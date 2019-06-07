@@ -7159,12 +7159,12 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
 
 
 signTypedDataButton.addEventListener('click', function(event) {
-  var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
+  //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
   event.preventDefault()
   let hotWallet = $("#hotWallet").val();
   let sum = $("#sum").val();
-  let to = '0x' + utils.keccak256($("#to").val());
-  let password = '0x' + utils.keccak256($("#password").val());
+  let to = web3.sha3($("#to").val());
+  let password =  web3.sha3($("#password").val());
   const msgParams = [
     {
       type: 'address',
