@@ -7163,14 +7163,19 @@ signTypedDataButton.addEventListener('click', function(event) {
 
   const msgParams = [
     {
-      type: 'string',
-      name: 'Message',
-      value: 'Hi, Alice!'
+      type: 'address',
+      name: 'hotWallet',
+      value: $("#hotWallet").val()
     },
     {
-      type: 'uint32',
-      name: 'A number',
-      value: '1337'
+      type: 'uint256',
+      name: 'Sum',
+      value: $("#sum")
+    },
+    {
+      type: 'address',
+      name: 'To',
+      value: $("#to")
     }
   ]
 
