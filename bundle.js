@@ -7160,22 +7160,24 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
 
 signTypedDataButton.addEventListener('click', function(event) {
   event.preventDefault()
-
+  let hotWallet = $("#hotWallet").val();
+  let sum = $("#sum").val();
+  let to = $("#to").val();
   const msgParams = [
     {
       type: 'address',
       name: 'hotWallet',
-      value: $("#hotWallet").val()
+      value: ''+hotWallet
     },
     {
       type: 'uint256',
       name: 'Sum',
-      value: $("#sum")
+      value: ''+sum
     },
     {
       type: 'address',
       name: 'To',
-      value: $("#to")
+      value: ''+to
     }
   ]
 
