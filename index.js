@@ -240,8 +240,7 @@ signTypedDataButton.addEventListener('click', function(event) {
     const recovered = sigUtil.recoverTypedSignatureLegacy({ data: msgParams, sig: result.result })
 
     if (ethUtil.toChecksumAddress(recovered) === ethUtil.toChecksumAddress(from)) {
-      alert('Successfully ecRecovered signer as ' + result.result)
-      //$("#sign").html("Signature: " + result.result);
+      alert('Successfully ecRecovered signer as ' + from)
     } else {
       alert('Failed to verify signer when comparing ' + result + ' to ' + from)
     }
@@ -309,4 +308,44 @@ signTypedDataV3Button.addEventListener('click', function(event) {
 
   })
 
+})
+
+ethjsSignTypedDataButton.addEventListener('click', function(event) {
+  event.preventDefault()
+
+  const msgParams = [
+    {
+      type: 'string',
+      name: 'Message',
+      value: 'Hi, Alice!'
+    },
+    {
+      type: 'uint32',
+      name: 'A number',
+      value: '1337'
+    }
+  ]
+
+  var from = web3.eth.accounts[0]
+  if (!from) return connect()
+
+  console.log('CLICKED, SENDING PERSONAL SIGN REQ')
+  var params = [msgParams, from]
+
+  var eth = new Eth(web3.currentProvider)
+
+  eth.signTypedData(msgParams, from)
+  .then((signed) => {
+    console.log('Signed!  Result is: ', signed)
+    console.log('Recovering...')
+
+    const recovered = sigUtil.recoverTypedSignature({ data: msgParams, sig: signed })
+
+    if (ethUtil.toChecksumAddress(recovered) === ethUtil.toChecksumAddress(from)) {
+      alert('Successfully ecRecovered signer as ' + from)
+    } else {
+      alert('Failed to verify signer when comparing ' + signed + ' to ' + from)
+    }
+
+  })
 })
