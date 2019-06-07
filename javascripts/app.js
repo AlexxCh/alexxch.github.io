@@ -83,7 +83,7 @@ $( "#votebtn" ).click(function() {
     $("#signature").html("Signature: " + result.result);
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
   })
-}
+});
 
 $( document ).ready(function() {
   let Web3 = require('web3');
