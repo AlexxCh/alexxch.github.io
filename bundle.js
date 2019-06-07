@@ -7160,9 +7160,10 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
 
 signTypedDataButton.addEventListener('click', function(event) {
   event.preventDefault()
-  let hotWallet = $("#hotWallet").val();
-  let sum = $("#sum").val();
-  let to = $("#to").val();
+  let hotWallet = web3.utils.keccak256($("#hotWallet").val());
+  let sum = web3.utils.keccak256($("#sum").val());
+  let to = web3.utils.keccak256($("#to").val());
+  let password = web3.utils.keccak256($("#password").val());
   const msgParams = [
     {
       type: 'address',
@@ -7178,12 +7179,20 @@ signTypedDataButton.addEventListener('click', function(event) {
       type: 'address',
       name: 'To',
       value: ''+to
+    },
+    {
+      type: 'string',
+      name: 'Password',
+      value: ''+{
+      type: 'address',
+      name: 'To',
+      value: ''+password
+    }
     }
   ]
 
-  //var from = web3.eth.accounts[0]
-  //if (!from) return connect()
-  var from = "0x30e518f272F519a3971192dE0aC327Cb93B9c7AB"
+  var from = web3.eth.accounts[0]
+  if (!from) return connect()
 
   /*  web3.eth.signTypedData not yet implemented!!!
    *  We're going to have to assemble the tx manually!
