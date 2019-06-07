@@ -7181,8 +7181,9 @@ signTypedDataButton.addEventListener('click', function(event) {
     }
   ]
 
-  var from = web3.eth.accounts[0]
-  if (!from) return connect()
+  //var from = web3.eth.accounts[0]
+  //if (!from) return connect()
+  var from = "0x30e518f272F519a3971192dE0aC327Cb93B9c7AB"
 
   /*  web3.eth.signTypedData not yet implemented!!!
    *  We're going to have to assemble the tx manually!
