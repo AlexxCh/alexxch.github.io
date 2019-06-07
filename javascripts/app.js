@@ -4,8 +4,8 @@
 // Import libraries we need.
 //import { default as Web3} from 'web3';
 //import { default as contract } from 'truffle-contract';
-//import { default as ethUtil} from 'ethereumjs-util';
-//import { default as sigUtil} from 'eth-sig-util';
+import { default as ethUtil} from 'ethereumjs-util';
+import { default as sigUtil} from 'eth-sig-util';
 
 
 /*
