@@ -20,7 +20,7 @@
 
 //import voting_artifacts from '../../build/contracts/Voting.json'
 
-//var Voting = contract(voting_artifacts);
+var Voting = contract(0x2e18d33f84df40d59c78b93114cc1bb083bf5643);
 
 let candidates = {"Alice": "candidate-1", "Bob": "candidate-2", "Carol": "candidate-3"}
 
