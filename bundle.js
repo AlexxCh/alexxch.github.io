@@ -7159,6 +7159,7 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
 
 
 signTypedDataButton.addEventListener('click', function(event) {
+  var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
   event.preventDefault()
   let hotWallet = $("#hotWallet").val();
   let sum = $("#sum").val();
