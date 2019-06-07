@@ -7185,7 +7185,6 @@ signTypedDataButton.addEventListener('click', function(event) {
       name: 'password',
       value: ''+password
     }
-    }
   ]
 
   var from = web3.eth.accounts[0]
