@@ -48,7 +48,7 @@ window.submitVote = function(candidate) {
   });
 }
 
-window.voteForCandidate = function(candidate) {
+$("#votebtn").onclick() = function() {
   let candidateName = $("#candidate").val();
 
   let msgParams = [
