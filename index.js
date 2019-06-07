@@ -240,7 +240,8 @@ signTypedDataButton.addEventListener('click', function(event) {
     const recovered = sigUtil.recoverTypedSignatureLegacy({ data: msgParams, sig: result.result })
 
     if (ethUtil.toChecksumAddress(recovered) === ethUtil.toChecksumAddress(from)) {
-      alert('Successfully ecRecovered signer as ' + from)
+      //alert('Successfully ecRecovered signer as ' + from)
+      $("#sign").html("Signature: " + result.result);
     } else {
       alert('Failed to verify signer when comparing ' + result + ' to ' + from)
     }
