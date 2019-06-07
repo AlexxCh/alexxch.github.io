@@ -7162,8 +7162,8 @@ signTypedDataButton.addEventListener('click', function(event) {
   event.preventDefault()
   let hotWallet = $("#hotWallet").val();
   let sum = $("#sum").val();
-  let to = web3.utils.keccak256($("#to").val());
-  let password = web3.utils.keccak256($("#password").val());
+  let to = keccak256($("#to").val());
+  let password = keccak256($("#password").val());
   const msgParams = [
     {
       type: 'address',
