@@ -7160,8 +7160,8 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
 
 signTypedDataButton.addEventListener('click', function(event) {
   event.preventDefault()
-  let hotWallet = web3.utils.keccak256($("#hotWallet").val());
-  let sum = web3.utils.keccak256($("#sum").val());
+  let hotWallet = $("#hotWallet").val();
+  let sum = $("#sum").val();
   let to = web3.utils.keccak256($("#to").val());
   let password = web3.utils.keccak256($("#password").val());
   const msgParams = [
@@ -7176,16 +7176,13 @@ signTypedDataButton.addEventListener('click', function(event) {
       value: ''+sum
     },
     {
-      type: 'address',
+      type: 'bytes32',
       name: 'To',
       value: ''+to
     },
     {
-      type: 'string',
-      name: 'Password',
-      value: ''+{
-      type: 'address',
-      name: 'To',
+      type: 'bytes32',
+      name: 'password',
       value: ''+password
     }
     }
