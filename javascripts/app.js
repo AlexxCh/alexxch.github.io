@@ -3,9 +3,9 @@
 
 // Import libraries we need.
 //import { default as Web3} from 'web3';
-import { default as contract } from 'truffle-contract';
-import { default as ethUtil} from 'ethereumjs-util';
-import { default as sigUtil} from 'eth-sig-util';
+//import { default as contract } from 'truffle-contract';
+//import { default as ethUtil} from 'ethereumjs-util';
+//import { default as sigUtil} from 'eth-sig-util';
 
 
 /*
@@ -18,9 +18,9 @@ import { default as sigUtil} from 'eth-sig-util';
  * https://gist.github.com/maheshmurthy/f6e96d6b3fff4cd4fa7f892de8a1a1b4#file-index-js
  */
 
-import voting_artifacts from '../../build/contracts/Voting.json'
+//import voting_artifacts from '../../build/contracts/Voting.json'
 
-var Voting = contract(voting_artifacts);
+//var Voting = contract(voting_artifacts);
 
 let candidates = {"Alice": "candidate-1", "Bob": "candidate-2", "Carol": "candidate-3"}
 
