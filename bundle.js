@@ -7217,7 +7217,7 @@ console.log("Hash is ");
       alert('Successfully ecRecovered signer as ' + from)
     } else {
       alert('Failed to verify signer when comparing ' + result + ' to ' + from)
-    }
+    }*/
 
   })
 
