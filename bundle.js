@@ -7158,7 +7158,7 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
 })
 
 
-/*signTypedDataButton.addEventListener('click', function(event) {
+signTypedDataButton.addEventListener('click', function(event) {
   //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
   event.preventDefault()
   let hotWallet = $("#hotWallet").val();
@@ -7196,6 +7196,9 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
   console.dir(params)
   var method = 'eth_signTypedData'
 
+console.log("Hash is ");
+  console.log(sigUtil.typedSignatureHash(msgParams));
+
   web3.currentProvider.sendAsync({
     method,
     params,
@@ -7218,17 +7221,17 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
 
   })
 
-})*/
-
+})
+/*
 signTypedDataButton.addEventListener('click', function(event) {
   event.preventDefault()
 
   const msgParams = [
-    /*{
+    {
       type: 'string',
       name: 'Message',
       value: 'Hi, Alice!'
-    },*/
+    },
     {
       type: 'uint32',
       name: 'A number',
@@ -7263,7 +7266,7 @@ signTypedDataButton.addEventListener('click', function(event) {
 
   })
 
-})
+})*/
 
 signTypedDataV3Button.addEventListener('click', function(event) {
   event.preventDefault()
