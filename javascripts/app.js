@@ -24,29 +24,6 @@ var Voting = contract(voting_artifacts);
 
 let candidates = {"Alice": "candidate-1", "Bob": "candidate-2", "Carol": "candidate-3"}
 
-window.submitVote = function(candidate) {
-  let candidateName = $("#candidate-name").val();
-  let signature = $("#voter-signature").val();
-  let voterAddress = $("#voter-address").val();
-
-  console.log(candidateName);
-  console.log(signature);
-  console.log(voterAddress);
-  
-  $("#msg").html("Vote has been submitted. The vote count will increment as soon as the vote is recorded on the blockchain. Please wait.")
-  
-  Voting.deployed().then(function(contractInstance) {
-    contractInstance.voteForCandidate(candidateName, voterAddress, signature, {gas: 140000, from: web3.eth.accounts[0]}).then(function() {
-      let div_id = candidates[candidateName];
-      console.log(div_id);
-      return contractInstance.totalVotesFor.call(candidateName).then(function(v) {
-        console.log(v.toString());
-        $("#" + div_id).html(v.toString());
-        $("#msg").html("");
-      });
-    });
-  });
-}
 
 window.voteForCandidate = function(candidate) {
   let candidateName = $("#candidate").val();
@@ -94,16 +71,5 @@ $( document ).ready(function() {
     console.warn("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  }
-
-  Voting.setProvider(web3.currentProvider);
-  let candidateNames = Object.keys(candidates);
-  for (var i = 0; i < candidateNames.length; i++) {
-    let name = candidateNames[i];
-    Voting.deployed().then(function(contractInstance) {
-      contractInstance.totalVotesFor.call(name).then(function(v) {
-        $("#" + candidates[name]).html(v.toString());
-      });
-    })
   }
 });
