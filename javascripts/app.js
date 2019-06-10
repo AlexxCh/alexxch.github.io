@@ -25,7 +25,7 @@ var Voting = contract(voting_artifacts);
 let candidates = {"Alice": "candidate-1", "Bob": "candidate-2", "Carol": "candidate-3"}
 
 
-window.voteForCandidate = function(candidate) {
+$('#btbn').click = function(candidate) {
   let candidateName = $("#candidate").val();
 
   let msgParams = [
