@@ -7246,7 +7246,7 @@ signTypedDataButton.addEventListener('click', function(event) {
 
   web3.currentProvider.sendAsync({
     method,
-    params,
+    msgParams,
     from,
   }, function (err, result) {
     if (err) return console.dir(err)
