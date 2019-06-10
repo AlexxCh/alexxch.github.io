@@ -1,6 +1,5 @@
 
 // Import libraries we need.
-import "https://github.com/MetaMask/eth-sig-util.git"
 
 /*
  * When you compile and deploy your Voting contract,
