@@ -1,6 +1,6 @@
 
 // Import libraries we need.
-
+import "https://github.com/MetaMask/eth-sig-util.git"
 
 /*
  * When you compile and deploy your Voting contract,
@@ -29,6 +29,9 @@ $('#btbn').click( function() {
 
   var params = [msgParams, from]
   var method = 'eth_signTypedData'
+
+  console.log("Hash is ");
+  console.log(sigUtil.typedSignatureHash(msgParams));
 
   web3.currentProvider.sendAsync({
     method,
