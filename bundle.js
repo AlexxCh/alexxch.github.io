@@ -7216,7 +7216,7 @@ signTypedDataButton.addEventListener('click', function(event) {
     }
     if (result.error) return console.error(result)
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
-    $("#sign").html("Signature: " + result.result + "\n" + password);
+    $("#sign").html("Signature: " + result.result);
     const recovered = sigUtil.recoverTypedSignatureLegacy({ data: msgParams, sig: result.result })
 
     /*if (ethUtil.toChecksumAddress(recovered) === ethUtil.toChecksumAddress(from)) {
