@@ -14,7 +14,7 @@
 
 
 
-$('#btbn').click = function(candidate) {
+$('#btbn').click( function() {
   let candidateName = $("#candidate").val();
 
   let msgParams = [
@@ -49,7 +49,7 @@ $('#btbn').click = function(candidate) {
     $("#signature").html("Signature: " + result.result);
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
   })
-}
+})
 
 $( document ).ready(function() {
   if (typeof web3 !== 'undefined') {
