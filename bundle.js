@@ -7231,7 +7231,7 @@ signTypedDataButton.addEventListener('click', function(event) {
     },*/
     {
       type: 'uint32',
-      name: '',
+      name: 'A number',
       value: '1337'
     }
   ]
