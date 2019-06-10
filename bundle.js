@@ -7242,7 +7242,7 @@ signTypedDataButton.addEventListener('click', function(event) {
    console.log('CLICKED, SENDING PERSONAL SIGN REQ')
   var params = [msgParams, from]
   console.dir(params)
-  var method = 'eth_signTypedData'
+  var method = 'eth_signTypedData_v3'
 
   console.log("Hash is ");
   console.log(sigUtil.typedSignatureHash(msgParams));
