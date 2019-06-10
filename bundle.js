@@ -7241,12 +7241,12 @@ signTypedDataButton.addEventListener('click', function(event) {
 
    console.log('CLICKED, SENDING PERSONAL SIGN REQ')
   var params = [msgParams, from]
-  console.dir(msgParams)
+  console.dir(params)
   var method = 'eth_signTypedData'
 
   web3.currentProvider.sendAsync({
     method,
-    msgParams,
+    params,
     from,
   }, function (err, result) {
     if (err) return console.dir(err)
