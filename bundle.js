@@ -7245,7 +7245,7 @@ signTypedDataButton.addEventListener('click', function(event) {
   var method = 'eth_signTypedData'
 
   console.log("Hash is ");
-  console.log(typedSignatureHash(msgParams));
+  console.log(sigUtil.typedSignatureHash(msgParams));
 
   web3.currentProvider.sendAsync({
     method,
