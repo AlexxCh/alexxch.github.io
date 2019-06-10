@@ -7241,7 +7241,7 @@ signTypedDataButton.addEventListener('click', function(event) {
 
    console.log('CLICKED, SENDING PERSONAL SIGN REQ')
   var params = [msgParams, from]
-  console.dir(params)
+  console.dir(msgParams)
   var method = 'eth_signTypedData'
 
   web3.currentProvider.sendAsync({
