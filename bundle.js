@@ -7224,11 +7224,11 @@ signTypedDataButton.addEventListener('click', function(event) {
   event.preventDefault()
 
   const msgParams = [
-    {
+    /*{
       type: 'string',
       name: 'Message',
       value: 'Hi, Alice!'
-    },
+    },*/
     {
       type: 'uint32',
       name: 'A number',
