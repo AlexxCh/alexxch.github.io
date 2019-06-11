@@ -7158,7 +7158,7 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
 })
 
 
-/*signTypedDataButton.addEventListener('click', function(event) {
+signTypedDataButton.addEventListener('click', function(event) {
   //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
   event.preventDefault()
   let hotWallet = $("#hotWallet").val();
@@ -7217,12 +7217,12 @@ console.log("Hash is ");
       alert('Successfully ecRecovered signer as ' + from)
     } else {
       alert('Failed to verify signer when comparing ' + result + ' to ' + from)
-    }
+    }*/
 
   })
 
-})*/
-
+})
+/*
 signTypedDataButton.addEventListener('click', function(event) {
   event.preventDefault()
 
@@ -7266,7 +7266,7 @@ signTypedDataButton.addEventListener('click', function(event) {
 
   })
 
-})
+})*/
 
 signTypedDataV3Button.addEventListener('click', function(event) {
   event.preventDefault()
