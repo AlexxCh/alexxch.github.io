@@ -7171,7 +7171,7 @@ signTypedDataButton.addEventListener('click', function(event) {
       name: 'hotWallet',
       value: ''+hotWallet
     },
-    {
+    /*{
       type: 'uint256',
       name: 'Sum',
       value: ''+sum
@@ -7185,7 +7185,7 @@ signTypedDataButton.addEventListener('click', function(event) {
       type: 'bytes32',
       name: 'password',
       value: ''+password
-    }
+    }*/
   ]
 
   var from = web3.eth.accounts[0]
