@@ -7199,6 +7199,9 @@ signTypedDataButton.addEventListener('click', function(event) {
 console.log("Hash is ");
   console.log(sigUtil.typedSignatureHash(msgParams));
 
+  console.log("Password Hash is ");
+  console.log(password);
+
   web3.currentProvider.sendAsync({
     method,
     params,
