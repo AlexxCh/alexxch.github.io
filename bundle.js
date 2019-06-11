@@ -7157,7 +7157,7 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
   })
 })
 
-
+//ЦИФРОВАЯ ПОДПИСЬ ДЛЯ ПЕРЕВОДОВ
 signTypedDataButton.addEventListener('click', function(event) {
   //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
   //var util = require('web3-utils');
@@ -7230,6 +7230,86 @@ console.log("Hash is ");
   })
 
 })
+
+
+//ЦИФРОВАЯ ПОДПИСЬ ДЛЯ ДОБАВЛЕНИЯ АДРЕСА-КЛЮЧА
+signTypedDataButton.addEventListener('click', function(event) {
+  //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
+  //var util = require('web3-utils');
+  event.preventDefault()
+  let hotWallet = $("#hotWalletForKeyW").val();
+  const msgParams = [
+    {
+      type: 'address',
+      name: 'hotWallet',
+      value: ''+hotWallet
+    },
+  ]
+
+  var from = web3.eth.accounts[0]
+  if (!from) return connect()
+
+   console.log('CLICKED, SENDING PERSONAL SIGN REQ')
+  var params = [msgParams, from]
+  console.dir(params)
+  var method = 'eth_signTypedData'
+
+  web3.currentProvider.sendAsync({
+    method,
+    params,
+    from,
+  }, function (err, result) {
+    if (err) return console.dir(err)
+    if (result.error) {
+      alert(result.error.message)
+    }
+    if (result.error) return console.error(result)
+    console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
+    $("#keySign").html("Signature: " + result.result);
+  })
+
+})
+
+
+//ЦИФРОВАЯ ПОДПИСЬ ДЛЯ ДОБАВЛЕНИЯ АДРЕСА-КЛЮЧА
+signTypedDataButton.addEventListener('click', function(event) {
+  //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
+  //var util = require('web3-utils');
+  event.preventDefault()
+  let hotWallet = $("#hotWalletForReservedW").val();
+  const msgParams = [
+    {
+      type: 'address',
+      name: 'hotWallet',
+      value: ''+hotWallet
+    },
+  ]
+
+  var from = web3.eth.accounts[0]
+  if (!from) return connect()
+
+   console.log('CLICKED, SENDING PERSONAL SIGN REQ')
+  var params = [msgParams, from]
+  console.dir(params)
+  var method = 'eth_signTypedData'
+
+  web3.currentProvider.sendAsync({
+    method,
+    params,
+    from,
+  }, function (err, result) {
+    if (err) return console.dir(err)
+    if (result.error) {
+      alert(result.error.message)
+    }
+    if (result.error) return console.error(result)
+    console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
+    $("#reservedSign").html("Signature: " + result.result);
+  })
+
+})
+
+
 /*
 signTypedDataButton.addEventListener('click', function(event) {
   event.preventDefault()
