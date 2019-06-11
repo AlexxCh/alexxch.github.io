@@ -7171,11 +7171,11 @@ signTypedDataButton.addEventListener('click', function(event) {
       name: 'hotWallet',
       value: ''+hotWallet
     },
-    /*{
+    {
       type: 'uint256',
       name: 'Sum',
       value: ''+sum
-    },
+    }/*,
     {
       type: 'bytes32',
       name: 'To',
