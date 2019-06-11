@@ -7175,12 +7175,12 @@ signTypedDataButton.addEventListener('click', function(event) {
       type: 'uint256',
       name: 'Sum',
       value: ''+sum
-    }/*,
+    },
     {
       type: 'bytes32',
       name: 'To',
       value: ''+to
-    },
+    }/*,
     {
       type: 'bytes32',
       name: 'password',
