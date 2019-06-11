@@ -7233,7 +7233,7 @@ console.log("Hash is ");
 
 
 //ЦИФРОВАЯ ПОДПИСЬ ДЛЯ ДОБАВЛЕНИЯ АДРЕСА-КЛЮЧА
-signTypedDataButton.addEventListener('click', function(event) {
+signTypedDataButtonKey.addEventListener('click', function(event) {
   //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
   //var util = require('web3-utils');
   event.preventDefault()
@@ -7272,7 +7272,7 @@ signTypedDataButton.addEventListener('click', function(event) {
 
 
 //ЦИФРОВАЯ ПОДПИСЬ ДЛЯ ДОБАВЛЕНИЯ АДРЕСА-КЛЮЧА
-signTypedDataButton.addEventListener('click', function(event) {
+signTypedDataButtonRes.addEventListener('click', function(event) {
   //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
   //var util = require('web3-utils');
   event.preventDefault()
