@@ -7165,7 +7165,7 @@ signTypedDataButton.addEventListener('click', function(event) {
   let hotWallet = $("#hotWallet").val();
   let sum = $("#sum").val();
   //let to = web3.sha3($("#to").val());
-  let to = web3.soliditySha3({t: 'address', v: $("#to").val()});
+  let to = web3.sha3(leftPad(($("#to").val()).toString(16), 64, 0), { encoding: 'hex' })
   let password =  web3.sha3($("#password").val());
   const msgParams = [
     {
