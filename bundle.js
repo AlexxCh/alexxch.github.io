@@ -7161,11 +7161,12 @@ ethjsPersonalSignButton.addEventListener('click', function(event) {
 signTypedDataButton.addEventListener('click', function(event) {
   //import * as Utils from 'web3-utils';
   //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
+  var util = require('ethjs-util');
   event.preventDefault()
   let hotWallet = $("#hotWallet").val();
   let sum = $("#sum").val();
   //let to = web3.sha3($("#to").val());
-  let to = web3.utils.soliditySha3({t: 'address', v: $("#to").val()});
+  let to = util.soliditySha3({t: 'address', v: $("#to").val()});
   let password =  web3.sha3($("#password").val());
   const msgParams = [
     {
