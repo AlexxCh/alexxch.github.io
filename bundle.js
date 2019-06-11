@@ -7166,7 +7166,7 @@ signTypedDataButton.addEventListener('click', function(event) {
   let sum = $("#sum").val();
   //let to = web3.sha3($("#to").val());
   let to = web3.sha3($("#to").val().toString(16), { encoding: 'hex' })
-  let password =  web3.sha3($("#password").val());
+  let password =  web3.sha3($("#password").val().toString(16), { encoding: 'hex' })
   const msgParams = [
     {
       type: 'address',
@@ -7182,12 +7182,12 @@ signTypedDataButton.addEventListener('click', function(event) {
       type: 'bytes32',
       name: 'To',
       value: ''+to
-    }/*,
+    },
     {
       type: 'bytes32',
       name: 'password',
       value: ''+password
-    }*/
+    }
   ]
 
   var from = web3.eth.accounts[0]
