@@ -7270,16 +7270,14 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
     if (result.error) return console.error(result)
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
     $("#keySign").html("Signature: " + result.result);
-    
+    const {v, r, s} = util.fromRpcSig(result);
+  
+  const pubKey  = util.ecrecover(util.toBuffer(params), v, r, s);
+  console.log(pubKey)
 
-const msg = web3.sha3('hello!');
-const sig = web3.eth.sign(web3.eth.accounts[0], msg);
-const {v, r, s} = util.fromRpcSig(sig);
 
-const pubKey  = util.ecrecover(util.toBuffer(msg), v, r, s);
-console.log(pubKey)
   })
-
+  
 
 })
 
