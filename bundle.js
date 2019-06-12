@@ -7271,13 +7271,7 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
     if (result.error) return console.error(result)
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
     $("#keySign").html("Signature: " + result.result);
-    console.log('typeof ethereumjs:',               (typeof ethereumjs))
-    console.log('Object.keys(ethereumjs):',         Object.keys(ethereumjs))
-    console.log('typeof ethereumjs.Tx:',            (typeof ethereumjs.Tx))
-    console.log('typeof ethereumjs.RLP:',           (typeof ethereumjs.RLP))
-    console.log('typeof ethereumjs.Util:',          (typeof ethereumjs.Util))
-    console.log('typeof ethereumjs.Buffer:',        (typeof ethereumjs.Buffer))
-    console.log('typeof ethereumjs.Buffer.Buffer:', (typeof ethereumjs.Buffer.Buffer))
+    
     
     // signed tx
     const signedTx = result
