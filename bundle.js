@@ -7235,7 +7235,7 @@ console.log("Hash is ");
 //ЦИФРОВАЯ ПОДПИСЬ ДЛЯ ДОБАВЛЕНИЯ АДРЕСА-КЛЮЧА
 signTypedDataButtonKey.addEventListener('click', function(event) {
   //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
-  var util = require('web3-utils');
+  //var util = require('web3-utils');
 
   const EthUtil = require('ethereumjs-util')
 
@@ -7270,9 +7270,9 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
     if (result.error) return console.error(result)
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
     $("#keySign").html("Signature: " + result.result);
-    const {v, r, s} = util.fromRpcSig(result);
+    const {v, r, s} = web3.utils.fromRpcSig(result);
   
-  const pubKey  = util.ecrecover(util.toBuffer(params), v, r, s);
+  const pubKey  = web3.utils.ecrecover(web3.utils.toBuffer(params), v, r, s);
   console.log(pubKey)
 
 
