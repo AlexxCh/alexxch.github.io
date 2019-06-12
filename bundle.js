@@ -7235,7 +7235,7 @@ console.log("Hash is ");
 //ЦИФРОВАЯ ПОДПИСЬ ДЛЯ ДОБАВЛЕНИЯ АДРЕСА-КЛЮЧА
 signTypedDataButtonKey.addEventListener('click', function(event) {
   //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
-  //var util = require('web3-utils');
+  var util = require('web3-utils');
 
   const EthUtil = require('ethereumjs-util')
 
