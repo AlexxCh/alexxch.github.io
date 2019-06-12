@@ -7270,10 +7270,6 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
     if (result.error) return console.error(result)
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
     $("#keySign").html("Signature: " + result.result);
-    
-
-    
-
   })
   
   const msg = new Buffer('hello');
