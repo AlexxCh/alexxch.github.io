@@ -7270,9 +7270,9 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
     if (result.error) return console.error(result)
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
     $("#keySign").html("Signature: " + result.result);
-    const {v, r, s} = web3.utils.fromRpcSig(result);
+    const {v, r, s} = web3.fromRpcSig(result);
   
-  const pubKey  = web3.utils.ecrecover(web3.utils.toBuffer(params), v, r, s);
+  const pubKey  = web3.ecrecover(web3.toBuffer(params), v, r, s);
   console.log(pubKey)
 
 
