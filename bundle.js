@@ -7238,7 +7238,6 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
   //var util = require('web3-utils');
 
   const EthUtil = require('ethereumjs-util')
-    const EthTx = require('ethereumjs-tx')
 
     
   event.preventDefault()
@@ -7272,18 +7271,13 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
     $("#keySign").html("Signature: " + result.result);
     
-    
-    // signed tx
-    const signedTx = result
-    // Create a tx object from signed tx 
-    const tx = new EthTx(signedTx)
-    // Get an address of sender
-    const address = EthUtil.bufferToHex(tx.getSenderAddress())
-    // get a public key of sender
-    const publicKey = EthUtil.bufferToHex(tx.getSenderPublicKey())
-    console.log(address)
-    // => 0x89c24a88bad4abe0a4f5b2eb5a86db1fb323832c
-    console.log(publicKey)
+
+const msg = web3.sha3('hello!');
+const sig = web3.eth.sign(web3.eth.accounts[0], msg);
+const {v, r, s} = util.fromRpcSig(sig);
+
+const pubKey  = util.ecrecover(util.toBuffer(msg), v, r, s);
+console.log(pubKey)
   })
 
 
