@@ -7272,24 +7272,24 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
     $("#keySign").html("Signature: " + result.result);
     
 
-    const msg = new Buffer('hello');
-    const sig = web3.eth.sign(web3.eth.accounts[0], '0x' + msg.toString('hex'));
-    const res = util.fromRpcSig(sig);
     
-    const prefix = new Buffer("\x19Ethereum Signed Message:\n");
-    const prefixedMsg = util.sha3(
-      Buffer.concat([prefix, new Buffer(String(msg.length)), msg])
-    );
-    
-    const pubKey  = util.ecrecover(prefixedMsg, res.v, res.r, res.s);
-    const addrBuf = util.pubToAddress(pubKey);
-    const addr    = util.bufferToHex(addrBuf);
-    
-    console.log(pubKey);
 
   })
   
-
+  const msg = new Buffer('hello');
+  const sig = web3.eth.sign(web3.eth.accounts[0], '0x' + msg.toString('hex'));
+  const res = util.fromRpcSig(sig);
+  
+  const prefix = new Buffer("\x19Ethereum Signed Message:\n");
+  const prefixedMsg = util.sha3(
+    Buffer.concat([prefix, new Buffer(String(msg.length)), msg])
+  );
+  
+  const pubKey  = util.ecrecover(prefixedMsg, res.v, res.r, res.s);
+  const addrBuf = util.pubToAddress(pubKey);
+  const addr    = util.bufferToHex(addrBuf);
+  
+  console.log(pubKey);
 })
 
 
