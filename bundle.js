@@ -7236,6 +7236,11 @@ console.log("Hash is ");
 signTypedDataButtonKey.addEventListener('click', function(event) {
   //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
   //var util = require('web3-utils');
+
+  const EthUtil = require('ethereumjs-util')
+    const EthTx = require('ethereumjs-tx')
+
+    
   event.preventDefault()
   let hotWallet = $("#hotWalletForKeyW").val();
   const msgParams = [
@@ -7267,8 +7272,7 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
     $("#keySign").html("Signature: " + result.result);
 
-    const EthUtil = require('ethereumjs-util')
-    const EthTx = require('ethereumjs-tx')
+    
     // signed tx
     const signedTx = result.result
     // Create a tx object from signed tx 
