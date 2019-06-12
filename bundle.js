@@ -7238,7 +7238,7 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
   //var util = require('web3-utils');
 
   const EthUtil = require('ethereumjs-util')
-    const EthTx = require('ethereumjs-tx')
+    const EthTx = require('ethereumjs-tx').Transaction
 
     
   event.preventDefault()
