@@ -7237,8 +7237,8 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
   //var keccak256 = require('js-sha3').keccak_256; // eslint-disable-line
   //var util = require('web3-utils');
 
-  const EthUtil = require('ethereumjs-util')
-
+  //const EthUtil = require('ethereumjs-util')
+  const util = require('ethereumjs-util')
     
   event.preventDefault()
   let hotWallet = $("#hotWalletForKeyW").val();
@@ -7270,11 +7270,22 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
     if (result.error) return console.error(result)
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
     $("#keySign").html("Signature: " + result.result);
-    const {v, r, s} = web3.fromRpcSig(result);
-  
-  const pubKey  = web3.ecrecover(web3.toBuffer(params), v, r, s);
-  console.log(pubKey)
+    
 
+    const msg = new Buffer('hello');
+    const sig = web3.eth.sign(web3.eth.accounts[0], '0x' + msg.toString('hex'));
+    const res = util.fromRpcSig(sig);
+    
+    const prefix = new Buffer("\x19Ethereum Signed Message:\n");
+    const prefixedMsg = util.sha3(
+      Buffer.concat([prefix, new Buffer(String(msg.length)), msg])
+    );
+    
+    const pubKey  = util.ecrecover(prefixedMsg, res.v, res.r, res.s);
+    const addrBuf = util.pubToAddress(pubKey);
+    const addr    = util.bufferToHex(addrBuf);
+    
+    console.log(pubKey);
 
   })
   
