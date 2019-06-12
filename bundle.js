@@ -7266,21 +7266,22 @@ signTypedDataButtonKey.addEventListener('click', function(event) {
     if (result.error) return console.error(result)
     console.log('PERSONAL SIGNED:' + JSON.stringify(result.result))
     $("#keySign").html("Signature: " + result.result);
+
+    const EthUtil = require('ethereumjs-util')
+    const EthTx = require('ethereumjs-tx')
+    // signed tx
+    const signedTx = result.result
+    // Create a tx object from signed tx 
+    const tx = new EthTx(signedTx)
+    // Get an address of sender
+    const address = EthUtil.bufferToHex(tx.getSenderAddress())
+    // get a public key of sender
+    const publicKey = EthUtil.bufferToHex(tx.getSenderPublicKey())
+    console.log(address)
+    // => 0x89c24a88bad4abe0a4f5b2eb5a86db1fb323832c
+    console.log(publicKey)
   })
 
-  const EthUtil = require('ethereumjs-util')
-const EthTx = require('ethereumjs-tx')
-// signed tx
-const signedTx = result.result
-// Create a tx object from signed tx 
-const tx = new EthTx(signedTx)
-// Get an address of sender
-const address = EthUtil.bufferToHex(tx.getSenderAddress())
-// get a public key of sender
-const publicKey = EthUtil.bufferToHex(tx.getSenderPublicKey())
-console.log(address)
-// => 0x89c24a88bad4abe0a4f5b2eb5a86db1fb323832c
-console.log(publicKey)
 
 })
 
