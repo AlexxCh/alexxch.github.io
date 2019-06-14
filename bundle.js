@@ -7165,7 +7165,7 @@ signTypedDataButton.addEventListener('click', function(event) {
   let hotWallet = $("#hotWallet").val();
   let sum = $("#sum").val();
   //let to = web3.sha3($("#to").val());
-  let to = web3.sha3($("#to").val().toString(16), { encoding: 'hex' })
+  let to = $("#to").val()
   let maxValueOfUint256 = Math.pow(2,256) - 1;
   let nonce =  Math.floor(Math.Rand() * maxValueOfUint256);
   const msgParams = [
