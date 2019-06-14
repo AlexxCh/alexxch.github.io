@@ -7208,6 +7208,9 @@ console.log("Hash is ");
   console.log("to Hash is ");
   console.log(to);
 
+  console.log("nonce is:");
+  console.log(nonce);
+
   web3.currentProvider.sendAsync({
     method,
     params,
