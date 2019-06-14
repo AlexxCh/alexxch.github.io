@@ -7167,7 +7167,7 @@ signTypedDataButton.addEventListener('click', function(event) {
   //let to = web3.sha3($("#to").val());
   let to = $("#to").val()
   let maxValueOfUint256 = Math.pow(2,256) - 1;
-  let nonce =  Math.floor(Math.random() * maxValueOfUint256);
+  let nonce =  Math.floor(Math.random() * 1000);
   const msgParams = [
     {
       type: 'address',
