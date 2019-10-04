@@ -4,13 +4,24 @@ let dataUrl = "/lister/coinsData";
 // let dataUrl = "/lister/coinsData?ropsten=true" // for ropsten
 
 window.addEventListener('load', async () => {
-    if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-        } else {
-            // set the provider you want from Web3.providers
-            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-			$('.networkName').html(`<button class="btn btn-warning animation-on-hover" type="button" onclick='navAlerts(4)'>LOCAL NETWORK</button>`);
+    if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        try {
+            await ethereum.enable();
+            getAccountAndNetwork();
+        } catch (error) {
+            console.log(error);
         }
+    } else if (window.web3) {
+        window.web3 = new Web3(web3.currentProvider);
+        getAccountAndNetwork();
+    } else {
+        $('.networkName').html(`<button class="btn btn-danger animation-on-hover" type="button" onclick="navAlerts(1)">NO ETH PROVIDER</button>`);
+        let link = `<button class="btn btn-info btn-simple animation-on-hover" type="button" onclick="navAlerts(0)">Create ID</button>`;
+        $('.navUserAdd').html(link);
+        ifWeb3NotConfigured();
+        updateNavOrderbook();
+    }
 });
 
 
@@ -27,8 +38,6 @@ function getAccountAndNetwork() {
             $('.networkName').html(`<button class="btn btn-warning animation-on-hover" type="button" onclick='navAlerts(3)'>ROPSTEN TEST NETWORK</button>`);
         } else {
             $('.networkName').html(`<button class="btn btn-warning animation-on-hover" type="button" onclick='navAlerts(4)'>NOT MAIN NETWORK</button>`);
-			let link = '' + account;
-                $('.navUserAdd').html(link);
         }
         if (account) {
             let stringLen = account.length;
