@@ -4,15 +4,7 @@ let dataUrl = "/lister/coinsData";
 // let dataUrl = "/lister/coinsData?ropsten=true" // for ropsten
 
 window.addEventListener('load', async () => {
-    if (window.ethereum) {
-        window.web3 = new Web3(ethereum);
-        try {
-            await ethereum.enable();
-            getAccountAndNetwork();
-        } catch (error) {
-            console.log(error);
-        }
-    } else if (window.web3) {
+   
         window.web3 = new Web3(web3.currentProvider);
         getAccountAndNetwork();
     } else {
@@ -21,8 +13,7 @@ window.addEventListener('load', async () => {
         $('.navUserAdd').html(link);
         ifWeb3NotConfigured();
         updateNavOrderbook();
-    }
-});
+    });
 
 
 function getAccountAndNetwork() {
