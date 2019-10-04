@@ -21,6 +21,9 @@ function getAccountAndNetwork() {
         } else if (networkId == 3) {
             dataUrl = "/lister/coinsData?ropsten=true";
             $('.networkName').html(`<button class="btn btn-warning animation-on-hover" type="button" onclick='navAlerts(3)'>ROPSTEN TEST NETWORK</button>`);
+		} else if (networkId == 4) {
+            dataUrl = "/lister/coinsData?ropsten=true";
+            $('.networkName').html(`<button class="btn btn-warning animation-on-hover" type="button" onclick='navAlerts(3)'>RINKEBY TEST NETWORK</button>`);
         } else {
             $('.networkName').html(`<button class="btn btn-warning animation-on-hover" type="button" onclick='navAlerts(4)'>NOT MAIN NETWORK</button>`);
         }
@@ -36,6 +39,11 @@ function getAccountAndNetwork() {
             } else if (networkId == 3) {
                 let link = `<button class="btn btn-info btn-simple animation-on-hover btn-sm" type="button">
                                 <a class="navbar-brand" href="https://ropsten.etherscan.io/address/${account}" target="_blank">${text}</a>
+                            </button>`;
+                $('.navUserAdd').html(link);
+			} else if (networkId == 4) {
+                let link = `<button class="btn btn-info btn-simple animation-on-hover btn-sm" type="button">
+                                <a class="navbar-brand" href="https://rinkeby.etherscan.io/address/${account}" target="_blank">${text}</a>
                             </button>`;
                 $('.navUserAdd').html(link);
             } else {
