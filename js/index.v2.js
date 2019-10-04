@@ -15,6 +15,7 @@ window.addEventListener('load', async () => {
     } else if (window.web3) {
         window.web3 = new Web3(web3.currentProvider);
         getAccountAndNetwork();
+		console.log(web3.currentProvider);
     } else {
         $('.networkName').html(`<button class="btn btn-danger animation-on-hover" type="button" onclick="navAlerts(1)">NO ETH PROVIDER</button>`);
         let link = `<button class="btn btn-info btn-simple animation-on-hover" type="button" onclick="navAlerts(0)">Create ID</button>`;
