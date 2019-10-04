@@ -131,120 +131,208 @@
 </nav>
 <!-- End Navbar -->
 
-    <div class="content">
-    <!-- Main Body -->
-<div class="searchBar">
-    <div class="searchall searchButBox">
-    <button class="btn btn-sm btn-default btn-fab btn-icon" onclick="filterSearch('all')">All</button>  
-    </div>
+{% extends "templates/index.html" %}
+
+{% block content %}
+
+<div style="display:none">
+    <div id="coinCmcName">{{ coinData.cmcName }}</div>
+    <div id="coinContractAdd">{{ coinData.contractAddress }}</div>
+    <div id="coinDecimals">{{ coinData.decimals }}</div>
+    <div id="coinName">{{ coinData.name }}</div>
+    <div id="coinSymbol">{{ coinData.symbol }}</div>
 </div>
 
-<div class="boxesData">
+<h1 class="text-center" style="margin-top:30px;margin-bottom:50px">ORDERBOOK OF {{ coinName }}</h1>
 
-<div class="daiEthDescBox">
-    <div class="boxEth"></div>
-    <div class="descSwapLine">
-        <h2 class="text-center descLineMargin">SELECT 2 COINS TO SWAP</h2>
-        <div class="showHideQtyBox">
-        <button class="btn btn-primary btn-sm btn-round showHideQty">Show QTY</button>
+<div class="reserveStatsContainer">
+    <div class="reserveStatsBox">
+        <div class="bookTitleLogoBox">
+            <div class="bookCoinName">ETH</div>
+            <div class="bookCoinLogo"><img src="logos/eth.svg" height="64px" width="64px"></div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Unlocked</div>
+            <div class="bookDepositQty" id="ethUnlocked">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Locked</div>
+            <div class="bookDepositQty" id="ethLocked">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Total</div>
+            <div class="bookDepositQty" id="ethTotal">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">ETH/USD</div>
+            <div class="bookDepositQty" id="ethRate">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Value(USD)</div>
+            <div class="bookDepositQty" id="ethValue">0</div>
+        </div>
+        <div class="depositWithdrawButBox">
+            <div class="depositButBox">
+                <button class="btn btn-success animation-on-hover h2" type="button" data-toggle="modal" data-target="#depositEth">DEPOSIT</button>
+            </div>
+            <div class="withdrawButBox">
+                <button class="btn btn-warning animation-on-hover h2" type="button" data-toggle="modal" data-target="#withdrawEth">WITHDRAW</button>                
+            </div>
         </div>
     </div>
-    <div class="boxEthMob"></div>
-    <div class="boxDai"></div>
-</div>
-
-<div class="tradeDataContainer"></div>
-
-</div>
-<!-- End Main Body -->
-<!-- Swapping Box -->
-<div class="easSwapBox">
-    <div class="closeTradeIcon">
-        <button type="button" class="close" onclick="hideTrade()">
-            <i class="tim-icons icon-simple-remove"></i>
-        </button>
-    </div>
-    <div class="tradeInputContainer">
-        <div class="coinSellBox coinTradeBox">
-            <div class="imgNameSymbolBox">
-                <div class="tradeImgCon">
-                    <img src="logos/eth.svg" id="imgForSell" height="44px" width="44px">
-                </div>
-                <div class="coinNameSym">
-                    <div class="coinSymbol" id="sellSymbol">ETH</div>
-                    <div class="coinFullName" id="sellFullName">ethereum</div>
-                </div>
+    <div class="reserveStatsBox">
+        <div class="bookTitleLogoBox">
+            <div class="bookCoinName">{{ coinName }}</div>
+            <div class="bookCoinLogo"><img src="logos/{{ coinName | lower }}.svg" height="64px" width="64px"></div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Unlocked</div>
+            <div class="bookDepositQty" id="tokenUnlocked">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Locked</div>
+            <div class="bookDepositQty" id="tokenLocked">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Total</div>
+            <div class="bookDepositQty" id="tokenTotal">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">{{ coinName }}/USD</div>
+            <div class="bookDepositQty" id="tokenRate">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Value(USD)</div>
+            <div class="bookDepositQty" id="tokenValue">0</div>
+        </div>
+        <div class="depositWithdrawButBox">
+            <div class="depositButBox">
+                <button class="btn btn-success animation-on-hover h2" type="button" data-toggle="modal" data-target="#depositToken">DEPOSIT</button>
             </div>
-            <div class="inputTradeBox">
-                <input type="number" min="0" class="form-control inputTrade coinOneInput" placeholder="0.00">
+            <div class="withdrawButBox">
+                <button class="btn btn-warning animation-on-hover h2" type="button" data-toggle="modal" data-target="#withdrawToken">WITHDRAW</button>                
             </div>
         </div>
-        <div class="ArrowIcon">
-            <div class="toggleIconCon">
+    </div>
+    <div class="reserveStatsBox">
+        <div class="bookTitleLogoBox">
+            <div class="bookCoinName">
+                <div>KNC</div>
+                <div class="badge badge-info forFeeTag">For Fees</div>
+                {# <span class="forFeeTag"></div> #}
+            </div>
+            <div class="bookCoinLogo"><img src="logos/knc.svg" height="64px" width="64px"></div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Unlocked</div>
+            <div class="bookDepositQty" id="kncUnlocked">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Locked</div>
+            <div class="bookDepositQty" id="kncLocked">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Total</div>
+            <div class="bookDepositQty" id="kncTotal">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">KNC/USD</div>
+            <div class="bookDepositQty" id="kncRate">0</div>
+        </div>
+        <div class="bookDepositBox">
+            <div class="bookDepositTitle">Value(USD)</div>
+            <div class="bookDepositQty" id="kncValue">0</div>
+        </div>
+        <div class="depositWithdrawButBox">
+            <div class="depositButBox">
+                <button class="btn btn-success animation-on-hover h2" type="button" data-toggle="modal" data-target="#depositKnc">DEPOSIT</button>
+            </div>
+            <div class="withdrawButBox">
+                <button class="btn btn-warning animation-on-hover h2" type="button" data-toggle="modal" data-target="#withdrawKnc">WITHDRAW</button>                
+            </div>
+        </div>
+    </div>
+</div>
+
+{# <div class="addOrderBox">
+    <div class="EthTokenBox">
+        <div class="EthTokenCon">
+            <img src='/logos/eth.svg' height='44px' width='44px'>
+            <div class="coinOrderQty">2</div>
+            <div class="coinName">ETH</div>
+        </div>
+        <div class="toggleIconCon">
             <i class="tim-icons icon-double-right toggleIcon"></i> 
-            </div>
-            <div id="toggleCoin" class="text-muted">toggle</div>
         </div>
-        <div class="coinBuyBox coinTradeBox">
-            <div class="inputTradeBox">
-                <input type="number" min="0" class="form-control inputTrade coinTwoInput" placeholder="0.00">
-            </div>
-            <div class="imgNameSymbolBox">
-                <div class="coinNameSym">
-                    <div class="coinSymbol" id="buySymbol">ETH</div>
-                    <div class="coinFullName" id="buyFullName">ethereum</div>
-                </div>
-                <div class="tradeImgCon">
-                    <img src="logos/eth.svg" id="imgForBuy" height="44px" width="44px">
-                </div>
-            </div>
+        <div class="EthTokenCon">
+            <div class="coinOrderQty">23</div>
+            <div class="coinName">APPC</div>
+            <img src='/logos/APPC.svg' height='44px' width='44px'>
         </div>
     </div>
-    <div class="coinConversionRate">1 ETH = 1 ETH</div>
-    <div class="swapAllBox">
-    <div class="allButbox">
-        <div class="allQty">1.1198 ETH</div>
-        <button class="btn btn-primary btn-round btn-sm tradeAllBut" onclick="tradeAllCoin()">Trade All</button>
+    <div class="EthTokenBox">
+        <div class="EthTokenCon"></div>
     </div>
-    <div class="swapButBox">
-        <button class="btn btn-success animation-on-hover btn-lg h2 swapBut" onclick="swapTokens()" type="button">SWAP</button>
-    </div>
-    </div>
-    <center>
-    <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#advancedCollapse" aria-expanded="false" aria-controls="collapseExample">
-        Advanced
-    </button>
-    </center>
-    <br>
-    <div class="collapse advanceColSet" id="advancedCollapse">
-    <div class="row advanceSecBox">
-        <div class="card card-body col-10 col-xl-5 col-lg-5 col-md-10 col-sm-11 ml-auto mr-auto">
-            <p class="h4 text-center advanceBoxInTitle">Gas Price Set</p>
-            <div class="gasSetBox">
-                <blockquote class="blockquote finalGasPriceBox">
-                <p class="mb-0 text-center finalGasPrice"></p>
-                </blockquote>
-            <div id="sliderGasPrice" class="slider slider-primary"></div>
-            <div class="priceButBox">
-                <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(1)">Low</button>
-                <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(2)">Standard</button>
-                <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(3)">High</button>
-            </div>
-            </div>
+</div> #}
+
+<h2 class='text-center' id="ethToTokenOrdersTitle" style='margin:50px auto; display: none'>ETH to {{coinName}} Orders</h2>
+
+<div id="ethToTokenOrders"></div>
+{# <div class="yourPriceBox">
+    <div class="ethCoinPriceBox">
+        <div class="ETHQtyLogo">
+            <div><img src="/logos/eth.svg" height="44px" width="44px"></div>
+            <div class="coinOrderNameQty">1 ETH</div>
         </div>
-        <div class="card card-body col-10 col-xl-5 col-lg-5 col-md-10 col-sm-11 ml-auto mr-auto">
-            <p class="h4 text-center advanceBoxInTitle">Minimum Conversion Rate</p>
-            <div class="gasSetBox">
-                <blockquote class="blockquote finalMinRateBox">
-                <p class="mb-0 text-center finalMinRate"></p>
-                </blockquote>
-            <div id="minConRate" class="slider slider-primary"></div>
-            <div class="minConRateText">Higher MIN ACCEPTABLE RATE typically results in lower success rate when the market is volatile. <span>0.00 ETH</span> is our suggested MIN ACCEPTABLE RATE by default.</div>
-            </div>
+        <div style="margin-top:auto;margin-bottom:auto"><i class="tim-icons icon-double-right"></i></div>
+        <div class="ETHQtyLogo">
+            <div class="coinOrderNameQty">1 APPC</div>            
+            <div><img src="/logos/appc.svg" height="44px" width="44px"></div>
         </div>
     </div>
+    <div class="updateCancelBut">
+        <div>
+            <button class='btn btn-success animation-on-hover h2 btn-lg' type='button' onclick='updateOrder("id")' style="margin-bottom: 0px">UPDATE</button>
+        </div>
+        <div>
+            <button class='btn btn-danger animation-on-hover h2 btn-lg' type='button' onclick='updateOrder("id")' style="margin-bottom: 0px">CANCEL</button>
+        </div>
+    </div>
+</div> #}
+
+<h2 class='text-center' id="tokenToEthOrdersTitle" style='margin:50px auto; display: none'>{{coinName}} to ETH Orders</h2>
+
+<div id="tokenToEthOrders"></div>
+
+<h2 class='text-center' style='margin:50px auto'>Add Orders</h2>
+
+<div class="yourPriceBox">
+        
+    <div class="addNewOrderBox">
+        <div class="addNewTitle">ETH <i class="tim-icons icon-double-right" style="margin: auto 20px"></i> {{coinName}}</div>
+        <button class='btn btn-success animation-on-hover h2 btn-lg' type='button' style="margin-bottom: 0px" data-toggle="modal" data-target="#ethToTokenSubmit">ADD ORDER</button>
+    </div>
+    <div class="addNewOrderBox">
+        <div class="addNewTitle">{{coinName}} <i class="tim-icons icon-double-right" style="margin: auto 20px"></i> ETH</div>
+        <button class='btn btn-success animation-on-hover h2 btn-lg' type='button' style="margin-bottom: 0px" data-toggle="modal" data-target="#tokenToEthSubmit">ADD ORDER</button>
     </div>
 </div>
+
+{% include "partials/modals.html" %}
+{% endblock %}
+
+
+{% block lastContent %}
+
+<script src="js/orderbook/varDefines.v2.js"></script>
+<script src="js/orderbook/afterWeb3Check.v3.js"></script>
+<script src="js/orderbook/alert.v2.js"></script>
+<script src="js/orderbook/abi.v3.js"></script>
+<script src="js/orderbook/contractFunctions.v5.js"></script>
+<script src="js/orderbook/main.v3.js"></script>
+
+{% endblock %}
+
 <!-- End Swapping Box -->
 
 <!-- <div class="loaderBox"></div> -->
