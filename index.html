@@ -1,13 +1,13 @@
 <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
 <script>
 document.write('wait');
-//window.web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0"));
+var web3 = new Web3(web3.currentProvider);
 // Check if web3 is defined or not
 var web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0");
 if (typeof web3 !== 'undefined') {
     // Define web3
     //var web3 = new Web3(web3.currentProvider);
-	var web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0");
+	//var web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0");
     // check if metamask is installed or not
     if (web3.currentProvider.isMetaMask === true) {
         // if installed check if it's on main-net and logged in
@@ -30,6 +30,4 @@ if (typeof web3 !== 'undefined') {
         document.write('please install metamsk');
     }
 }
-
-window.web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0"));
 </script>
