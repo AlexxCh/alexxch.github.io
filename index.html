@@ -4,30 +4,19 @@ document.write('wait');
 var web3 = new Web3(web3.currentProvider);
 // Check if web3 is defined or not
 var web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0"));
-if (typeof web3 !== 'undefined') {
-    // Define web3
-    var web3 = new Web3(web3.currentProvider);
-	//var web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0"));
-    // check if metamask is installed or not
-    if (web3.currentProvider.isMetaMask === true) {
-        // if installed check if it's on main-net and logged in
-        web3.version.getNetwork((err, netId) => {
-            // if account is not defined means not logged-in
-            var account = web3.eth.accounts[0];
-            // if account not defined means not logged-in
-            if (account) {
-                // if netId = 1 then main-net
-                if (netId == 1) {
-                  document.write('main net');
-                } else {
-                  document.write('not main net');
-                }
-            } else {
-                document.write('please log in');
-            }
-        });
-    } else {
-        document.write('please install metamsk');
-    }
-}
+web3.version.getNetwork((err, netId) => {
+        $('.swapButClass').css('display', 'none');
+        $('.descLineMargin').css('margin', 'auto');
+        account = window.web3.eth.accounts[0];
+        networkId = netId;
+        if (networkId == 1) {
+            document.write('main');
+        } else if (networkId == 3) {
+            dataUrl = "/lister/coinsData?ropsten=true";
+            document.write('ropsten');
+        } else {
+            document.write('not main');
+        }
+        
+    });
 </script>
