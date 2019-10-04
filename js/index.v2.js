@@ -3,6 +3,10 @@ let account; // user account
 let dataUrl = "/lister/coinsData";
 // let dataUrl = "/lister/coinsData?ropsten=true" // for ropsten
 
+	
+
+
+function getAccountAndNetwork() {
 	let Web3 = require('web3');
 if (typeof web3 !== 'undefined'){
     web3 = new Web3(web3.currentProvider);
@@ -17,9 +21,6 @@ else {
 
     var web3 = new Web3(new Web3.providers.HttpProvider(CURRENT_URL));
 }
-
-
-function getAccountAndNetwork() {
     web3.version.getNetwork((err, netId) => {
         $('.swapButClass').css('display', 'none');
         $('.descLineMargin').css('margin', 'auto');
