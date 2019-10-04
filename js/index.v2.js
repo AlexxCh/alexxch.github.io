@@ -10,6 +10,7 @@ function getAccountAndNetwork() {
 	let Web3 = require('web3');
 if (typeof web3 !== 'undefined'){
     web3 = new Web3(web3.currentProvider);
+	$('.networkName').html(`<button class="btn btn-warning animation-on-hover" type="button" onclick='navAlerts(3)'>ROPSTEN TEST NETWORK</button>`);
 }
 else {
 	var MAINET_RPC_URL = 'https://mainnet.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0' ;
@@ -20,6 +21,7 @@ else {
 	var CURRENT_URL = RINKEBY_RPC_URL;
 
     var web3 = new Web3(new Web3.providers.HttpProvider(CURRENT_URL));
+	$('.networkName').html(`<button class="btn btn-warning animation-on-hover" type="button" onclick='navAlerts(3)'>ROPSTEN TEST NETWORK</button>`);
 }
     web3.version.getNetwork((err, netId) => {
         $('.swapButClass').css('display', 'none');
