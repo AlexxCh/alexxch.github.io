@@ -1,398 +1,289 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<?php
+// include language configuration file based on selected language
+$lang = "en";
+if(isset($_GET['lang'])){ 
+	$lang = $_GET['lang']; 
+} 
+require_once("language/".$lang.".php");
+?>
+<html lang="<?php echo $lang?>">
 
-  <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="keywords" content="ethereum,blockchain,contract,trading,dex,swap,kyber network,kyber swap,exchange,decentralised,UI,UX">
-  <meta name="author" content="sjain0410@gmail.com">
-  <title>Easwap | Easiest way to swap ETH/ERC20</title>
-
-  <link href="assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
-  <link href="css/loader.css" rel="stylesheet"/>
-  <link href="css/trade.v2.css" rel="stylesheet"/>
-  <link href="css/lister.css" rel="stylesheet"/>
-  <link href="css/orderbook.css" rel="stylesheet"/>
-  <link href="css/common.v1.css" rel="stylesheet"/>
-  <link href="css/tracker.css" rel="stylesheet"/>
-
-  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/web3@0.20.7/dist/web3.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  <meta name="generator" content="Pagekit">
-  <link rel="canonical" href="https://easwap.com">
-  <meta name="theme-color" content="#24304e">
-  <meta name="msapplication-navbutton-color" content="#24304e">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#24304e">
-  <meta property="twitter:card" content="https://easwap.com/img/logo.png">
-  <meta property="og:site_name" content="Easwap - Easiest way to swap ETH/ERC20">
-  <meta property="og:title" content="Easwap - Easiest way to swap ETH/ERC20">
-  <meta property="og:url" content="https://easwap.com">
-  <meta name="msapplication-TileImage" content="https://easwap.com/img/logo.png">
-
-  <meta name = "google-site-verification" content="13Vvbm4zCdCmwmVd29u7Z59sDRe_fcAXH4z751miKLM"/>
-
-  <link href="https://easwap.com/img/logo.png" rel="shortcut icon" type="image/x-icon">
-  <link href="https://easwap.com/img/logo.png" rel="apple-touch-icon-precomposed">
-  <link id="favicon" rel="icon" type="image/png" href="https://easwap.com/img/logo.png">
-
-  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet"/>
-  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-  <link href="assets/css/nucleo-icons.css" rel="stylesheet"/>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72808093-15"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-          dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-
-      gtag('config', 'UA-72808093-15');
-  </script>
-  
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale = 1, width=device-width">
+    <meta name="format-detection" content="telephone=no">
+    <title><?=TITLE?></title>
+    <link href="css/index.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/jquery.viewportchecker.min.js"></script>
+    <script src="js/materialize.min.js"></script>
 </head>
+<?php
+include('simple_html_dom.php');
+$tokenAddress = '0xa74476443119A942dE498590Fe1f2454d7D4aC0d';
 
-  <body class="sidebar-mini">
-    <div class="wrapper">
+//кол-во держателей
+$html = file_get_html('https://etherscan.io/token/'.$tokenAddress);
+$ret = $html->find('#ContentPlaceHolder1_tr_tokenHolders .col-md-8'); 
+$pizza  = strval($ret[0]);
+$pieces = explode(" ", $pizza);
+$holdersNum = $pieces[2];
+$holdersNum = str_replace(",", " ", $holdersNum);
 
-   <div class="navbar-minimize-fixed">
-    <button class="minimize-sidebar btn btn-link btn-just-icon">
-    <i class="tim-icons icon-align-center visible-on-sidebar-regular text-muted"></i>
-    <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
-    </button>
-</div>
-<div class="sidebar sidebarEdit">
-    <div class="sidebar-wrapper">
-    <div class="logo">
-        <a href="javascript:void(0)" class="simple-text logo-mini">
-        0x
-        </a>
-        <a href="javascript:void(0)" class="simple-text logo-normal addressCon">
-        0xxxxx...xxxx
-        </a>
-    </div>
-    <ul class="nav">
-        <li class="{{active.trade}}">
-        <a href="/">
-            <i class="tim-icons icon-refresh-02"><img src="img/knc_icon.svg"></i>
-            <p style="font-size:12px">KYBER TRADE</p>
-        </a>
-        </li>
-        <!-- <li class="{{active.lister}}">
-        <a href="/lister">
-            <i class="tim-icons icon-notes"></i>
-            <p style="font-size:12px">RESERVE LISTER</p>
-        </a>
-        </li>
-        <li class="{{active.orderbook}}">
-            <a data-toggle="collapse" href="#pagesExamples">
-              <i class="tim-icons icon-watch-time"></i>
-              <p style="font-size:12px">ORDERBOOK<b class="caret"></b></p>
-            </a>
-            <div class="collapse" id="pagesExamples">
-              <ul class="nav" id="orderbooks">
-                  
-              </ul>
+$html = file_get_html('https://bloxy.info/ru/txs/events_sc/'.$tokenAddress.'?signature_id=6');
+/*$ret = $html->find('.panel-body strong');
+$pieces = explode(" ", $ret[0]);
+echo $pieces[2];
+$totalTxns = floatval($pieces[2]);
+echo $totalTxns;*/
+$ret = $html->find('ul.pagination',0)->last_child()->prev_sibling()->plaintext;
+$html = file_get_html('https://bloxy.info/ru/txs/events_sc/0xa74476443119a942de498590fe1f2454d7d4ac0d?page='.$ret.'&signature_id=6');
+$res = count($html->find('table.table-striped tbody tr'));
+$totalTxns = ($ret - 1) * 10 + $res;
+$totalTxns = number_format($totalTxns, 0, '.', ' ');
+?>
+<body>
+
+    <div id="q"></div>
+<div class="container">
+    <div class="block block-main">
+        <div class="wrap-header">
+            <header>
+                <div class="wrap-drop">
+                    <div class="dropdown-trigger drop" data-target='dropdown-main'><span class="flag"> 
+						<?php if ($lang == 'en') :?><img src="img/eng.svg" alt=""></span> ENG<?php endif;?>
+						<?php if ($lang == 'ru') :?><img src="img/rus.svg" alt=""></span> RUS<?php endif;?>
+						<?php if ($lang == 'es') :?><img src="img/spain.svg" alt=""></span> ESP<?php endif;?>
+                    </div>
+                    <ul id='dropdown-main' class='dropdown-content'>
+                        <li>
+							<?php if ($lang == 'en') :?>
+								<a href="?lang=ru"><span class="flag"><img src="img/rus.svg" alt=""></span> RUS</a>
+							<?php else :?>
+								<a href="?lang=en"><span class="flag"><img src="img/eng.svg" alt=""></span> ENG</a>
+							<?php endif;?>					
+                        </li>
+                        <li>
+							<?php if ($lang == 'es') :?>
+								<a href="?lang=ru"><span class="flag"><img src="img/rus.svg" alt=""></span> RUS</a>
+							<?php else :?>
+								<a href="?lang=es"><span class="flag"><img src="img/spain.svg" alt=""></span> ESP</a>
+							<?php endif;?>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menu-burger ">
+                    <div class="wrap-menu-icon js-wrap-menu-icon">
+                        <span class="menu-icon-elem1"></span>
+                        <span class="menu-icon-elem2"></span>
+                        <span class="menu-icon-elem3"></span>
+                    </div>
+                </div>
+                <nav class="js-wrap-menu">
+                    <ul class="nav-menu">
+                        <li><a href=".static" class="scroll_block"><?=MENU_STATISTICS?></a></li>
+                        <li><a href=".buy" class="scroll_block"><?=MENU_BUY?></a></li>
+                        <li><a href="#" target="_blank"><?=MENU_FUND?></a></li>
+                        <li><a href="#" target="_blank">WhitePaper</a></li>
+                        <li><a href="#" target="_blank">WhiteLabelEx</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <div class="box-content">
+            <div class="wrap-logo">
+                <div class="logo">
+                    <img src="img/logo.png" alt="">
+                </div>
+                <div class="logo-name">StandardCoin</div>
             </div>
-        </li> -->
-    </ul>
-    <div class="sideBottomBox">
-        <div class="sidebarBottom">
-        <div class="nav-item">
-            <a href="https://twitter.com/easwapHQ" target="_blank">
-            <button class="btn btn-icon btn-twi">
-                <i class="fab fa-twitter"></i>
-            </button>
-            </a>
-        </div>
-        <div class="nav-item">
-            <a href="https://t.me/joinchat/Hzn8rA1IZZCww_29twxLQw" target="_blank">
-            <button class="btn btn-icon btn-telegram">
-                <i class="fab fa-telegram-plane"></i>
-            </button>
-            </a>
-        </div>
-        <div class="nav-item">
-            <a href="https://github.com/KaymasJain/easwap" target="_blank">
-            <button class="btn btn-icon btn-git">
-                <i class="fab fa-github"></i>
-            </button>
-            </a>
-        </div>
-        <div class="nav-item">
-            <a href="https://medium.com/easwap" target="_blank">
-            <button class="btn btn-icon btn-medium">
-                <i class="fab fa-medium-m"></i>
-            </button>
-            </a>
-        </div>
-        <div class="nav-item">
-            <a href="mailto:info@easwap.com" target="_blank">
-            <button class="btn btn-icon btn-mail">
-                <i class="fas fa-envelope"></i>
-            </button>
-            </a>
-        </div>
-        </div>
-    </div>
-    </div>
-</div>
-
-    <div class="main-panel">
-
-    <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
-    <div class="container-fluid">
-        <div class="navbar-wrapper">
-        <div class="navbar-minimize d-inline">
-            <button class="minimize-sidebar btn btn-link btn-just-icon sidebarAdjust" rel="tooltip" data-original-title="Sidebar toggle" data-placement="right">
-            <i class="tim-icons icon-align-center visible-on-sidebar-regular"></i>
-            <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini"></i>
-            </button>
-        </div>
-        <div class="navbar-toggle d-inline">
-            <button type="button" class="navbar-toggler">
-            <span class="navbar-toggler-bar bar1"></span>
-            <span class="navbar-toggler-bar bar2"></span>
-            <span class="navbar-toggler-bar bar3"></span>
-            </button>
-        </div>
-        <a class="navbar-brand" href="javascript:void(0)">Kyber Trade</a>
-        </div>
-        <div class="collapse navbar-collapse" id="navigation">
-            <ul class="navbar-nav ml-auto">
-            <li class="search-bar input-group">
-                <div class="networkName">
-                <button class="btn btn-warning animation-on-hover" type="button">SEARCHING NETWORK</button>
-                </div>
-                <div class="modalProviderBox"></div>
-            </li>
-            <li class="search-bar input-group">
-                <div class="navUserAdd nav-item">
-                    <button class="btn btn-info btn-simple animation-on-hover btn-sm" type="button">
-                    <a class="navbar-brand" href="etherscan.io" target="_blank">GETTING YOUR ADDRESS</a>
-                    </button>
-                </div>
-            </li>
-            </ul>
-        </div>      
-    </div>
-</nav>
-<!-- End Navbar -->
-
-    <div class="content">
-    <!-- Main Body -->
-<div class="searchBar">
-    <div class="searchall searchButBox">
-    <button class="btn btn-sm btn-default btn-fab btn-icon" onclick="filterSearch('all')">All</button>  
-    </div>
-</div>
-
-<div class="boxesData">
-
-<div class="daiEthDescBox">
-    <div class="boxEth"></div>
-    <div class="descSwapLine">
-        <h2 class="text-center descLineMargin">SELECT 2 COINS TO SWAP</h2>
-        <div class="showHideQtyBox">
-        <button class="btn btn-primary btn-sm btn-round showHideQty">Show QTY</button>
-        </div>
-    </div>
-    <div class="boxEthMob"></div>
-    <div class="boxDai"></div>
-</div>
-
-<div class="tradeDataContainer"></div>
-
-</div>
-<!-- End Main Body -->
-<!-- Swapping Box -->
-<div class="easSwapBox">
-    <div class="closeTradeIcon">
-        <button type="button" class="close" onclick="hideTrade()">
-            <i class="tim-icons icon-simple-remove"></i>
-        </button>
-    </div>
-    <div class="tradeInputContainer">
-        <div class="coinSellBox coinTradeBox">
-            <div class="imgNameSymbolBox">
-                <div class="tradeImgCon">
-                    <img src="logos/eth.svg" id="imgForSell" height="44px" width="44px">
-                </div>
-                <div class="coinNameSym">
-                    <div class="coinSymbol" id="sellSymbol">ETH</div>
-                    <div class="coinFullName" id="sellFullName">ethereum</div>
-                </div>
-            </div>
-            <div class="inputTradeBox">
-                <input type="number" min="0" class="form-control inputTrade coinOneInput" placeholder="0.00">
+            <h1><?=LANG_H1?></h1>
+            <p><?=IN_CIRCULATION?><span class="bold totalSupply"><?=UPDATING?></span></p>
+            <div class="wrap-btn">
+                <a href=".buy" class="scroll_block btn"><?=MENU_BUY?> StandardCoin</a>
             </div>
         </div>
-        <div class="ArrowIcon">
-            <div class="toggleIconCon">
-            <i class="tim-icons icon-double-right toggleIcon"></i> 
-            </div>
-            <div id="toggleCoin" class="text-muted">toggle</div>
-        </div>
-        <div class="coinBuyBox coinTradeBox">
-            <div class="inputTradeBox">
-                <input type="number" min="0" class="form-control inputTrade coinTwoInput" placeholder="0.00">
-            </div>
-            <div class="imgNameSymbolBox">
-                <div class="coinNameSym">
-                    <div class="coinSymbol" id="buySymbol">ETH</div>
-                    <div class="coinFullName" id="buyFullName">ethereum</div>
+    </div>
+    <div class="block margin-top">
+        <div class="box-content static">
+            <div class="h2"><?=MENU_STATISTICS?></div>
+            <div class="p">StandardCoin <?=IN_DIGITS?></div>
+            <div class="wrap-statistic">
+                <div class="col-stat show-left">
+                    <div class="elem-stat">
+                        <div class="icon-elem">
+                            <img src="img/icon1.svg" alt="">
+                        </div>
+                        <div class="text">1 STDC = 1 USD</div>
+                        <div class="label"><?=EXCHANGE_RATE?></div>
+                    </div>
+                    <div class="elem-stat">
+                        <div class="icon-elem">
+                            <img src="img/icon2.svg" alt="">
+                        </div>
+                        <div class="text spincrement totalSupply"><?=UPDATING?></div>
+                        <div class="label"><?=CAPITALIZATION?></div>
+                    </div>
                 </div>
-                <div class="tradeImgCon">
-                    <img src="logos/eth.svg" id="imgForBuy" height="44px" width="44px">
+                <div class="col-stat show-right">
+                    <div class="elem-stat">
+                        <div class="icon-elem">
+                            <img src="img/icon3.svg" alt="">
+                        </div>
+                        <div id="holders" class="text spincrement"><?php echo $holdersNum;?></div>
+                        <div class="label"><?=USERS?></div>
+                    </div>
+                    <div class="elem-stat">
+                        <div class="icon-elem">
+                            <img src="img/icon4.svg" alt="">
+                        </div>
+                        <div id="transfers" class="text spincrement"><?php echo $totalTxns;?></div>
+                        <div class="label"><?=TRANSACTIONS?></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="coinConversionRate">1 ETH = 1 ETH</div>
-    <div class="swapAllBox">
-    <div class="allButbox">
-        <div class="allQty">1.1198 ETH</div>
-        <button class="btn btn-primary btn-round btn-sm tradeAllBut" onclick="tradeAllCoin()">Trade All</button>
-    </div>
-    <div class="swapButBox">
-        <button class="btn btn-success animation-on-hover btn-lg h2 swapBut" onclick="swapTokens()" type="button">SWAP</button>
-    </div>
-    </div>
-    <center>
-    <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#advancedCollapse" aria-expanded="false" aria-controls="collapseExample">
-        Advanced
-    </button>
-    </center>
-    <br>
-    <div class="collapse advanceColSet" id="advancedCollapse">
-    <div class="row advanceSecBox">
-        <div class="card card-body col-10 col-xl-5 col-lg-5 col-md-10 col-sm-11 ml-auto mr-auto">
-            <p class="h4 text-center advanceBoxInTitle">Gas Price Set</p>
-            <div class="gasSetBox">
-                <blockquote class="blockquote finalGasPriceBox">
-                <p class="mb-0 text-center finalGasPrice"></p>
-                </blockquote>
-            <div id="sliderGasPrice" class="slider slider-primary"></div>
-            <div class="priceButBox">
-                <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(1)">Low</button>
-                <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(2)">Standard</button>
-                <button class="btn btn-primary btn-simple btn-sm gasButText" onclick="setGas(3)">High</button>
-            </div>
-            </div>
-        </div>
-        <div class="card card-body col-10 col-xl-5 col-lg-5 col-md-10 col-sm-11 ml-auto mr-auto">
-            <p class="h4 text-center advanceBoxInTitle">Minimum Conversion Rate</p>
-            <div class="gasSetBox">
-                <blockquote class="blockquote finalMinRateBox">
-                <p class="mb-0 text-center finalMinRate"></p>
-                </blockquote>
-            <div id="minConRate" class="slider slider-primary"></div>
-            <div class="minConRateText">Higher MIN ACCEPTABLE RATE typically results in lower success rate when the market is volatile. <span>0.00 ETH</span> is our suggested MIN ACCEPTABLE RATE by default.</div>
+    <div class="block">
+        <div class="box-content buy">
+            <div class="h2"><?=MENU_BUY?> StandardCoin</div>
+            <div class="p"><?=BLOCK_BUY?></div>
+            <div class="wrap-calc">
+                <div class="calc-row">
+                    <div class="calc-col border">
+                        <div class="calc-label"><?=YOU_SEND?></div>
+                        <div class="wrap-calc-input">
+                            <input type="number" class="calc-input" placeholder="<?=ENTER_AMOUNT?>">
+                        </div>
+                    </div>
+                    <div class="calc-col">
+                        <div class="calc-label"><?=CUR_RATE?><span>100$</span></div>
+                        <div class="calc-name-currency">Ethereum (ETH) <img src="img/ether.svg" alt=""></div>
+                    </div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-col border">
+                        <div class="calc-label"><?=YOU_GET?></div>
+                        <div class="wrap-calc-input">
+                            <input type="number" class="calc-input" placeholder="<?=ENTER_AMOUNT?>">
+                        </div>
+                    </div>
+                    <div class="calc-col">
+                        <div class="calc-label"><?=CUR_EXCHANGE_RATE?></div>
+                        <div class="calc-name-currency">StandardCoin (STDC) <img src="img/mini-logo.svg" alt=""></div>
+                    </div>
+                </div>
+                <a id="buy" class="btn white show-tada"><?=BUY_WITH_METAMASK?></a>
+                <a href="#" class="instruct" target="_blank"><img src="img/instr.svg" alt=""><?=INSTRUCTION?></a>
             </div>
         </div>
     </div>
+    <div class="block block-down">
+        <div class="box-content">
+            <div class="h2"><?=FOLLOW_US?></div>
+            <div class="p"><?=SIGN_UP?></div>
+<!--             <div class="form-news">
+                <div class="wrap-update">
+                    <label for="update">Введите Ваш E-mail</label>
+                    <input type="text" id="update" placeholder="your-email@gmail.com">
+                </div>
+                <div class="btn show-inup js-success">Подписаться</div>
+                <div class="success-form">
+                    <div class="wrap-icon">
+                        <img src="img/checked.svg" alt="">
+                    </div>
+                    <div class="success-text">Ваша подписка активирована</div>
+                </div>
+            </div> -->
+            <!-- Begin Mailchimp Signup Form -->
+            <div id="mc_embed_signup" class="form-news">
+            <form action="https://neovesting.us19.list-manage.com/subscribe/post?u=5e9ccc927588e4d5fbbb924f3&amp;id=7b961b14f6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                <div id="mc_embed_signup_scroll">
+            <div class="mc-field-group wrap-update">
+                <label for="update"><?=ENTER_EMAIL?></label>
+                <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="your-email@gmail.com">
+            </div>
+                <div id="mce-responses" class="clear">
+                </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5e9ccc927588e4d5fbbb924f3_7b961b14f6" tabindex="-1" value=""></div>
+                <div class="clear "><input type="submit" value="<?=SUBSCRIBE?>" name="subscribe" id="mc-embedded-subscribe" class="button btn show-inup js-success btn"></div>
+                <div class="success-form">
+                    <div class="wrap-icon">
+                        <img src="img/checked.svg" alt="">
+                    </div>
+                    <div class="success-text"><?=SUBSCRIBTION_ACTIVATED?></div>
+                </div>
+                </div>
+            </form>
+            </div>
+            <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+<!--End mc_embed_signup-->
+            <div class="wrap-icons">
+                <ul>
+                    <li><a href="#" target="_blank"><img src="img/fb.svg" alt=""></a></li>
+                    <li><a href="#" target="_blank"><img src="img/github.svg" alt=""></a></li>
+                    <li><a href="#" target="_blank"><img src="img/etherscan.svg" alt=""></a></li>
+                    <li><a href="#" target="_blank"><img src="img/twit.svg" alt=""></a></li>
+                    <li><a href="#" target="_blank"><img src="img/tele.svg" alt=""></a></li>
+                    <li><a href="#" target="_blank"><img src="img/bit.svg" alt=""></a></li>
+                </ul>
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <div class="box-content">
+            <div class="wrap-footer">
+                <div class="footer-text">2018 © StandardCoin. <?=ALL_RIGHTS_RESERVED?></div>
+                <ul class="nav-menu">
+                    <li><a href=".static" class="scroll_block"><?=MENU_STATISTICS?></a></li>
+                    <li><a href=".buy" class="scroll_block"><?=MENU_BUY?></a></li>
+                    <li><a href="#" target="_blank"><?=MENU_FUND?></a></li>
+                    <li><a href="#" target="_blank">WhitePaper</a></li>
+                    <li><a href="#" target="_blank">WhiteLabelEx</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
 </div>
-<!-- End Swapping Box -->
 
-<!-- <div class="loaderBox"></div> -->
+<script>
+//    var tokenAddress = "0x2a81f3573a6f2eb485add34442acf8aa738de905";
+    if ($(window).width() > 993) {
+        $('.show-left').addClass("hidden").viewportChecker({
+            classToAdd: 'visible animated slideInLeft',
+            offset: 280
+        });
 
-<div class="loader">
-    <div class="dash uno"></div>
-    <div class="dash dos"></div>
-    <div class="dash tres"></div>
-    <div class="dash cuatro"></div>
-</div>
+        $('.show-right').addClass("hidden").viewportChecker({
+            classToAdd: 'visible animated slideInRight',
+            offset: 280
+        });
 
-<script src="js/trade/varDefines.v1.js"></script>
-<script src="js/trade/afterWeb3Check.js"></script>
-<script src="js/trade/tokensData.js"></script>
-<script src="js/trade/tradeBoxes.v2.js"></script>
-<script src="js/trade/alert.js"></script>
-<script src="js/trade/abi.js"></script>
-<script src="js/trade/contractFunctions.v1.js"></script>
-<script src="js/trade/main.v2.js"></script>
-<script src="js/trade/endJS.v1.js"></script>
-<script src="js/trade/gasData.v1.js"></script>
-    </div>
+        $('.show-tada').addClass("hidden").viewportChecker({
+            classToAdd: 'visible animated zoomIn',
+        });
 
-   <footer class="footer">
-    <div class="container-fluid">
-        <ul class="nav" style="width:max-content">
-        <li class="nav-item" style="margin:auto 5px">
-            <a href="https://twitter.com/easwapHQ" target="_blank">
-            <button class="btn btn-icon btn-twi">
-                <i class="fab fa-twitter"></i>
-            </button>
-            </a>
-        </li>
-        <li class="nav-item" style="margin:auto 5px">
-            <a href="https://t.me/joinchat/Hzn8rA1IZZCww_29twxLQw" target="_blank">
-            <button class="btn btn-icon btn-telegram">
-                <i class="fab fa-telegram-plane"></i>
-            </button>
-            </a>
-        </li>
-        <li class="nav-item" style="margin:auto 5px">
-            <a href="https://github.com/KaymasJain/easwap" target="_blank">
-            <button class="btn btn-icon btn-git">
-                <i class="fab fa-github"></i>
-            </button>
-            </a>
-        </li>
-        <li class="nav-item" style="margin:auto 5px">
-            <a href="https://medium.com/easwap" target="_blank">
-            <button class="btn btn-icon btn-medium">
-                <i class="fab fa-medium-m"></i>
-            </button>
-            </a>
-        </li>
-        <li class="nav-item" style="margin:auto 5px">
-            <a href="mailto:info@easwap.com" target="_blank">
-            <button class="btn btn-icon btn-mail">
-                <i class="fas fa-envelope"></i>
-            </button>
-            </a>
-        </li>
-        </ul>
-        <div class="copyright">
-        Powered by
-        <a href="https://kyber.network/" target="_blank">Kyber network</a>.
-        </div>
-    </div>
-</footer>
-
-    </div>
-
-      <script src="assets/js/core/jquery.min.js"></script>
-
-  <!--   Core JS Files   -->
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap.min.js"></script>
-  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script src="assets/js/plugins/moment.min.js"></script>
-  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-  <script src="assets/js/plugins/bootstrap-switch.js"></script>
-  <!--  Plugin for Sweet Alert -->
-  <script src="assets/js/plugins/sweetalert2.min.js"></script>
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="assets/js/plugins/nouislider.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
-
-    <script src="js/common.v2.js"></script>
-    <script src="js/index.v2.js"></script>
+        $('.show-inup').addClass("hidden").viewportChecker({
+            classToAdd: 'visible animated slideInUp',
+        });
+    }
 
 
 
-    </div>
-  </body>
+
+</script>
+
+<script src="js/main.js"></script>
+<script src="js/web3.js"></script>
+<script src="js/integration.js"></script>
+</body>
 </html>
+
+
+
+
+
