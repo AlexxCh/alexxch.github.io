@@ -3,17 +3,11 @@ let account; // user account
 let dataUrl = "/lister/coinsData";
 // let dataUrl = "/lister/coinsData?ropsten=true" // for ropsten
 
-window.addEventListener('load', async () => {
-   
+
         window.web3 = new Web3(web3.currentProvider);
         getAccountAndNetwork();
-    } else {
-        $('.networkName').html(`<button class="btn btn-danger animation-on-hover" type="button" onclick="navAlerts(1)">NO ETH PROVIDER</button>`);
-        let link = `<button class="btn btn-info btn-simple animation-on-hover" type="button" onclick="navAlerts(0)">Create ID</button>`;
-        $('.navUserAdd').html(link);
-        ifWeb3NotConfigured();
-        updateNavOrderbook();
-    });
+
+
 
 
 function getAccountAndNetwork() {
