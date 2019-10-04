@@ -5,8 +5,8 @@ document.write('wait');
 // Check if web3 is defined or not
 var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0"));
 web3.version.getNetwork((err, netId) => {
-        $('.swapButClass').css('display', 'none');
-        $('.descLineMargin').css('margin', 'auto');
+        //$('.swapButClass').css('display', 'none');
+        //$('.descLineMargin').css('margin', 'auto');
         account = window.web3.eth.accounts[0];
         networkId = netId;
         if (networkId == 1) {
