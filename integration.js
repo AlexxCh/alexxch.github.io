@@ -8,7 +8,7 @@ let Web3 = require('web3');
 
 	var CURRENT_URL = RINKEBY_RPC_URL;
 
-    var web3 = new Web3(new Web3.providers.HttpProvider(CURRENT_URL));
+    //var web3 = new Web3(new Web3.providers.HttpProvider(CURRENT_URL));
 
 
 //var Web3 = require('web3');
@@ -275,3 +275,22 @@ myevent.watch(function(error, result){
    console.log(result);
 myevent.stopWatching();
 });
+
+
+
+let web3 = new Web3(
+  // Replace YOUR-PROJECT-ID with a Project ID from your Infura Dashboard
+  new Web3.providers.WebsocketProvider("wss://rinkeby.infura.io/ws/v3/66492ced9c334deeb2bf9cd40f4e09b0")
+);
+
+const instance = new web3.eth.Contract(abi, '0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
+
+instance.getPastEvents(
+    "Transfer",
+    { fromBlock: 0, toBlock: "latest" },
+    (errors, events) => {
+        if (!errors) {
+            console.log(events);
+        }
+    }
+);
