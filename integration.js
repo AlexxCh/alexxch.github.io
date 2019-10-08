@@ -288,4 +288,4 @@ myEvent.watch(function(error, result){
   console.log(result);
 });
 // would stop and uninstall the filter
-myEvent.stopWatching();
+//myEvent.stopWatching();
