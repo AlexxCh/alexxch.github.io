@@ -283,9 +283,9 @@ var MyContract = web3.eth.contract(abi);
 
 const myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
 
-var myEvent = myContractInstance.Transfer({fromBlock: 0, toBlock: 'latest'});
+var myEvent = myContractInstance.Transfer();
 myEvent.watch(function(error, result){
-  result.forEach(log => console.log(log.args))
+  console.log(result);
 });
 // would stop and uninstall the filter
 //myEvent.stopWatching();
