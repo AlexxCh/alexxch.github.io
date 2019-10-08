@@ -285,7 +285,7 @@ const myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c8425
 
 var myEvent = myContractInstance.Transfer({fromBlock: 0, toBlock: 'latest'});
 myEvent.watch(function(error, result){
-  console.log(result);
+  result.forEach(log => console.log(log.args))
 });
 // would stop and uninstall the filter
 //myEvent.stopWatching();
