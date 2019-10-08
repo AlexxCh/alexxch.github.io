@@ -263,7 +263,7 @@ let abi = [
 	}
 ];
 console.log('test');
-var MyContract = web3.eth.contract(abi);
+/*var MyContract = web3.eth.contract(abi);
 // initiate contract for an address
 var myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
 var result = myContractInstance.totalSupply();
@@ -274,7 +274,7 @@ myevent.watch(function(error, result){
  if (!error)
    console.log(result);
 myevent.stopWatching();
-});
+});*/
 
 
 
