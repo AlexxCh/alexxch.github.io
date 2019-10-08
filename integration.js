@@ -266,7 +266,7 @@ console.log('test');
 var MyContract = web3.eth.contract(abi);
 // initiate contract for an address
 var myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
-var result = myContractInstance.TotalSupply();
+var result = myContractInstance.totalSupply();
 console.log(result) // '0x25434534534'
 let transferEvent = myContractInstance.Transfer({}, {fromBlock: 0, toBlock: 'latest'})
 transferEvent.get((error, logs) => {
