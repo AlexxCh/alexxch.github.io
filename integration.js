@@ -47,10 +47,10 @@ let abi = [
 ];
 var MyContract = web3.eth.contract(abi);
 // initiate contract for an address
-var myContractInstance = MyContract.at('0xa45b4aeec6a234dfc957430492bd3e6a5f77bcb0');
+var myContractInstance = MyContract.at('0x6C4A8518a7e2167d66fEBd4e1402c5ad9E3C0367');
 
 
-var event = myContractInstance.Test1({}, {fromBlock: 0, toBlock: 'latest'})
+var event = myContractInstance.Transfer({}, {fromBlock: 0, toBlock: 'latest'})
 // watch for changes
 event.watch(function(error, result){
  if (!error)
