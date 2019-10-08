@@ -47,7 +47,7 @@ let abi = [
 ];
 var MyContract = web3.eth.contract(abi);
 // initiate contract for an address
-var myContractInstance = MyContract.at('0x651f91fe0beb24df8f870103342aac34f55a4eb8');
+var myContractInstance = MyContract.at('0xa45b4aeec6a234dfc957430492bd3e6a5f77bcb0');
 
 
 var event = myContractInstance.Test1({}, {fromBlock: 0, toBlock: 'latest'})
