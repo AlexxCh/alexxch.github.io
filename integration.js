@@ -1,6 +1,6 @@
 
 let Web3 = require('web3');
-+
+
 	var MAINET_RPC_URL = 'https://mainnet.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0' ;
 	var ROPSTEN_RPC_URL = 'https://ropsten.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0' ;
 	var KOVAN_RPC_URL = 'https://kovan.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0' ;
@@ -278,12 +278,14 @@ myevent.stopWatching();
 
 
 
-let web3 = new Web3(new Web3.providers.HttpProvider(RINKEBY_RPC_URL));
-var MyContract = web3.eth.contract(abi);
+let web3 = new Web3(
+  // Replace YOUR-PROJECT-ID with a Project ID from your Infura Dashboard
+  new Web3.providers.WebsocketProvider("wss://rinkeby.infura.io/ws/v3/66492ced9c334deeb2bf9cd40f4e09b0")
+);
 
-const myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
+const instance = new web3.eth.Contract(abi, '0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
 
-myContractInstance.getPastEvents(
+instance.getPastEvents(
     "Transfer",
     { fromBlock: 0, toBlock: "latest" },
     (errors, events) => {
