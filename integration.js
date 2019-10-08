@@ -268,9 +268,11 @@ var MyContract = web3.eth.contract(abi);
 var myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
 var result = myContractInstance.totalSupply();
 console.log(result) // '0x25434534534'
-let transferEvent = myContractInstance.Transfer({}, {fromBlock: 0, toBlock: 'latest'})
-transferEvent.get((error, logs) => {
-  // we have the logs, now print them
-  logs.forEach(log => console.log(log.args))
+var event = myContractInstance.Transfer({valueA: 100000} [, additionalFilterObject])
+// watch for changes
+event.watch(function(error, result){
+ if (!error)
+   console.log(result);
+});
 })
 
