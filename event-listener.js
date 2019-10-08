@@ -1,4 +1,4 @@
-let contractInterface = require('contract-interface');
+
 let contractInstance = contractInterface.getContractInstance({type: "wss"});
 
 exports.init = async () => {

@@ -1,7 +1,4 @@
-let express = require('express');
-let contractInterface = require('contract-interface');
-let environment = require('environment');
-let eventListener = require('event-listener');
+
 
 let app = express();
 
