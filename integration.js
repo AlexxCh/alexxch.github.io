@@ -23,7 +23,7 @@ let abi = [
 	{
 		"anonymous": false,
 		"inputs": [],
-		"name": "Test1",
+		"name": "Transfer",
 		"type": "event"
 	},
 	{
@@ -47,7 +47,7 @@ let abi = [
 ];
 var MyContract = web3.eth.contract(abi);
 // initiate contract for an address
-var myContractInstance = MyContract.at('0x6C4A8518a7e2167d66fEBd4e1402c5ad9E3C0367');
+var myContractInstance = MyContract.at('0xb65e31cbdd0a7a727b86c36ad7ac0d29f9b7233d');
 
 
 var event = myContractInstance.Transfer({}, {fromBlock: 0, toBlock: 'latest'})
