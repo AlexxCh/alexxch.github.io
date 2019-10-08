@@ -283,7 +283,7 @@ var MyContract = web3.eth.contract(abi);
 
 const myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
 
-var myEvent = myContractInstance.myEvent({some: 'args'}, {fromBlock: 0, toBlock: 'latest'});
+var myEvent = myContractInstance.Transfer({fromBlock: 0, toBlock: 'latest'});
 myEvent.watch(function(error, result){
   console.log(result);
 });
