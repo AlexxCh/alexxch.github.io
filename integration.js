@@ -278,7 +278,7 @@ myevent.stopWatching();
 
 
 
-let web3 = new Web3(new Web3.providers.HttpProvider(RINKEBY_RPC_URL));
+let web3 = new Web3(new Web3.providers.WebsocketProvider('wss://rinkeby.infura.io/ws/v3/66492ced9c334deeb2bf9cd40f4e09b0'));
 var MyContract = web3.eth.contract(abi);
 
 const myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
