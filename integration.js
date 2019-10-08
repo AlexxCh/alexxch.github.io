@@ -279,10 +279,11 @@ myevent.stopWatching();
 
 
 let web3 = new Web3(new Web3.providers.HttpProvider(RINKEBY_RPC_URL));
+var MyContract = web3.eth.contract(abi);
 
-const instance = new web3.eth.Contract(abi, '0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
+const myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
 
-instance.getPastEvents(
+myContractInstance.getPastEvents(
     "Transfer",
     { fromBlock: 0, toBlock: "latest" },
     (errors, events) => {
