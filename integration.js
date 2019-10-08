@@ -274,5 +274,4 @@ event.watch(function(error, result){
  if (!error)
    console.log(result);
 });
-})
 
