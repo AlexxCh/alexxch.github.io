@@ -299,8 +299,8 @@ myEvent.watch(function (err, result) {
   if (err) {
     return error(err);
   }
-console.log(result);
-console.log(result.args);
-  console.log("Count was incremented by address: " + result.args._value);
+//console.log(result);
+//console.log(result.args);
+  console.log("Transfer was incremented by address: " + result.args._from);
 
 })
