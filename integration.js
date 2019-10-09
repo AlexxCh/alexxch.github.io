@@ -277,7 +277,7 @@ myevent.stopWatching();
 });*/
 
 
-
+/*
 let web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0'));
 var MyContract = web3.eth.contract(abi);
 console.log(MyContract);
@@ -289,4 +289,14 @@ myEvent.watch(function(error, result){
   console.log(result);
 });
 // would stop and uninstall the filter
-//myEvent.stopWatching();
+//myEvent.stopWatching();*/
+
+counter = web3.eth.contract(abi).at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
+
+counter.Increment(function (err, result) {
+  if (err) {
+    return error(err);
+  }
+
+  log("Count was incremented by address: " + result.args._value);
+})
