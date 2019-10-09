@@ -302,5 +302,4 @@ myEvent.watch(function (err, result) {
 //console.log(result);
 //console.log(result.args);
   console.log("Transfer was incremented by address: " + result.args._from);
-
 })
