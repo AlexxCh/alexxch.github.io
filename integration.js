@@ -293,7 +293,9 @@ myEvent.watch(function(error, result){
 
 let counter = web3.eth.contract(abi).at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
 
-counter.Transfer(function (err, result) {
+var myEvent = counter.Transfer({},{fromBlock: 0, toBlock: 'latest'});
+console.log(myEvent);
+myEvent.watch(function (err, result) {
   if (err) {
     return error(err);
   }
