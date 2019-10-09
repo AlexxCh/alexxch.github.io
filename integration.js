@@ -301,8 +301,6 @@ myEvent.watch(function (err, result) {
   }
 console.log(result);
 console.log(result.args);
-  //log("Count was incremented by address: " + result.args._value);
-  result.args.forEach(function(entry) {
-    console.log(entry);
-});
+  log("Count was incremented by address: " + result.args._value);
+
 })
