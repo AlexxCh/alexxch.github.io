@@ -293,7 +293,7 @@ myEvent.watch(function(error, result){
 
 counter = web3.eth.contract(abi).at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
 
-counter.Increment(function (err, result) {
+counter.Transfer(function (err, result) {
   if (err) {
     return error(err);
   }
