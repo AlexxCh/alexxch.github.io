@@ -297,7 +297,8 @@ counter.Transfer(function (err, result) {
   if (err) {
     return error(err);
   }
-
+console.log(result);
+console.log(result.args);
   //log("Count was incremented by address: " + result.args._value);
   result.args.forEach(function(entry) {
     console.log(entry);
