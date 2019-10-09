@@ -15,6 +15,24 @@ let Web3 = require('web3');
 //let web3 = new Web3(web3.currentProvider);
 let abi = [
 	{
+		"constant": false,
+		"inputs": [],
+		"name": "test1",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "test2",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [],
 		"name": "TEST2",
@@ -32,24 +50,6 @@ let abi = [
 		],
 		"name": "Transfer",
 		"type": "event"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "test1",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "test2",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
 	}
 ];
 console.log('test');
@@ -83,7 +83,7 @@ myEvent.watch(function(error, result){
 
 let counter = web3.eth.contract(abi).at('0xd7001fb991a8797ecda33d32967523c3bdda2612');
 
-var myEvent = counter.Test1({},{fromBlock: 0, toBlock: 'latest'});
+var myEvent = counter.Transfer({},{fromBlock: 0, toBlock: 'latest'});
 console.log(myEvent);
 myEvent.watch(function (err, result) {
   if (err) {
