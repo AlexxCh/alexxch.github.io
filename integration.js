@@ -622,7 +622,7 @@ for (let i = 0; i < hashes.length; i++) {
 	  ( "tbody" ).html(string);
 
   });
-
+}
 function convert(unixtimestamp){
 
  // Unixtimestamp
