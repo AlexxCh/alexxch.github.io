@@ -612,6 +612,7 @@ console.log(token1);
 
 */
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
+console.log(hashes);
 for (let i = 0; i < hashes.length; i++) {
   counter.orderHashList.call(hashes[i], function(err, result) {
 	  console.log(result);
