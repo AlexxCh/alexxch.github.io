@@ -571,7 +571,8 @@ myEvent.watch(function (err, result) {
   }
   //console.log("Transfer was incremented by address: " + result.args._from);
   $( "tbody" ).html(function() {
-		let token1Add = '' + result.args.makerTokenAddress;
+		var token1Add = '' + result.args.makerTokenAddress;
+		console.log(token1Add);
 		token2Add = '' + result.args.takenTokenAddress;
 		var string = '<tr><td>' + result.args.maker + '</td>';
 		string += '<td class ="' + result.args.makerTokenAddress + '"</td><td>';
