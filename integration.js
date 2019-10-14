@@ -583,8 +583,8 @@ myEvent.watch(function (err, result) {
 		return string;
   });
 });
-token1 = web3.eth.contract(tokenABI).at(token1Add);
-	token2 = web3.eth.contract(tokenABI).at(token2Add);
+//token1 = web3.eth.contract(tokenABI).at(token1Add);
+/*	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	$( "." + token1Add).html(token1.symbol().call(function(error, result){
 		console.log('1. ' + result);
 		return result;
@@ -593,7 +593,7 @@ token1 = web3.eth.contract(tokenABI).at(token1Add);
 		return result;
 	}));
 
-
+*/
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
 
 
