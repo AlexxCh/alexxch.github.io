@@ -614,7 +614,7 @@ console.log(token1);
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
 console.log(hashes);
 for (let i = 0; i < hashes.length; i++) {
-  counter.methods.orderHashList.call(hashes[i], function(err, result) {
+  counter.methods.orderHashList().call(hashes[i], function(err, result) {
 	  console.log(result);
 	  string = '<tr><td>' + result.args.maker + '</td><td>';
 	  token = web3.eth.contract(abi).at(result.args.givenTokenAddress);
