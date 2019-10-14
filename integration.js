@@ -578,6 +578,7 @@ myEvent.watch(function (err, result) {
 		var token1 = web3.eth.contract(tokenABI).at(token1Add);
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	string += token1.symbol.call(function(error, result){
+		console.log(result);
 		return result;
 	});
 	string += '</td><td>';
