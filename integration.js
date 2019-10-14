@@ -573,8 +573,6 @@ myEvent.watch(function (err, result) {
   $( "tbody" ).html(function() {
 		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
-		token1 = web3.eth.contract(tokenABI).at(result.args.makerTokenAddress);
-		token2 = web3.eth.contract(tokenABI).at(result.args.takenTokenAddress);
 		var string = '<tr><td>' + result.args.maker + '</td><td>';
 		string += '<td class ="' + result.args.makerTokenAddress + '"</td>';
 		//string += await token1.symbol.call() + '</td><td>';
@@ -584,8 +582,10 @@ myEvent.watch(function (err, result) {
 		string += result.args.takenTokenAmount + '</td><td>' + result.args.orderValidUntil+ '</td><td>' + result.args.orderHash + '</td></tr>';
 		return string;
   });
-  $( "." + token1Add).html(token1.symbol.call());
-  $( "." + token2Add).html(token2.symbol.call());
+	token1 = web3.eth.contract(tokenABI).at(result.args.makerTokenAddress);
+	token2 = web3.eth.contract(tokenABI).at(result.args.takenTokenAddress);
+	$( "." + token1Add).html(token1.symbol.call());
+	$( "." + token2Add).html(token2.symbol.call());
 })
 
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
