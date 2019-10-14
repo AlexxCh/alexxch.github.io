@@ -576,7 +576,8 @@ myEvent.watch(async function (err, result) {
     return error(err);
   }
   //console.log("Transfer was incremented by address: " + result.args._from);
-  console.log(result.args.orderHash).then(function() {
+  console.log(result.args.orderHash)
+}).then(function() {
   $( "tbody" ).html(function() {
 		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
@@ -596,7 +597,6 @@ myEvent.watch(async function (err, result) {
 		string += result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td></tr>';
 		return string;
   })
-})
 });
 /*console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(token1Add);
