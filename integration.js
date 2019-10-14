@@ -575,7 +575,7 @@ myEvent.watch(function (err, result) {
 		console.log(token1Add);
 		token2Add = '' + result.args.takenTokenAddress;
 		var string = '<tr><td>' + result.args.maker + '</td>';
-		string += '<td class ="' + result.args.makerTokenAddress + '"';
+		string += '<td class ="' + result.args.makerTokenAddress + '">';
 		var token1 = web3.eth.contract(tokenABI).at(token1Add);
 console.log(token1);
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
