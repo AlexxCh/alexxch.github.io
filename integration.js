@@ -579,7 +579,7 @@ myEvent.watch(function (err, result) {
 		string += result.args.givenTokenAmount + '</td><td>';
 		string += '<td class ="' + result.args.takenTokenAddress + '"</td>';
 		//string += await token2.symbol.call() + '</td><td>'; 
-		string += result.args.takenTokenAmount + '</td><td>' + result.args.orderValidUntil+ '</td><td>' + result.args.orderHash + '</td></tr>';
+		string += result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td></tr>';
 		return string;
   });
 });
@@ -589,3 +589,40 @@ token1 = web3.eth.contract(tokenABI).at(token1Add);
 	$( "." + token2Add).html(token2.symbol.call());
 
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
+
+
+function convert(unixtimestamp){
+
+ // Unixtimestamp
+ //var unixtimestamp = document.getElementById('timestamp').value;
+
+ // Months array
+ var months_arr = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
+
+ // Convert timestamp to milliseconds
+ var date = new Date(unixtimestamp*1000);
+
+ // Year
+ var year = date.getFullYear();
+
+ // Month
+ var month = months_arr[date.getMonth()];
+
+ // Day
+ var day = date.getDate();
+
+ // Hours
+ var hours = date.getHours();
+
+ // Minutes
+ var minutes = "0" + date.getMinutes();
+
+ // Seconds
+ var seconds = "0" + date.getSeconds();
+
+ // Display date time in dd-Mm-yyyy h:m:s format
+ var convdataTime = day+'-'+month+'-'+year+' '+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+ 
+ return convdataTime;
+ 
+}
