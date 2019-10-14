@@ -577,12 +577,13 @@ myEvent.watch(function (err, result) {
 		string += '<td class ="' + result.args.makerTokenAddress + '">';
 		var token1 = web3.eth.contract(tokenABI).at(token1Add);
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
-	token1.symbol.call(function(error, result){
-		string += result + '</td><td>';
+	string += token1.symbol.call(function(error, result){
+		return result;
 	});
+	string += '</td><td>';
 		//string += await token1.symbol.call() + '</td><td>';
-		string += result.args.givenTokenAmount + '</td><';
-		string += '<td class ="' + result.args.takenTokenAddress + '"</td><td>';
+		string += result.args.givenTokenAmount + '</td>';
+		string += '<td class ="' + result.args.takenTokenAddress + '"></td><td>';
 		//string += await token2.symbol.call() + '</td><td>'; 
 		string += result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td></tr>';
 		return string;
