@@ -573,8 +573,8 @@ myEvent.watch(function (err, result) {
   $( "tbody" ).html(async function() {
 		let token1Add = '' + result.args.makerTokenAddress;
 		let token2Add = '' + result.args.takenTokenAddress;
-		let token1 = await web3.eth.contract(tokenABI).at(result.args.makerTokenAddress);
-		let token2 = await web3.eth.contract(tokenABI).at(result.args.takenTokenAddress);
+		let token1 = await web3.eth.contract(tokenABI).at(await result.args.makerTokenAddress);
+		let token2 = await web3.eth.contract(tokenABI).at(await result.args.takenTokenAddress);
 		var string = '<tr><td>' + await result.args.maker + '</td><td>';
 		string += await token1.symbol.call() + '</td><td>';
 		string += await result.args.givenTokenAmount + '</td><td>';
