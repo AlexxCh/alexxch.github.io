@@ -247,15 +247,17 @@ let abi = [
 
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 
-/*var myEvent = counter.Transfer({},{fromBlock: 0, toBlock: 'latest'});
+var myEvent = counter.OrderCreated({},{fromBlock: 0, toBlock: 'latest'});
 console.log(myEvent);
 myEvent.watch(function (err, result) {
   if (err) {
     return error(err);
   }
-//console.log(result);
-//console.log(result.args);
-  console.log("Transfer was incremented by address: " + result.args._from);
-})*/
+  //console.log("Transfer was incremented by address: " + result.args._from);
+  $( "tbody" ).html(function() {
+		var string = '<tr><td>' + result.args.maker + '</td><td>' + result.args.makerTokenAddress + '</td><td>' + result.args.givenTokenAmount + '</td><td>' + result.args.takenTokenAddress + '</td><td>' + result.args.takenTokenAmount + '</td><td>' + result.args.orderHash + '</td></tr>';
+		return string;
+  });
+})
 
-$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
+//$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
