@@ -255,7 +255,7 @@ myEvent.watch(function (err, result) {
   }
   //console.log("Transfer was incremented by address: " + result.args._from);
   $( "tbody" ).html(function() {
-		var string = '<tr><td>' + result.args.maker + '</td><td>' + result.args.makerTokenAddress + '</td><td>' + result.args.givenTokenAmount + '</td><td>' + result.args.takenTokenAddress + '</td><td>' + result.args.takenTokenAmount + '</td><td>' + result.args.orderHash + '</td></tr>';
+		var string = '<tr><td>' + result.args.maker + '</td><td>' + result.args.makerTokenAddress + '</td><td>' + result.args.givenTokenAmount + '</td><td>' + result.args.takenTokenAddress + '</td><td>' + result.args.takenTokenAmount + '</td><td>' + result.args.validUntil+ '</td><td>' + result.args.orderHash + '</td></tr>';
 		return string;
   });
 })
