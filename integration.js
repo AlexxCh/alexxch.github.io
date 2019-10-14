@@ -564,13 +564,14 @@ let tokenABI = [
 
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = counter.OrderCreated({},{fromBlock: 0, toBlock: 'latest'});
+var token1Add;
 myEvent.watch(function (err, result) {
   if (err) {
     return error(err);
   }
   //console.log("Transfer was incremented by address: " + result.args._from);
   $( "tbody" ).html(function() {
-		var token1Add = '' + result.args.makerTokenAddress;
+		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
 		var string = '<tr><td>' + result.args.maker + '</td>';
 		string += '<td class ="' + result.args.makerTokenAddress + '"</td><td>';
