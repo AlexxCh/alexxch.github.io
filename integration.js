@@ -567,18 +567,18 @@ var token1 = web3.eth.contract(tokenABI).at('0xe24c82ce83acc9b1a845d5ab01c0753a3
 	//console.log(token1.symbol.call());
 
 
-
+var hashes = [];
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = counter.OrderCreated({},{fromBlock: 0, toBlock: 'latest'});
 var token1Add;
-myEvent.watch(async function (err, result) {
+myEvent.watch(function (err, result) {
   if (err) {
     return error(err);
   }
   //console.log("Transfer was incremented by address: " + result.args._from);
-  console.log(result.args.orderHash)
-}).then(function() {
-  $( "tbody" ).html(function() {
+  console.log(result.args.orderHash);
+  hashes.push(result.args.orderHash);
+ /* $( "tbody" ).html(function() {
 		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
 		var string = '<tr><td>' + result.args.maker + '</td>';
@@ -588,7 +588,7 @@ myEvent.watch(async function (err, result) {
 	string += token1.symbol.call(function(error, result){
 		console.log(result);
 		return result;
-	});*/
+	});
 	string += '</td><td>';
 		//string += await token1.symbol.call() + '</td><td>';
 		string += result.args.givenTokenAmount + '</td>';
@@ -596,7 +596,7 @@ myEvent.watch(async function (err, result) {
 		//string += await token2.symbol.call() + '</td><td>'; 
 		string += result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td></tr>';
 		return string;
-  })
+  })*/
 });
 /*console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(token1Add);
@@ -612,7 +612,13 @@ console.log(token1);
 
 */
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
-
+for (let i = 0; i < hashes.length; i++) {
+  (maker, givenAdd, givenAmount, takenAdd, takenAmount, validUntil, nonce) = counter.orderHashList.call(hashes[i]);
+  string = '<tr><td>' + maker + '</td><td>';
+  token = web3.eth.contract(abi).at(givenAdd);
+  string += token.symbol.call();
+  string += '</td></tr>';
+}
 
 function convert(unixtimestamp){
 
