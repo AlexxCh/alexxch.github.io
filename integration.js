@@ -258,4 +258,4 @@ myEvent.watch(function (err, result) {
   console.log("Transfer was incremented by address: " + result.args._from);
 })*/
 
-document.getElementById("orders").innerHTML = "Orders";
+$("orders").html("Orders");
