@@ -613,9 +613,9 @@ console.log(token1);
 */
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
 for (let i = 0; i < hashes.length; i++) {
-  (maker, givenAdd, givenAmount, takenAdd, takenAmount, validUntil, nonce) = counter.orderHashList.call(hashes[i]);
-  string = '<tr><td>' + maker + '</td><td>';
-  token = web3.eth.contract(abi).at(givenAdd);
+  let result = counter.orderHashList.call(hashes[i]);
+  string = '<tr><td>' + result[0] + '</td><td>';
+  token = web3.eth.contract(abi).at(result[1]);
   string += token.symbol.call();
   string += '</td></tr>';
 }
