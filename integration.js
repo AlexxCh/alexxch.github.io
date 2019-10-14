@@ -573,11 +573,11 @@ myEvent.watch(function (err, result) {
   $( "tbody" ).html(function() {
 		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
-		var string = '<tr><td>' + result.args.maker + '</td><td>';
-		string += '<td class ="' + result.args.makerTokenAddress + '"</td>';
+		var string = '<tr><td>' + result.args.maker + '</td>';
+		string += '<td class ="' + result.args.makerTokenAddress + '"</td><td>';
 		//string += await token1.symbol.call() + '</td><td>';
-		string += result.args.givenTokenAmount + '</td><td>';
-		string += '<td class ="' + result.args.takenTokenAddress + '"</td>';
+		string += result.args.givenTokenAmount + '</td><';
+		string += '<td class ="' + result.args.takenTokenAddress + '"</td><td>';
 		//string += await token2.symbol.call() + '</td><td>'; 
 		string += result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td></tr>';
 		return string;
