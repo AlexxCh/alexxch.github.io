@@ -579,7 +579,7 @@ myEvent.watch(function (err, result) {
 		//string += await token1.symbol.call() + '</td><td>';
 		string += result.args.givenTokenAmount + '</td><td>';
 		//string += await token2.symbol.call() + '</td><td>'; 
-		string += result.args.takenTokenAmount + '</td><td>' + result.args.validUntil+ '</td><td>' + result.args.orderHash + '</td></tr>';
+		string += result.args.takenTokenAmount + '</td><td>' + result.args.orderValidUntil+ '</td><td>' + result.args.orderHash + '</td></tr>';
 		return string;
   });
 })
