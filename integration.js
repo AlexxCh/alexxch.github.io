@@ -583,7 +583,7 @@ myEvent.watch(function (err, result) {
 		return string;
   });
 });
-//token1 = web3.eth.contract(tokenABI).at(token1Add);
+token1 = web3.eth.contract(tokenABI).at(token1Add);
 /*	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	$( "." + token1Add).html(token1.symbol().call(function(error, result){
 		console.log('1. ' + result);
