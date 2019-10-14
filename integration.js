@@ -573,9 +573,9 @@ myEvent.watch(function (err, result) {
   $( "tbody" ).html(function() {
 		let token1Add = '' + result.args.makerTokenAddress;
 		let token2Add = '' + result.args.takenTokenAddress;
-		let token1 = web3.eth.contract(tokenABI).at(token1Add);
-		let token2 = web3.eth.contract(tokenABI).at(token2Add);
-		var string = '<tr><td>' + result.args.maker + '</td><td>' + token1.methods.symbol().call() + '</td><td>' + result.args.givenTokenAmount + '</td><td>' + token2.methods.symbol().call() + '</td><td>' + result.args.takenTokenAmount + '</td><td>' + result.args.validUntil+ '</td><td>' + result.args.orderHash + '</td></tr>';
+		let token1 = web3.eth.contract(tokenABI).at(result.args.makerTokenAddress);
+		let token2 = web3.eth.contract(tokenABI).at(result.args.takenTokenAddress);
+		var string = '<tr><td>' + result.args.maker + '</td><td>' + token1.symbol()) + '</td><td>' + result.args.givenTokenAmount + '</td><td>' + token2.symbol() + '</td><td>' + result.args.takenTokenAmount + '</td><td>' + result.args.validUntil+ '</td><td>' + result.args.orderHash + '</td></tr>';
 		return string;
   });
 })
