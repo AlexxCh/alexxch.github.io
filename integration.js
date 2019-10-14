@@ -577,9 +577,9 @@ myEvent.watch(function (err, result) {
 		string += '<td class ="' + result.args.makerTokenAddress + '">';
 		var token1 = web3.eth.contract(tokenABI).at(token1Add);
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
-	string += token1.symbol.call(function(error, result){
+	string += token1.symbol.call(async function(error, result){
 		console.log(result);
-		return result;
+		return await result;
 	});
 	string += '</td><td>';
 		//string += await token1.symbol.call() + '</td><td>';
