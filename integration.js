@@ -564,7 +564,7 @@ let tokenABI = [
 
 var token1 = web3.eth.contract(tokenABI).at('0xe24c82ce83acc9b1a845d5ab01c0753a3b5ad2e5');
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
-	console.log(token1.symbol.call(function(error, result));
+	console.log(token1.symbol.call());
 
 
 
