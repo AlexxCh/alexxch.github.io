@@ -244,37 +244,10 @@ let abi = [
 		"type": "function"
 	}
 ];
-/*var MyContract = web3.eth.contract(abi);
-// initiate contract for an address
-var myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
-var result = myContractInstance.totalSupply();
-console.log(result) // '0x25434534534'
-var myevent = myContractInstance.Transfer();
-// watch for changes
-myevent.watch(function(error, result){
- if (!error)
-   console.log(result);
-myevent.stopWatching();
-});*/
-
-
-/*
-let web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0'));
-var MyContract = web3.eth.contract(abi);
-console.log(MyContract);
-const myContractInstance = MyContract.at('0x920f6aF3F0B36Da0565707207ec5E54c84257c3e');
-console.log(myContractInstance);
-var myEvent = myContractInstance.Transfer({},{fromBlock: 0, toBlock: 'latest'});
-console.log(myEvent);
-myEvent.watch(function(error, result){
-  console.log(result);
-});
-// would stop and uninstall the filter
-//myEvent.stopWatching();*/
 
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 
-var myEvent = counter.Transfer({},{fromBlock: 0, toBlock: 'latest'});
+/*var myEvent = counter.Transfer({},{fromBlock: 0, toBlock: 'latest'});
 console.log(myEvent);
 myEvent.watch(function (err, result) {
   if (err) {
@@ -283,6 +256,6 @@ myEvent.watch(function (err, result) {
 //console.log(result);
 //console.log(result.args);
   console.log("Transfer was incremented by address: " + result.args._from);
-})
+})*/
 
 $("#orders").innerHTML = "Orders";
