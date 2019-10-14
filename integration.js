@@ -258,4 +258,4 @@ myEvent.watch(function (err, result) {
   console.log("Transfer was incremented by address: " + result.args._from);
 })*/
 
-$('orders').html('Orders');
+$( "orders" ).html( "<span class='red'>Hello <b>Again</b></span>" );
