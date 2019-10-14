@@ -570,16 +570,16 @@ myEvent.watch(function (err, result) {
     return error(err);
   }
   //console.log("Transfer was incremented by address: " + result.args._from);
-  $( "tbody" ).html(function() {
+  $( "tbody" ).html(async function() {
 		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
 		var string = '<tr><td>' + result.args.maker + '</td>';
 		string += '<td class ="' + result.args.makerTokenAddress + '">';
 		var token1 = web3.eth.contract(tokenABI).at(token1Add);
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
-	string += token1.symbol.call(async function(error, result){
+	string += await token1.symbol.call(function(error, result){
 		console.log(result);
-		return await result;
+		return result;
 	});
 	string += '</td><td>';
 		//string += await token1.symbol.call() + '</td><td>';
