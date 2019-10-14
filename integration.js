@@ -563,7 +563,7 @@ let tokenABI = [
 
 
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
-
+var token1, token2 token1Add, token2Add;
 var myEvent = counter.OrderCreated({},{fromBlock: 0, toBlock: 'latest'});
 myEvent.watch(function (err, result) {
   if (err) {
@@ -571,17 +571,21 @@ myEvent.watch(function (err, result) {
   }
   //console.log("Transfer was incremented by address: " + result.args._from);
   $( "tbody" ).html(function() {
-		let token1Add = '' + result.args.makerTokenAddress;
-		let token2Add = '' + result.args.takenTokenAddress;
-		//let token1 = await web3.eth.contract(tokenABI).at(await result.args.makerTokenAddress);
-		//let token2 = await web3.eth.contract(tokenABI).at(await result.args.takenTokenAddress);
+		token1Add = '' + result.args.makerTokenAddress;
+		token2Add = '' + result.args.takenTokenAddress;
+		token1 = web3.eth.contract(tokenABI).at(result.args.makerTokenAddress);
+		token2 = web3.eth.contract(tokenABI).at(result.args.takenTokenAddress);
 		var string = '<tr><td>' + result.args.maker + '</td><td>';
+		string += '<td class ="' + result.args.makerTokenAddress + '"</td>';
 		//string += await token1.symbol.call() + '</td><td>';
 		string += result.args.givenTokenAmount + '</td><td>';
+		string += '<td class ="' + result.args.takenTokenAddress + '"</td>';
 		//string += await token2.symbol.call() + '</td><td>'; 
 		string += result.args.takenTokenAmount + '</td><td>' + result.args.orderValidUntil+ '</td><td>' + result.args.orderHash + '</td></tr>';
 		return string;
   });
+  $( "." + token1Add).html(token1.symbol.call());
+  $( "." + token2Add).html(token2.symbol.call());
 })
 
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
