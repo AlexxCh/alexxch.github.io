@@ -584,12 +584,12 @@ myEvent.watch(function (err, result) {
   });
 });
 token1 = web3.eth.contract(tokenABI).at(token1Add);
-/*	token2 = web3.eth.contract(tokenABI).at(token2Add);
+//	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	$( "." + token1Add).html(token1.symbol().call(function(error, result){
 		console.log('1. ' + result);
 		return result;
 	}));
-	$( "." + token2Add).html(token2.symbol.call(function(error, result){
+/*	$( "." + token2Add).html(token2.symbol.call(function(error, result){
 		return result;
 	}));
 
