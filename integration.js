@@ -606,6 +606,7 @@ fruits.push('Банан');
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
 console.log(hashes[0]);
+console.log(fruits[0]);
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	$( "." + token1Add).html(token1.symbol.call(function(error, result){
 		//console.log('1. ' + result);
