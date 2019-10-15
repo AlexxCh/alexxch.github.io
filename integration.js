@@ -626,11 +626,9 @@ myEvent.watch(function (err, result) {
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
-		console.log(result);
 		var add = result[3];
-		console.log(add);
+		var amount = result[4];
 	let taken = web3.eth.contract(tokenABI).at(add);
-	console.log(taken);
 	/*if (taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function(err, result) {
 		console.log(result);
 		console.log(result > 0);
@@ -638,12 +636,13 @@ function trade(hash) {
 	})) taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', exchange.orderHashList.call(hash, function (err, result) {
 		return result.takenTokenAmount;
 	}), {from: web3.eth.accounts[0]});*/
-	taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
-		console.log(result.c);
+	taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', async function (err, result) {
+		if (result.c[0] < amount) await taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', amount);
+		await exchange.trade(hash, {from: web3.eth.accounts[0]});
 	});
-	exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
+	/*exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
 	return 1;
-	});
+	});*/
 	//alert(hash);
 	});
 }
