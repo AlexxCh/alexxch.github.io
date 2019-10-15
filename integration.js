@@ -580,13 +580,13 @@ myEvent.watch(function (err, result) {
   //console.log("Transfer was incremented by address: " + result.args._from);
   //console.log(result.args.orderHash);
   hashes.push(result.args.orderHash);
-  var string = $('tbody').html() + '<tr><td>' + hashes[hashes.length - 1] + '</td>';
+  var string = $('tbody').html() + '<tr><td>' + hashes[hashes.length - 1] + '</td><td>';
   var token1 = web3.eth.contract(tokenABI).at(result.args.makerTokenAddress);
   token1.symbol.call(function(error, result){
 		console.log('1. ' + result);
 		string += result;
 	});
-	string += '</tr>';
+	string += '</td></tr>';
   $('tbody').html(string);
   
  /* $( "tbody" ).html(function() {
