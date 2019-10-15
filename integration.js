@@ -639,7 +639,7 @@ function trade(hash) {
 		return result.takenTokenAmount;
 	}), {from: web3.eth.accounts[0]});
 	counter.trade(hash, {from: web3.eth.accounts[0]});*/
-	alert(hash);
+	alert('' + hash);
 }
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
