@@ -571,7 +571,7 @@ var hashes = [];
 var fruits = [];
 
 
-function() {
+() {
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = counter.OrderCreated({},{fromBlock: 0, toBlock: 'latest'});
 var token1Add;
