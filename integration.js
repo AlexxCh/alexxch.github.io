@@ -573,7 +573,7 @@ var hashes = [];
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = counter.OrderCreated({},{fromBlock: 0, toBlock: 'latest'});
 var token1Add;
-var global = this;
+var arr = [];
 myEvent.watch(function (err, result) {
   if (err) {
     return error(err);
@@ -581,8 +581,7 @@ myEvent.watch(function (err, result) {
   //console.log("Transfer was incremented by address: " + result.args._from);
   //console.log(result.args.orderHash);
   hashes.push(result.args.orderHash);
-  var global = this;
-  var string = $('tbody').html() + '<tr><td>' + hashes[hashes.length - 1] + '</td><td>';
+ /*var string = $('tbody').html() + '<tr><td>' + hashes[hashes.length - 1] + '</td><td>';
   var token1 = web3.eth.contract(tokenABI).at(result.args.makerTokenAddress);
   $('tbody').html(string);
   token1.symbol.call(function(error, result){
@@ -592,8 +591,21 @@ myEvent.watch(function (err, result) {
 	});
 	string = $('tbody').html();
 	string += '</td></tr>';
-  $('tbody').html(string);
-  
+  $('tbody').html(string);*/
+  var string = $('orders').html();
+  string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td>' + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td></tr>';
+  $('orders').html(string);
+  arr.push(result.args.makerTokenAddress);
+  arr.push(result.args.takenTokenAddress);
+  for (let i = 0; i < arr.length; i++) {
+		let token = web3.eth.contract(tokenABI).at(arr[i]);
+		token.symbol.call(function(error, result){
+		let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '">';
+		str += result;
+		str += '</a>';
+		$('.' + arr[i]).html(str);
+	});
+  }
  /* $( "tbody" ).html(function() {
 		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
