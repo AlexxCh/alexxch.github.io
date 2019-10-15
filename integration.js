@@ -628,8 +628,6 @@ function trade(hash) {
 	var add;
 	exchange.orderHashList.call(hash, function (err, result) {
 		add = result.takenTokenAddress;
-	});
-	console.log(add);
 	let taken = web3.eth.contract(tokenABI).at(add);
 	/*if (taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function(err, result) {
 		console.log(result);
@@ -645,6 +643,7 @@ function trade(hash) {
 	return 1;
 	});
 	//alert(hash);
+	});
 }
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
