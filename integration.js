@@ -607,6 +607,7 @@ fruits.push('Банан');
 showHashes();
 }
 
+
 function showHashes() {
 	console.log(hashes[0]);
 }
