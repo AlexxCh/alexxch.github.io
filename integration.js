@@ -568,7 +568,6 @@ var token1 = web3.eth.contract(tokenABI).at('0xe24c82ce83acc9b1a845d5ab01c0753a3
 
 
 var hashes = [];
-var fruits = [];
 
 
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
@@ -581,8 +580,6 @@ myEvent.watch(function (err, result) {
   //console.log("Transfer was incremented by address: " + result.args._from);
   //console.log(result.args.orderHash);
   hashes.push(result.args.orderHash);
-  fruits.push('Яблоко');
-fruits.push('Банан');
  /* $( "tbody" ).html(function() {
 		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
@@ -608,7 +605,6 @@ fruits.push('Банан');
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
 const arr = hashes.map((_, i) => i);
 console.log(arr[0]);
-console.log(JSON.stringify(fruits));
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	$( "." + token1Add).html(token1.symbol.call(function(error, result){
 		//console.log('1. ' + result);
@@ -620,9 +616,7 @@ console.log(JSON.stringify(fruits));
 
 */
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
-console.log(hashes);
-console.log(hashes.length);
-console.log(fruits);
+//console.log(hashes);
 for (let i = 0; i < hashes.length; i++) {
   /*counter.orderHashList.call(hashes[i], function(err, result) {
 	  console.log(result);
