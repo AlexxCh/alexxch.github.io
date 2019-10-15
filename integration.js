@@ -597,7 +597,7 @@ myEvent.watch(function (err, result) {
   $('orders').html(string);
   arr.push(result.args.makerTokenAddress);
   arr.push(result.args.takenTokenAddress);
-  for (let i = 0; i < arr.length; i++) {
+  /*for (let i = 0; i < arr.length; i++) {
 		let token = web3.eth.contract(tokenABI).at(arr[i]);
 		token.symbol.call(function(error, result){
 		let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '">';
@@ -605,7 +605,7 @@ myEvent.watch(function (err, result) {
 		str += '</a>';
 		$('.' + arr[i]).html(str);
 	});
-  }
+  }*/
  /* $( "tbody" ).html(function() {
 		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
