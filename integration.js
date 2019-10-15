@@ -634,6 +634,8 @@ function trade(hash) {
 	});
 	let taken = web3.eth.contract(tokenABI).at(add);
 	if (taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function(err, result) {
+		console.log(result);
+		console.log(result > 0);
 		return (result > 0);
 	})) taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', counter.orderHashList.call(hash, function (err, result) {
 		return result.takenTokenAmount;
