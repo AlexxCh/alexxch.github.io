@@ -593,7 +593,7 @@ myEvent.watch(function (err, result) {
   $('tbody').html(string);*/
   var string = $('tbody').html();
   string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
-  string += '<td><button onclick="trade(\'' + result.args.orderHash + '\'")">Торговать!</button></td></tr>';
+  string += '<td><button onclick="trade(\'' + result.args.orderHash + '\')">Торговать!</button></td></tr>';
   $('tbody').html(string);
   arr.push(result.args.makerTokenAddress);
   arr.push(result.args.takenTokenAddress);
