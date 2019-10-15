@@ -601,10 +601,10 @@ myEvent.watch(function (err, result) {
 
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
-//console.log(hashes[0]);
+console.log(hashes[0]);
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	$( "." + token1Add).html(token1.symbol.call(function(error, result){
-		console.log('1. ' + result);
+		//console.log('1. ' + result);
 		return result;
 	}));
 /*	$( "." + token2Add).html(token2.symbol.call(function(error, result){
@@ -613,7 +613,7 @@ var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
 
 */
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
-console.log(hashes);
+//console.log(hashes);
 for (let i = 0; i < hashes.length; i++) {
   counter.orderHashList.call(hashes[i], function(err, result) {
 	  console.log(result);
