@@ -639,11 +639,12 @@ function trade(hash) {
 	}), {from: web3.eth.accounts[0]});*/
 	taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
 		console.log(result);
+	});
 	exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
 	return 1;
 	});
 	//alert(hash);
-	});});
+	});
 }
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
