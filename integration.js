@@ -562,15 +562,11 @@ let tokenABI = [
 
 
 var token1 = web3.eth.contract(tokenABI).at('0xe24c82ce83acc9b1a845d5ab01c0753a3b5ad2e5');
-//	token2 = web3.eth.contract(tokenABI).at(token2Add);
-	//console.log(token1.symbol.call());
-
-
 var hashes = [];
 
 
-var counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
-var myEvent = counter.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
+var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
+var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var token1Add;
 var arr = [];
 myEvent.watch(function (err, result) {
@@ -629,7 +625,7 @@ myEvent.watch(function (err, result) {
 
 
 function trade(hash) {
-	let add = counter.orderHashList.call(hash, function (err, result) {
+	let add = exchange.orderHashList.call(hash, function (err, result) {
 		return result.takenTokenAddress;
 	});
 	let taken = web3.eth.contract(tokenABI).at(add);
@@ -637,10 +633,10 @@ function trade(hash) {
 		console.log(result);
 		console.log(result > 0);
 		return (result > 0);
-	})) taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', counter.orderHashList.call(hash, function (err, result) {
+	})) taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', exchange.orderHashList.call(hash, function (err, result) {
 		return result.takenTokenAmount;
 	}), {from: web3.eth.accounts[0]});
-	counter.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
+	exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
 	return 1;
 	});
 	//alert(hash);
@@ -660,7 +656,7 @@ var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
 //console.log(hashes);
 for (let i = 0; i < hashes.length; i++) {
-  /*counter.orderHashList.call(hashes[i], function(err, result) {
+  /*exchange.orderHashList.call(hashes[i], function(err, result) {
 	  console.log(result);
 	  string = '<tr><td>' + result.args.maker + '</td><td>';
 	  token = web3.eth.contract(abi).at(result.args.givenTokenAddress);
