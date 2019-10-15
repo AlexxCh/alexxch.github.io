@@ -600,7 +600,7 @@ myEvent.watch(function (err, result) {
   for (let i = 0; i < arr.length; i++) {
 		let token = web3.eth.contract(tokenABI).at(arr[i]);
 		token.symbol.call(function(error, result){
-		let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '">';
+		let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
 		str += result;
 		str += '</a>';
 		$('.' + arr[i]).html(str);
