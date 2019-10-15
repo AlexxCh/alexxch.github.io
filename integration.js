@@ -621,7 +621,7 @@ console.log(JSON.stringify(fruits)[0]);
 console.log(hashes);
 console.log(fruits);
 for (let i = 0; i < hashes.length; i++) {
-  counter.orderHashList.call(hashes[i], function(err, result) {
+  /*counter.orderHashList.call(hashes[i], function(err, result) {
 	  console.log(result);
 	  string = '<tr><td>' + result.args.maker + '</td><td>';
 	  token = web3.eth.contract(abi).at(result.args.givenTokenAddress);
@@ -630,7 +630,8 @@ for (let i = 0; i < hashes.length; i++) {
 	  $( "tbody" ).html(string);
 
   });
-  
+  */
+  $( "tbody" ).html('<td>' + hashes[i] + '</td>');
 }
 function convert(unixtimestamp){
 
