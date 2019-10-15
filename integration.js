@@ -568,6 +568,7 @@ var token1 = web3.eth.contract(tokenABI).at('0xe24c82ce83acc9b1a845d5ab01c0753a3
 
 
 var hashes = [];
+var fruits = ['Яблоко', 'Банан'];
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = counter.OrderCreated({},{fromBlock: 0, toBlock: 'latest'});
 var token1Add;
@@ -613,7 +614,8 @@ console.log(hashes[0]);
 
 */
 //$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
-//console.log(hashes);
+console.log(hashes);
+console.log(fruits);
 for (let i = 0; i < hashes.length; i++) {
   counter.orderHashList.call(hashes[i], function(err, result) {
 	  console.log(result);
