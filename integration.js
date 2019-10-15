@@ -580,8 +580,15 @@ myEvent.watch(function (err, result) {
   //console.log("Transfer was incremented by address: " + result.args._from);
   //console.log(result.args.orderHash);
   hashes.push(result.args.orderHash);
-  string = $('tbody').html() + '<tr><td>' + hashes[hashes.length - 1] + '</td></tr>';
+  string = $('tbody').html() + '<tr><td>' + hashes[hashes.length - 1] + '</td>';
+  var token1 = web3.eth.contract(tokenABI).at(hashes.length - 1);
+  string += token1.symbol.call(function(error, result){
+		//console.log('1. ' + result);
+		return result;
+	});
+	string += '</tr>';
   $('tbody').html(string);
+  
  /* $( "tbody" ).html(function() {
 		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
@@ -605,8 +612,6 @@ myEvent.watch(function (err, result) {
 
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
-const arr = hashes.map((_, i) => i);
-console.log(arr[0]);
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	$( "." + token1Add).html(token1.symbol.call(function(error, result){
 		//console.log('1. ' + result);
