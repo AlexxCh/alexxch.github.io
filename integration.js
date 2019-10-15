@@ -570,7 +570,7 @@ var hashes = [];
 
 
 var counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
-var myEvent = counter.OrderCreated({orderValidUntil > Date.now()},{fromBlock: 0, toBlock: 'latest'});
+var myEvent = counter.OrderCreated({},{filter: {orderValidUntil > Date.now()}, fromBlock: 0, toBlock: 'latest'});
 var token1Add;
 var arr = [];
 myEvent.watch(function (err, result) {
