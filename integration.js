@@ -629,7 +629,7 @@ myEvent.watch(function (err, result) {
 
 
 function trade(hash) {
-	let add = counter.orderHashList.call(hash, function (err, result) {
+	/*let add = counter.orderHashList.call(hash, function (err, result) {
 		return result.takenTokenAddress;
 	});
 	let taken = web3.eth.contract(tokenABI).at(add);
@@ -638,7 +638,8 @@ function trade(hash) {
 	})) taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', counter.orderHashList.call(hash, function (err, result) {
 		return result.takenTokenAmount;
 	}), {from: web3.eth.accounts[0]});
-	counter.trade(hash, {from: web3.eth.accounts[0]});
+	counter.trade(hash, {from: web3.eth.accounts[0]});*/
+	alert('ok');
 }
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
