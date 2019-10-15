@@ -10,7 +10,6 @@ let Web3 = require('web3');
 
     //var web3 = new Web3(new Web3.providers.HttpProvider(CURRENT_URL));
 
-
 //var Web3 = require('web3');
 //let web3 = new Web3(web3.currentProvider);
 let abi = [
@@ -636,10 +635,10 @@ function trade(hash) {
 	let taken = web3.eth.contract(tokenABI).at(add);
 	if (taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function(err, result) {
 		return result;
-	})) taken.approve.sendTransaction('0x8e7c770cba5cbb342880e57fada571fdbefc0691', counter.orderHashList.call(hash, function (err, result) {
+	})) taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', counter.orderHashList.call(hash, function (err, result) {
 		return result.takenTokenAmount;
-	}));
-	counter.trade.sendTransaction(hash);
+	}), {from: web3.eth.accounts[0]});
+	counter.trade(hash, {from: web3.eth.accounts[0]});
 }
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
