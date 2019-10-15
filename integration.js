@@ -576,7 +576,7 @@ myEvent.watch(function (err, result) {
     return error(err);
   }
   //console.log("Transfer was incremented by address: " + result.args._from);
-  console.log(result.args.orderHash);
+  //console.log(result.args.orderHash);
   hashes.push(result.args.orderHash);
  /* $( "tbody" ).html(function() {
 		token1Add = '' + result.args.makerTokenAddress;
@@ -598,11 +598,10 @@ myEvent.watch(function (err, result) {
 		return string;
   })*/
 });
-//myEvent.stopWatching();
 
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
-console.log(hashes[0]);
+//console.log(hashes[0]);
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	$( "." + token1Add).html(token1.symbol.call(function(error, result){
 		console.log('1. ' + result);
