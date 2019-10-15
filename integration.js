@@ -627,9 +627,10 @@ for (let i = 0; i < hashes.length; i++) {
 	  token = web3.eth.contract(abi).at(result.args.givenTokenAddress);
 	  string += token.symbol.call();
 	  string += '</td></tr>';
-	  ( "tbody" ).html(string);
+	  $( "tbody" ).html(string);
 
   });
+  
 }
 function convert(unixtimestamp){
 
