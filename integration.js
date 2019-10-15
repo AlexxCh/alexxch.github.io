@@ -580,7 +580,8 @@ myEvent.watch(function (err, result) {
   //console.log("Transfer was incremented by address: " + result.args._from);
   //console.log(result.args.orderHash);
   hashes.push(result.args.orderHash);
-  $('tbody').html('<tr><td>' + hashes[hashes.length - 1] + '</td></tr>');
+  string = $('tbody').html() + '<tr><td>' + hashes[hashes.length - 1] + '</td></tr>';
+  $('tbody').html(string);
  /* $( "tbody" ).html(function() {
 		token1Add = '' + result.args.makerTokenAddress;
 		token2Add = '' + result.args.takenTokenAddress;
