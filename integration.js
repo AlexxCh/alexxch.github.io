@@ -584,6 +584,7 @@ myEvent.watch(function (err, result) {
   var global = this;
   var string = $('tbody').html() + '<tr><td>' + hashes[hashes.length - 1] + '</td><td>';
   var token1 = web3.eth.contract(tokenABI).at(result.args.makerTokenAddress);
+  $('tbody').html(string);
   token1.symbol.call(function(error, result){
 		console.log('1. ' + result);
 		str = $('tbody').html() + result;
