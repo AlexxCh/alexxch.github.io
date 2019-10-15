@@ -606,7 +606,7 @@ fruits.push('Банан');
 
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
-arr = hashes.map((_, i) => i);
+const arr = hashes.map((_, i) => i);
 console.log(arr[0]);
 console.log(JSON.stringify(fruits));
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
