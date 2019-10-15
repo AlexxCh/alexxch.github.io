@@ -570,7 +570,7 @@ var token1 = web3.eth.contract(tokenABI).at('0xe24c82ce83acc9b1a845d5ab01c0753a3
 var hashes = [];
 
 
-let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
+var counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = counter.OrderCreated({},{fromBlock: 0, toBlock: 'latest'});
 var token1Add;
 var arr = [];
@@ -593,7 +593,8 @@ myEvent.watch(function (err, result) {
 	string += '</td></tr>';
   $('tbody').html(string);*/
   var string = $('tbody').html();
-  string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td></tr>';
+  string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
+  string += '<td><button onclick="trade(' + result.args.orderHash + ')">Торговать!</button></td></tr>';
   $('tbody').html(string);
   arr.push(result.args.makerTokenAddress);
   arr.push(result.args.takenTokenAddress);
@@ -627,6 +628,19 @@ myEvent.watch(function (err, result) {
   })*/
 });
 
+
+function trade(hash) {
+	let add = counter.orderHashList.call(hash, function (err, result) {
+		return result.takenTokenAddress;
+	});
+	let taken = web3.eth.contract(tokenABI).at(add);
+	if (taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function(err, result) {
+		return result;
+	})) taken.approve.sendTransaction('0x8e7c770cba5cbb342880e57fada571fdbefc0691', counter.orderHashList.call(hash, function (err, result) {
+		return result.takenTokenAmount;
+	}));
+	counter.trade.sendTransaction(hash);
+}
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
