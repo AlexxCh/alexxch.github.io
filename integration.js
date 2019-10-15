@@ -598,7 +598,7 @@ myEvent.watch(function (err, result) {
 		return string;
   })*/
 });
-myEvent.stopWatching();
+//myEvent.stopWatching();
 
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
