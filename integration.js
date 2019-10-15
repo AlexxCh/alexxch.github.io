@@ -629,13 +629,14 @@ function trade(hash) {
 		return result.takenTokenAddress;
 	});
 	let taken = web3.eth.contract(tokenABI).at(add);
-	if (taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function(err, result) {
+	/*if (taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function(err, result) {
 		console.log(result);
 		console.log(result > 0);
 		return (result > 0);
 	})) taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', exchange.orderHashList.call(hash, function (err, result) {
 		return result.takenTokenAmount;
-	}), {from: web3.eth.accounts[0]});
+	}), {from: web3.eth.accounts[0]});*/
+	taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691').then(console.log);
 	exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
 	return 1;
 	});
