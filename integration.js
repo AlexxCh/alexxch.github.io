@@ -573,6 +573,7 @@ var hashes = [];
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = counter.OrderCreated({},{fromBlock: 0, toBlock: 'latest'});
 var token1Add;
+var global = this;
 myEvent.watch(function (err, result) {
   if (err) {
     return error(err);
@@ -580,11 +581,12 @@ myEvent.watch(function (err, result) {
   //console.log("Transfer was incremented by address: " + result.args._from);
   //console.log(result.args.orderHash);
   hashes.push(result.args.orderHash);
+  var global = this;
   var string = $('tbody').html() + '<tr><td>' + hashes[hashes.length - 1] + '</td><td>';
   var token1 = web3.eth.contract(tokenABI).at(result.args.makerTokenAddress);
   token1.symbol.call(function(error, result){
 		console.log('1. ' + result);
-		window.string += '1. ' + result;
+		global.string += '1. ' + result;
 	});
 	string += '</td></tr>';
   $('tbody').html(string);
