@@ -603,15 +603,11 @@ fruits.push('Банан');
 		return string;
   })*/
 });
-showHashes();
 
-
-function showHashes() {
-	console.log(hashes[0]);
-}
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
-console.log(hashes[0]);
+arr = hashes.map((_, i) => i);
+console.log(arr[0]);
 console.log(JSON.stringify(fruits));
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	$( "." + token1Add).html(token1.symbol.call(function(error, result){
