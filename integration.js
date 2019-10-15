@@ -570,6 +570,8 @@ var token1 = web3.eth.contract(tokenABI).at('0xe24c82ce83acc9b1a845d5ab01c0753a3
 var hashes = [];
 var fruits = [];
 
+
+function() {
 let counter = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = counter.OrderCreated({},{fromBlock: 0, toBlock: 'latest'});
 var token1Add;
@@ -602,11 +604,16 @@ fruits.push('Банан');
 		return string;
   })*/
 });
+showHashes();
+}
 
+function showHashes() {
+	console.log(hashes[0]);
+}
 //console.log(token1Add);
 var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
 console.log(hashes[0]);
-console.log(JSON.stringify(fruits)[1]);
+console.log(JSON.stringify(fruits));
 //	token2 = web3.eth.contract(tokenABI).at(token2Add);
 	$( "." + token1Add).html(token1.symbol.call(function(error, result){
 		//console.log('1. ' + result);
