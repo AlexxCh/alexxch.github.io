@@ -625,8 +625,9 @@ myEvent.watch(function (err, result) {
 
 
 function trade(hash) {
+	var add;
 	exchange.orderHashList.call(hash, function (err, result) {
-		var add = result.takenTokenAddress;
+		add = result.takenTokenAddress;
 	});
 	console.log(add);
 	let taken = web3.eth.contract(tokenABI).at(add);
