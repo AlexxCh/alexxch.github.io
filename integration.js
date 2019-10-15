@@ -636,14 +636,13 @@ function trade(hash) {
 	})) taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', exchange.orderHashList.call(hash, function (err, result) {
 		return result.takenTokenAmount;
 	}), {from: web3.eth.accounts[0]});*/
-	taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
-		//if (result.c[0] < amount) taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', amount, function (err, result) {
-		//})
-		exchange.trade(hash, {from: web3.eth.accounts[0]});
-	});
-	/*exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
+	if (taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
+		return (result.c[0] > 0);
+	}) console.log('ok');
+	else console.log('not ok');
+	exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
 	return 1;
-	});*/
+	});
 	//alert(hash);
 	});
 }
