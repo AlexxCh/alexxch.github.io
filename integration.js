@@ -622,7 +622,9 @@ myEvent.watch(function (err, result) {
 		return string;
   })*/
 });
-
+var arr;
+arr = exchange.orderHashArray.call();
+console.log(arr);
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
