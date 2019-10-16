@@ -640,7 +640,7 @@ function trade(hash) {
 		console.log(result.c[0]);
 		return (result.c[0] > 0);
 	})); console.log('ok');
-	else console.log('not ok');
+	 console.log('not ok');
 	exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
 	return 1;
 	});
