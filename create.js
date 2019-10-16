@@ -576,7 +576,7 @@ $( "#btn" ).click(function() {
 	token.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
 		if (result.c[0] < $("#givenAmount").val()) {
 			token.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', $("#givenAmount").val(), function (err, result) {
-				exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntill").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
+				exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntil").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
 				window.location.href = "/all.html";
 			});
 		}
