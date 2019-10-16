@@ -579,11 +579,10 @@ var i = 0;
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var filled = exchange.OrderFilled({},{ fromBlock: 0, toBlock: 'latest'});
 var created = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
-var arr = [];
 var ar = [];
 filled.watch(function (err, result) {
 	
-	arr.push(result);
+	var arr = result;
 	console.log(arr);
 	created.watch(function (err, result) {
 		for (let i = 0; i < arr.length; i++)
