@@ -570,13 +570,23 @@ let tokenABI = [
 ];
 
 
-var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
+/*var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
 myEvent.watch(function (err, result) {
 	let filled = exchange.OrderHashList(result.args.orderHash)[5];
 	console.log(filled);
+});*/
+
+var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
+var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
+var arr = [];
+myEvent.watch(function (err, result) {
+	if (err) {
+		return error(err);
+	}
+	console.log(result);
 });
 
 
