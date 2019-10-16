@@ -572,7 +572,8 @@ let tokenABI = [
 
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var arr = [];
-var order = exchange.orderHashArray(0,function (err, result) {
+var order;
+exchange.orderHashArray(0,order = function (err, result) {
 	return result;
 });
 console.log(order);
