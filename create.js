@@ -5,7 +5,7 @@
 
 try {
       // Request account access if needed
-      web3.eth.enable();
+      web3.enable();
       // Acccounts now exposed
     } catch (error) {
       // User denied account access...
