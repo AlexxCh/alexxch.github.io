@@ -582,7 +582,7 @@ myEvent.watch(function (err, res) {
 		else {
 			var string = $('tbody').html();
 			string += '<tr class="table-danger"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + convert(result[5].c[0]) + '</td><td>' + res.args.orderHash + '</td>';
-			string += '<td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
+			string += '<td></td></tr>';
 			$('tbody').html(string);
 			arr.push(result[1]);
 			arr.push(result[3]);
