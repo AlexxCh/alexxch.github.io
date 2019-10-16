@@ -586,6 +586,7 @@ do {
 	arr[i] = exchange.orderHashArray.call(i, function (err,result) {
 		return result;
 	});
+	i++;
 } while (arr[i-1] == '0x0000000000000000000000000000000000000000000000000000000000000000');
 
 
