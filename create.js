@@ -581,7 +581,7 @@ $( "#btn" ).click(function() {
 			});
 		}
 		else {
-			exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntill").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
+			exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntil").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
 			window.location.href = "/all.html";
 		}
 	})
