@@ -638,7 +638,9 @@ function trade(hash) {
 	}), {from: web3.eth.accounts[0]});*/
 	console.log (taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
 		console.log(result.c[0]);
-		return (result.c[0] > 0);
+		if (result.c[0] > 0)
+			return true;
+		else return false;
 	})); console.log('ok');
 	 console.log('not ok');
 	exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
