@@ -578,7 +578,7 @@ do {
 	arr[i] = exchange.orderHashArray.call(i);
 	i++;
 } //while (arr[arr.length - 1] != '0x0000000000000000000000000000000000000000000000000000000000000000');
-while exchange.orderHashArray.call(i) != '0x0000000000000000000000000000000000000000000000000000000000000000');
+while (exchange.orderHashArray.call(i) != '0x0000000000000000000000000000000000000000000000000000000000000000');
 console.log(arr);
 
 function trade(hash) {
