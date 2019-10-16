@@ -594,8 +594,8 @@ myEvent.watch(function (err, res) {
 			string += '<tr><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + convert(result[5].c[0]) + '</td><td>' + res.args.orderHash + '</td>';
 			string += '<td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
 			$('tbody').html(string);
-			arr.push(result.args.makerTokenAddress);
-			arr.push(result.args.takenTokenAddress);
+			arr.push(result[1]);
+			arr.push(result[3]);
 			for (let i = 0; i < arr.length; i++) {
 				let token = web3.eth.contract(tokenABI).at(arr[i]);
 				token.symbol.call(function(error, result){
