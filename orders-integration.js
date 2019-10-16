@@ -582,9 +582,6 @@ var arr;
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
 myEvent.watch(function (err, result) {
-	if (err) {
-		return error(err);
-	}
 	let filled = exchange.OrderHashList(result.args.orderHash)[5];
 	console.log(filled);
 });
