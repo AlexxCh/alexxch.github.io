@@ -583,7 +583,9 @@ console.log(counter);*/
 var arr =[];
 var i = 0;
 do {
-	arr[i] = exchange.orderHashArray.call(i);
+	arr[i] = exchange.orderHashArray.call(i, function (err,result) {
+		return result;
+	});
 } while (arr[i-1] == '0x0000000000000000000000000000000000000000000000000000000000000000');
 
 
