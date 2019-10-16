@@ -608,7 +608,7 @@ var arr;
 	})
 });*/
 var arr = filled.watch();
-console.log(arr);
+console.log(filled);
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
