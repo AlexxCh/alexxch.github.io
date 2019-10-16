@@ -576,7 +576,7 @@ var order = exchange.orderHashArray(0,function (err, result) {
 	console.log(result);
 	arr.push(result);
 });
-console.log(arr[0]);
+console.log(arr);
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
 myEvent.watch(function (err, result) {
