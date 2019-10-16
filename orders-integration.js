@@ -587,8 +587,6 @@ myEvent.watch(function (err, res) {
 		return error(err);
 	}
 	exchange.orderHashList(res.args.orderHash, function(err, result) {
-		console.log(result);
-		console.log(result[5].c[0]);
 		if (Date.now() < result[5].c[0]*1000) {
 			var string = $('tbody').html();
 			string += '<tr><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + convert(result[5].c[0]) + '</td><td>' + res.args.orderHash + '</td>';
@@ -616,15 +614,12 @@ function trade(hash) {
 		var amount = result[4];
 		let taken = web3.eth.contract(tokenABI).at(add);
 		taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
-			console.log(result.c[0]);
 			if (result.c[0] < amount) {
-				console.log('not ok');
 				taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', amount, function (err, result) {
 					exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
 				});
 			}
 			else {
-				console.log('ok');
 				exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
 			}
 		}); 
