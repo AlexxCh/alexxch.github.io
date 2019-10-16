@@ -584,6 +584,7 @@ var arr =[];
 var i = 0;
 do {
 	arr[i] = exchange.orderHashArray.call(i, function (err,result) {
+		console.log(result);
 		return result;
 	});
 	i++;
