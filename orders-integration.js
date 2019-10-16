@@ -588,6 +588,7 @@ myEvent.watch(function (err, result) {
 	}
 	exchange.orderHashList(result.args.orderHash, function(err, result) {
 		console.log(result);
+		console.log(result[5].c[0]);
 	})
 });
 
