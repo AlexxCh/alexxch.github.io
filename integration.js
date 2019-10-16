@@ -574,7 +574,7 @@ var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc
 var orderFilledEvent = exchange.OrderFilled({},{ fromBlock: 0, toBlock: 'latest'});
 orderFilledEvent.watch(function(err,result) {
 	var filled = [];
-	filled.push(result);
+	filled.push(result.args.orderHash);
 	console.log(filled);
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
@@ -582,6 +582,8 @@ myEvent.watch(function (err, result) {
 	if (err) {
 		return error(err);
 	}
+	for (let i = 0; i < filled.length; i++) {
+		if (filled[i] == result.args.orderHash) return 0;
 	if (Date.now() < (result.args.orderValidUntil * 1000)) {
 		var string = $('tbody').html();
 		string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
