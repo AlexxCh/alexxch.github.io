@@ -17,7 +17,7 @@ let Web3 = require('web3');
 
 	var CURRENT_URL = RINKEBY_RPC_URL;
 
-    var web3 = new Web3(new Web3.providers.HttpProvider(CURRENT_URL));
+    //var web3 = new Web3(new Web3.providers.HttpProvider(CURRENT_URL));
 
 //var Web3 = require('web3');
 //let web3 = new Web3(web3.currentProvider);
