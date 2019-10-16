@@ -582,13 +582,30 @@ myEvent.watch(function (err, result) {
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
-myEvent.watch(function (err, result) {
+myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	exchange.orderHashList(result.args.orderHash, function(err, result) {
+	exchange.orderHashList(res.args.orderHash, function(err, result) {
 		console.log(result);
 		console.log(result[5].c[0]);
+		if (Date.now() > result[5].c[0]*1000) {
+			var string = $('tbody').html();
+			string += '<tr><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + convert(result[5].c[0]) + '</td><td>' + res.args.orderHash + '</td>';
+			string += '<td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
+			$('tbody').html(string);
+			arr.push(result.args.makerTokenAddress);
+			arr.push(result.args.takenTokenAddress);
+			for (let i = 0; i < arr.length; i++) {
+				let token = web3.eth.contract(tokenABI).at(arr[i]);
+				token.symbol.call(function(error, result){
+					let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
+					str += result;
+					str += '</a>';
+					$('.' + arr[i]).html(str);
+				});
+			}
+		}
 	})
 });
 
