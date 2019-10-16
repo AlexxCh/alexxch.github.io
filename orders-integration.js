@@ -599,7 +599,7 @@ filled.watch(function (err, result) {
 			for (let i = 0; i < ar.length; i++) {
 				let token = web3.eth.contract(tokenABI).at(ar[i]);
 				token.symbol.call(function(error, result){
-					let str = '<a href="https://rinkeby.etherscan.io/address/' + ar[i]. + '" target="_blank">';
+					let str = '<a href="https://rinkeby.etherscan.io/address/' + ar[i] + '" target="_blank">';
 					str += result;
 					str += '</a>';
 					$('.' + ar[i]).html(str);
