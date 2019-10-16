@@ -574,11 +574,11 @@ var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc
 
 var arr =[];
 var i = 0;
-do {
+while (exchange.orderHashArray.call(i) != '0x0000000000000000000000000000000000000000000000000000000000000000') {
 	arr[i] = exchange.orderHashArray.call(i);
 	i++;
 } //while (arr[arr.length - 1] != '0x0000000000000000000000000000000000000000000000000000000000000000');
-while (exchange.orderHashArray.call(i) != '0x0000000000000000000000000000000000000000000000000000000000000000');
+
 console.log(arr);
 
 function trade(hash) {
