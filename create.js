@@ -556,7 +556,7 @@ $( "#givenAddress" ).change(function() {
 				token.symbol.call(function(error, result){
 					$('#givenSymbol').html(result);
 });
-
+});
 
 $( "#btn" ).click(function() {
 	let token = web3.eth.contract(tokenABI).at($("#givenAddress").val());
@@ -569,5 +569,5 @@ $( "#btn" ).click(function() {
 		else {
 			exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntill").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
 		}
-	}
+	})
 });
