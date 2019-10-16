@@ -569,7 +569,6 @@ let tokenABI = [
 		"type": "function"
 	}
 ];
-console.log(Date.now());
 
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
@@ -578,7 +577,7 @@ myEvent.watch(function (err, result) {
 	if (err) {
 		return error(err);
 	}
-	if (Date.now() < result.args.orderValidUntil) {
+	if (Date.now() < (result.args.orderValidUntil * 1000)) {
 	var string = $('tbody').html();
 	string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
 	string += '<td><button onclick="trade(\'' + result.args.orderHash + '\')">Торговать!</button></td></tr>';
