@@ -580,13 +580,13 @@ var i = 0;
 } //while (arr[arr.length - 1] != '0x0000000000000000000000000000000000000000000000000000000000000000');
 */
 
-while (true) {
+/*while (true) {
 	arr[i] = exchange.orderHashArray.call(i);
 	if (arr[i] == '0x0000000000000000000000000000000000000000000000000000000000000000') break;
 	else i++;
 }
 console.log(arr);
-
+*/
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
 		var add = result[3];
