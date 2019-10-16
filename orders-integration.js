@@ -571,16 +571,16 @@ let tokenABI = [
 
 
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
-/*var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
-var counter = 0;
-myEvent.watch(function (err, result) {
+var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
+var counter = exchange.orderHashArray.call(0);
+/*myEvent.watch(function (err, result) {
 	if (err) {
 		return error(err);
 	}
 	counter++;
-});
-console.log(counter);*/
-var arr =[];
+});*/
+console.log(counter);
+/*var arr =[];
 var i = 0;
 do {
 	arr[i] = exchange.orderHashArray.call(i, function (err,result) {
@@ -588,9 +588,9 @@ do {
 		return result;
 	});
 	i++;
-} while (arr[i-1] != '0x0000000000000000000000000000000000000000000000000000000000000000');
+} while (arr[i-1] == '0x0000000000000000000000000000000000000000000000000000000000000000');
 console.log(arr[0]);
-
+*/
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
