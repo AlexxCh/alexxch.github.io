@@ -629,10 +629,10 @@ function trade(hash) {
 		console.log(result.c[0]);
 		if (result.c[0] < amount) {
 			console.log('not ok');
-			taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', exchange.orderHashList.call(hash, function (err, result) {
+			taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', amount, function (err, result) {
 				exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
 				});
-			}));
+			});
 		}
 		else {
 			console.log('ok');
