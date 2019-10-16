@@ -584,6 +584,7 @@ myEvent.watch(function (err, result) {
 	}
 	for (let i = 0; i < filled.length; i++) {
 		if (filled[i] == result.args.orderHash) return 0;
+	}
 	if (Date.now() < (result.args.orderValidUntil * 1000)) {
 		var string = $('tbody').html();
 		string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
