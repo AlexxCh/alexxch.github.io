@@ -2,6 +2,14 @@
 	Создать ордер
 
 */
+
+try {
+      // Request account access if needed
+      web3.eth.enable();
+      // Acccounts now exposed
+    } catch (error) {
+      // User denied account access...
+    }
 let abi = [
 	{
 		"constant": false,
