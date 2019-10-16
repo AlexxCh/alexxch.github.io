@@ -571,7 +571,7 @@ let tokenABI = [
 
 
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
-var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
+/*var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var counter = 0;
 myEvent.watch(function (err, result) {
 	if (err) {
@@ -579,7 +579,12 @@ myEvent.watch(function (err, result) {
 	}
 	counter++;
 });
-console.log(counter);
+console.log(counter);*/
+var arr =[];
+var i = 0;
+do {
+	arr[i] = exchange.orderHashArray.call(i);
+} while (arr[i-1] == '0x0000000000000000000000000000000000000000000000000000000000000000');
 
 
 function trade(hash) {
