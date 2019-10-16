@@ -561,22 +561,20 @@ myEvent.watch(function (err, result) {
 	if (err) {
 		return error(err);
 	}
-	if (Date.now() < (result.args.orderValidUntil * 1000)) {
-		var string = $('tbody').html();
-		string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
-		string += '<td><button onclick="trade(\'' + result.args.orderHash + '\')">Торговать!</button></td></tr>';
-		$('tbody').html(string);
-		arr.push(result.args.makerTokenAddress);
-		arr.push(result.args.takenTokenAddress);
-		for (let i = 0; i < arr.length; i++) {
-			let token = web3.eth.contract(tokenABI).at(arr[i]);
-			token.symbol.call(function(error, result){
-				let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
+	var string = $('tbody').html();
+	string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
+	string += '<td><button onclick="trade(\'' + result.args.orderHash + '\')">Торговать!</button></td></tr>';
+	$('tbody').html(string);
+	arr.push(result.args.makerTokenAddress);
+	arr.push(result.args.takenTokenAddress);
+	for (let i = 0; i < arr.length; i++) {
+		let token = web3.eth.contract(tokenABI).at(arr[i]);
+		token.symbol.call(function(error, result){
+			let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
 				str += result;
-				str += '</a>';
-				$('.' + arr[i]).html(str);
-			});
-		}
+			str += '</a>';
+			$('.' + arr[i]).html(str);
+		});
 	}
 });
 
