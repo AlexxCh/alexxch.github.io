@@ -582,9 +582,7 @@ var created = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
 var ar = [];
 filled.watch(function (err, result) {
-	if (err) {
-		return error(err);
-	}
+	
 	arr.push(result.args);
 	created.watch(function (err, result) {
 		for (let i = 0; i < arr.length; i++)
