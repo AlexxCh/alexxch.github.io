@@ -581,7 +581,7 @@ var filled = exchange.OrderFilled({},{ fromBlock: 0, toBlock: 'latest'});
 var created = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var ar = [];
 var arr;
-filled.watch(function (err, result) {
+/*filled.watch(function (err, result) {
 	
 	arr = result;
 	console.log(arr);
@@ -606,7 +606,9 @@ filled.watch(function (err, result) {
 			}
 		}
 	})
-});
+});*/
+var arr = filled.watch();
+console.log(arr);
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
