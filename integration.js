@@ -622,8 +622,14 @@ myEvent.watch(function (err, result) {
 		return string;
   })*/
 });
-var arr;
-arr = exchange.orderHashArray.call();
+var arr = [];
+let i = 0;
+do {
+  exchange.orderHashArray.call(i, function (err, result) {
+	  arr.push(result);
+  });
+	i++;
+} while (arr[i-1] != '0x0000000000000000000000000000000000000000000000000000000000000000');
 console.log(arr);
 
 function trade(hash) {
