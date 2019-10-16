@@ -573,13 +573,8 @@ let tokenABI = [
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var counter;
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
-myEvent.watch(function (err, result) {
-	if (err) {
-		return error(err);
-	}
-	counter++;
-});
-console.log(counter);
+myEvent.watch();
+console.log(myEvent);
 var arr =[];
 var i = 0;
 /*while (i < counter) {
