@@ -583,17 +583,17 @@ var arr = [];
 var ar = [];
 filled.watch(function (err, result) {
 	
-	arr.push(result.args);
+	arr.push(result);
 	created.watch(function (err, result) {
 		for (let i = 0; i < arr.length; i++)
 			if (arr[i].orderHash == result.args.orderHash) return 0;
 		if (Date.now() < (arr[i].orderValidUntil * 1000)) {
 			var string = $('tbody').html();
-			string += '<tr><td>' + arr[i].maker + '</td><td class="' + arr[i].makerTokenAddress + '"></td><td>' + arr[i].givenTokenAmount + '</td><td class="' + arr[i].takenTokenAddress + '"></td><td>' + arr[i].takenTokenAmount + '</td><td>' + convert(arr[i].orderValidUntil) + '</td><td>' + arr[i].orderHash + '</td>';
-			string += '<td><button onclick="trade(\'' + arr[i].orderHash + '\')">Торговать!</button></td></tr>';
+			string += '<tr><td>' + arr[i].args.maker + '</td><td class="' + arr[i].args.makerTokenAddress + '"></td><td>' + arr[i].args.givenTokenAmount + '</td><td class="' + arr[i].args.takenTokenAddress + '"></td><td>' + arr[i].args.takenTokenAmount + '</td><td>' + convert(arr[i].args.orderValidUntil) + '</td><td>' + arr[i].args.orderHash + '</td>';
+			string += '<td><button onclick="trade(\'' + arr[i].args.orderHash + '\')">Торговать!</button></td></tr>';
 			$('tbody').html(string);
-			ar.push(arr[i].makerTokenAddress);
-			ar.push(arr[i].takenTokenAddress);
+			ar.push(arr[i].args.makerTokenAddress);
+			ar.push(arr[i].args.takenTokenAddress);
 			for (let i = 0; i < ar.length; i++) {
 				let token = web3.eth.contract(tokenABI).at(ar[i]);
 				token.symbol.call(function(error, result){
