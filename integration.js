@@ -624,13 +624,13 @@ myEvent.watch(function (err, result) {
 });
 var arr = [];
 let i = 0;
-do {
+/*do {
   exchange.orderHashArray.call(i, function (err, result) {
 	  arr.push(result);
   });
 	i++;
 } while (arr[i] != '0x0000000000000000000000000000000000000000000000000000000000000000');
-console.log(arr);
+console.log(arr);*/
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
