@@ -574,19 +574,40 @@ var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc
 
 var arr =[];
 var i = 0;
-/*while (i < counter) {
-	arr[i] = exchange.orderHashArray.call(i);
-	i++;
-} //while (arr[arr.length - 1] != '0x0000000000000000000000000000000000000000000000000000000000000000');
-*/
 
-/*while (true) {
-	arr[i] = exchange.orderHashArray.call(i);
-	if (arr[i] == '0x0000000000000000000000000000000000000000000000000000000000000000') break;
-	else i++;
-}
-console.log(arr);
-*/
+
+var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
+var filled = exchange.OrderFilled({},{ fromBlock: 0, toBlock: 'latest'});
+var created = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
+var arr = [];
+var ar = [];
+filled.watch(function (err, result) {
+	if (err) {
+		return error(err);
+	}
+	arr.push(result.args);
+	created.watch(function (err, result) {
+		for (let i = 0; i < arr.length; i++)
+			if (arr[i].orderHash == result.args.orderHash) return 0;
+		if (Date.now() < (arr[i].orderValidUntil * 1000)) {
+			var string = $('tbody').html();
+			string += '<tr><td>' + arr[i].maker + '</td><td class="' + arr[i].makerTokenAddress + '"></td><td>' + arr[i].givenTokenAmount + '</td><td class="' + arr[i].takenTokenAddress + '"></td><td>' + arr[i].takenTokenAmount + '</td><td>' + convert(arr[i].orderValidUntil) + '</td><td>' + arr[i].orderHash + '</td>';
+			string += '<td><button onclick="trade(\'' + arr[i].orderHash + '\')">Торговать!</button></td></tr>';
+			$('tbody').html(string);
+			ar.push(arr[i].makerTokenAddress);
+			ar.push(arr[i].takenTokenAddress);
+			for (let i = 0; i < ar.length; i++) {
+				let token = web3.eth.contract(tokenABI).at(ar[i]);
+				token.symbol.call(function(error, result){
+					let str = '<a href="https://rinkeby.etherscan.io/address/' + ar[i]. + '" target="_blank">';
+					str += result;
+					str += '</a>';
+					$('.' + ar[i]).html(str);
+				});
+			}
+		}
+	})
+});
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
