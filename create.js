@@ -1,27 +1,7 @@
 /*
-	Читаем ивенты CreateOrder, выводим все прочитанные на фронт, есть учет просроченных, но нет учета исполненых.
-	По кнопке вызывается функция trade
-	Функция проверяет разрешение на перемещение токенов с адреса вызывающего для адреса смарт-контракта биржи: если нет разрешения, то вызывается функция токена approve, потом функция смарт-контракта обмена trade
-	Если разрешение уже есть, то вызывается функция trade.
+	Создать ордер
 
 */
-
-
-
-
-let Web3 = require('web3');
-
-	var MAINET_RPC_URL = 'https://mainnet.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0' ;
-	var ROPSTEN_RPC_URL = 'https://ropsten.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0' ;
-	var KOVAN_RPC_URL = 'https://kovan.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0' ;
-	var RINKEBY_RPC_URL = 'https://rinkeby.infura.io/v3/66492ced9c334deeb2bf9cd40f4e09b0' ;
-
-	var CURRENT_URL = RINKEBY_RPC_URL;
-
-    //var web3 = new Web3(new Web3.providers.HttpProvider(CURRENT_URL));
-
-//var Web3 = require('web3');
-//let web3 = new Web3(web3.currentProvider);
 let abi = [
 	{
 		"constant": false,
@@ -571,84 +551,17 @@ let tokenABI = [
 ];
 
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
-var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
-var arr = [];
-myEvent.watch(function (err, result) {
-	if (err) {
-		return error(err);
-	}
-	if (Date.now() < (result.args.orderValidUntil * 1000)) {
-		var string = $('tbody').html();
-		string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
-		string += '<td><button onclick="trade(\'' + result.args.orderHash + '\')">Торговать!</button></td></tr>';
-		$('tbody').html(string);
-		arr.push(result.args.makerTokenAddress);
-		arr.push(result.args.takenTokenAddress);
-		for (let i = 0; i < arr.length; i++) {
-			let token = web3.eth.contract(tokenABI).at(arr[i]);
-			token.symbol.call(function(error, result){
-				let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
-				str += result;
-				str += '</a>';
-				$('.' + arr[i]).html(str);
-			});
-		}
-	}
-});
 
-function trade(hash) {
-	exchange.orderHashList.call(hash, function (err, result) {
-		var add = result[3];
-		var amount = result[4];
-		let taken = web3.eth.contract(tokenABI).at(add);
-		taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
-			console.log(result.c[0]);
-			if (result.c[0] < amount) {
-				console.log('not ok');
-				taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', amount, function (err, result) {
-					exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
+$( "#btn" ).click(function() {
+	let token = web3.eth.contract(tokenABI).at($("#givenAddress").val());
+	token.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
+		if (result.c[0] < $("#givenAmount").val()) {
+				token.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', $("#givenAmount").val(), function (err, result) {
+					exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntill").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
 				});
 			}
 			else {
-				console.log('ok');
-				exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
+				exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntill").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
 			}
-		}); 
-	});
-}
-
-function convert(unixtimestamp){
-
- // Unixtimestamp
- //var unixtimestamp = document.getElementById('timestamp').value;
-
- // Months array
- var months_arr = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
-
- // Convert timestamp to milliseconds
- var date = new Date(unixtimestamp*1000);
-
- // Year
- var year = date.getFullYear();
-
- // Month
- var month = months_arr[date.getMonth()];
-
- // Day
- var day = date.getDate();
-
- // Hours
- var hours = date.getHours();
-
- // Minutes
- var minutes = "0" + date.getMinutes();
-
- // Seconds
- var seconds = "0" + date.getSeconds();
-
- // Display date time in dd-Mm-yyyy h:m:s format
- var convdataTime = day+'-'+month+'-'+year+' '+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
- 
- return convdataTime;
- 
-}
+	}
+});
