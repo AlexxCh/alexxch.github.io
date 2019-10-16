@@ -580,17 +580,13 @@ var counter = exchange.orderHashArray.call(0);
 	counter++;
 });*/
 console.log(counter);
-/*var arr =[];
+var arr =[];
 var i = 0;
 do {
-	arr[i] = exchange.orderHashArray.call(i, function (err,result) {
-		console.log(result);
-		return result;
-	});
+	arr[i] = exchange.orderHashArray.call(i);
 	i++;
-} while (arr[i-1] == '0x0000000000000000000000000000000000000000000000000000000000000000');
-console.log(arr[0]);
-*/
+} while (arr[arr.length - 1] != '0x0000000000000000000000000000000000000000000000000000000000000000');
+console.log(arr);
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
