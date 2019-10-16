@@ -577,36 +577,17 @@ var i = 0;
 
 
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
-var filled = exchange.OrderFilled({},{ fromBlock: 0, toBlock: 'latest'});
-var created = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var ar = [];
 var arr;
-/*filled.watch(function (err, result) {
-	
-	arr = result;
-	console.log(arr);
-	created.watch(function (err, result) {
-		for (let i = 0; i < arr.length; i++)
-			if (arr[i].args.orderHash == result.args.orderHash) return 0;
-		if (Date.now() < (arr[i].orderValidUntil * 1000)) {
-			var string = $('tbody').html();
-			string += '<tr><td>' + arr[i].args.maker + '</td><td class="' + arr[i].args.makerTokenAddress + '"></td><td>' + arr[i].args.givenTokenAmount + '</td><td class="' + arr[i].args.takenTokenAddress + '"></td><td>' + arr[i].args.takenTokenAmount + '</td><td>' + convert(arr[i].args.orderValidUntil) + '</td><td>' + arr[i].args.orderHash + '</td>';
-			string += '<td><button onclick="trade(\'' + arr[i].args.orderHash + '\')">Торговать!</button></td></tr>';
-			$('tbody').html(string);
-			ar.push(arr[i].args.makerTokenAddress);
-			ar.push(arr[i].args.takenTokenAddress);
-			for (let i = 0; i < ar.length; i++) {
-				let token = web3.eth.contract(tokenABI).at(ar[i]);
-				token.symbol.call(function(error, result){
-					let str = '<a href="https://rinkeby.etherscan.io/address/' + ar[i] + '" target="_blank">';
-					str += result;
-					str += '</a>';
-					$('.' + ar[i]).html(str);
-				});
-			}
-		}
-	})
-});*/
+var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
+var arr = [];
+myEvent.watch(function (err, result) {
+	if (err) {
+		return error(err);
+	}
+	let filled = exchange.OrderHashList(result.args.orderHash)[5];
+	console.log(filled);
+});
 
 
 function trade(hash) {
