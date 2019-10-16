@@ -569,7 +569,7 @@ let tokenABI = [
 		"type": "function"
 	}
 ];
-
+console.log(Date.now());
 
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
