@@ -584,6 +584,7 @@ var ar = [];
 filled.watch(function (err, result) {
 	
 	arr.push(result);
+	console.log(arr);
 	created.watch(function (err, result) {
 		for (let i = 0; i < arr.length; i++)
 			if (arr[i].args.orderHash == result.args.orderHash) return 0;
