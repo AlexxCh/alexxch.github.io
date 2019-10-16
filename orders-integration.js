@@ -586,7 +586,7 @@ filled.watch(function (err, result) {
 	arr.push(result);
 	created.watch(function (err, result) {
 		for (let i = 0; i < arr.length; i++)
-			if (arr[i].orderHash == result.args.orderHash) return 0;
+			if (arr[i].args.orderHash == result.args.orderHash) return 0;
 		if (Date.now() < (arr[i].orderValidUntil * 1000)) {
 			var string = $('tbody').html();
 			string += '<tr><td>' + arr[i].args.maker + '</td><td class="' + arr[i].args.makerTokenAddress + '"></td><td>' + arr[i].args.givenTokenAmount + '</td><td class="' + arr[i].args.takenTokenAddress + '"></td><td>' + arr[i].args.takenTokenAmount + '</td><td>' + convert(arr[i].args.orderValidUntil) + '</td><td>' + arr[i].args.orderHash + '</td>';
