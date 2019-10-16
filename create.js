@@ -552,6 +552,10 @@ let tokenABI = [
 
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 
+let token = web3.eth.contract(tokenABI).at($("#givenAddress").val());
+				token.symbol.call(function(error, result){
+					$('#givenSymbol').html(result);
+
 $( "#btn" ).click(function() {
 	let token = web3.eth.contract(tokenABI).at($("#givenAddress").val());
 	token.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
