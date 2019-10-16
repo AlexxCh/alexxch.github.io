@@ -552,7 +552,7 @@ let tokenABI = [
 
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 $( "#givenAddress" ).change(function() {
-	let token = web3.eth.contract(tokenABI).at(arr[i]);
+	let token = web3.eth.contract(tokenABI).at($( "#givenAddress" ).val());
 	token.symbol.call(function(error, result){
 		let str = '<a href="https://rinkeby.etherscan.io/address/' + $( "#givenAddress" ).val() + '" target="_blank">';
 		str += result;
@@ -562,7 +562,7 @@ $( "#givenAddress" ).change(function() {
 });
 
 $( "#takenAddress" ).change(function() {
-	let token = web3.eth.contract(tokenABI).at(arr[i]);
+	let token = web3.eth.contract(tokenABI).at($( "#takenAddress" ).val());
 	token.symbol.call(function(error, result){
 		let str = '<a href="https://rinkeby.etherscan.io/address/' + $( "#takenAddress" ).val() + '" target="_blank">';
 		str += result;
