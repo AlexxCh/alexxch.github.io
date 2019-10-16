@@ -561,32 +561,13 @@ let tokenABI = [
 ];
 
 
-var token1 = web3.eth.contract(tokenABI).at('0xe24c82ce83acc9b1a845d5ab01c0753a3b5ad2e5');
-var hashes = [];
-
-
 var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
-var token1Add;
 var arr = [];
 myEvent.watch(function (err, result) {
   if (err) {
     return error(err);
   }
-  //console.log("Transfer was incremented by address: " + result.args._from);
-  //console.log(result.args.orderHash);
-  hashes.push(result.args.orderHash);
- /*var string = $('tbody').html() + '<tr><td>' + hashes[hashes.length - 1] + '</td><td>';
-  var token1 = web3.eth.contract(tokenABI).at(result.args.makerTokenAddress);
-  $('tbody').html(string);
-  token1.symbol.call(function(error, result){
-		console.log('1. ' + result);
-		str = $('tbody').html() + result;
-		$('tbody').html(str);
-	});
-	string = $('tbody').html();
-	string += '</td></tr>';
-  $('tbody').html(string);*/
   var string = $('tbody').html();
   string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
   string += '<td><button onclick="trade(\'' + result.args.orderHash + '\')">Торговать!</button></td></tr>';
@@ -603,28 +584,12 @@ myEvent.watch(function (err, result) {
 	});
   }
 });
-var arr = [];
-let i = 0;
-/*do {
-  exchange.orderHashArray.call(i, function (err, result) {
-	  arr.push(result);
-  });
-	i++;
-} while (arr[i] != '0x0000000000000000000000000000000000000000000000000000000000000000');
-console.log(arr);*/
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
 		var add = result[3];
 		var amount = result[4];
 	let taken = web3.eth.contract(tokenABI).at(add);
-	/*if (taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function(err, result) {
-		console.log(result);
-		console.log(result > 0);
-		return (result > 0);
-	})) taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', exchange.orderHashList.call(hash, function (err, result) {
-		return result.takenTokenAmount;
-	}), {from: web3.eth.accounts[0]});*/
 	taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
 		console.log(result.c[0]);
 		if (result.c[0] < amount) {
@@ -640,38 +605,9 @@ function trade(hash) {
 			});
 		}
 	}); 
-	//exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
-	//});
-	//alert(hash);
 	});
 }
-//console.log(token1Add);
-var token1 = web3.eth.contract(tokenABI).at(hashes[0]);
-//	token2 = web3.eth.contract(tokenABI).at(token2Add);
-	$( "." + token1Add).html(token1.symbol.call(function(error, result){
-		//console.log('1. ' + result);
-		return result;
-	}));
-/*	$( "." + token2Add).html(token2.symbol.call(function(error, result){
-		return result;
-	}));
 
-*/
-//$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
-//console.log(hashes);
-for (let i = 0; i < hashes.length; i++) {
-  /*exchange.orderHashList.call(hashes[i], function(err, result) {
-	  console.log(result);
-	  string = '<tr><td>' + result.args.maker + '</td><td>';
-	  token = web3.eth.contract(abi).at(result.args.givenTokenAddress);
-	  string += token.symbol.call();
-	  string += '</td></tr>';
-	  $( "tbody" ).html(string);
-
-  });
-  */
-  $( "tbody" ).html('<tr><td>vndksnglk</td></tr>');
-}
 function convert(unixtimestamp){
 
  // Unixtimestamp
