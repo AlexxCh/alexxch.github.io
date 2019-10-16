@@ -1,3 +1,13 @@
+/*
+	Читаем ивенты CreateOrder, выводим все прочитанные на фронт.
+	По кнопке вызывается функция trade
+	Функция проверяет разрешение на перемещение токенов с адреса вызывающего для адреса смарт-контракта биржи: если нет разрешения, то вызывается функция токена approve, потом функция смарт-контракта обмена trade
+	Если разрешение уже есть, то вызывается функция trade.
+
+*/
+
+
+
 
 let Web3 = require('web3');
 
@@ -565,46 +575,44 @@ var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
 myEvent.watch(function (err, result) {
-  if (err) {
-    return error(err);
-  }
-  var string = $('tbody').html();
-  string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
-  string += '<td><button onclick="trade(\'' + result.args.orderHash + '\')">Торговать!</button></td></tr>';
-  $('tbody').html(string);
-  arr.push(result.args.makerTokenAddress);
-  arr.push(result.args.takenTokenAddress);
-  for (let i = 0; i < arr.length; i++) {
+	if (err) {
+		return error(err);
+	}
+	var string = $('tbody').html();
+	string += '<tr><td>' + result.args.maker + '</td><td class="' + result.args.makerTokenAddress + '"></td><td>' + result.args.givenTokenAmount + '</td><td class="' + result.args.takenTokenAddress + '"></td><td>' + result.args.takenTokenAmount + '</td><td>' + convert(result.args.orderValidUntil) + '</td><td>' + result.args.orderHash + '</td>';
+	string += '<td><button onclick="trade(\'' + result.args.orderHash + '\')">Торговать!</button></td></tr>';
+	$('tbody').html(string);
+	arr.push(result.args.makerTokenAddress);
+	arr.push(result.args.takenTokenAddress);
+	for (let i = 0; i < arr.length; i++) {
 		let token = web3.eth.contract(tokenABI).at(arr[i]);
 		token.symbol.call(function(error, result){
-		let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
-		str += result;
-		str += '</a>';
-		$('.' + arr[i]).html(str);
-	});
-  }
+			let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
+			str += result;
+			str += '</a>';
+			$('.' + arr[i]).html(str);
+		});
+	}
 });
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
 		var add = result[3];
 		var amount = result[4];
-	let taken = web3.eth.contract(tokenABI).at(add);
-	taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
-		console.log(result.c[0]);
-		if (result.c[0] < amount) {
-			console.log('not ok');
-			taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', amount, function (err, result) {
-				exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
+		let taken = web3.eth.contract(tokenABI).at(add);
+		taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
+			console.log(result.c[0]);
+			if (result.c[0] < amount) {
+				console.log('not ok');
+				taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', amount, function (err, result) {
+					exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
 				});
-			});
-		}
-		else {
-			console.log('ok');
-			exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {
-			});
-		}
-	}); 
+			}
+			else {
+				console.log('ok');
+				exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
+			}
+		}); 
 	});
 }
 
