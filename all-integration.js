@@ -581,6 +581,23 @@ myEvent.watch(function (err, res) {
 		}
 		else if (result[5].c[0] == 0) {
 			var string = $('tbody').html();
+			string += '<tr class="table-info"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Отменен</td><td>' + res.args.orderHash + '</td>';
+			string += '<td></td></tr>';
+			$('tbody').html(string);
+			arr.push(result[1]);
+			arr.push(result[3]);
+			for (let i = 0; i < arr.length; i++) {
+				let token = web3.eth.contract(tokenABI).at(arr[i]);
+				token.symbol.call(function(error, result){
+					let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
+					str += result;
+					str += '</a>';
+					$('.' + arr[i]).html(str);
+				});
+			}
+		}
+		else if (result[5].c[0] == 1) {
+			var string = $('tbody').html();
 			string += '<tr class="table-success"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Исполнено</td><td>' + res.args.orderHash + '</td>';
 			string += '<td></td></tr>';
 			$('tbody').html(string);
