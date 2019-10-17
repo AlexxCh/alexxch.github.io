@@ -187,27 +187,6 @@ let abi = [
 		"constant": true,
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "orderHashArray",
-		"outputs": [
-			{
-				"internalType": "bytes32",
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
 				"internalType": "bytes32",
 				"name": "",
 				"type": "bytes32"
@@ -573,7 +552,7 @@ let tokenABI = [
 	}
 ];
 
-var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
+var exchange = web3.eth.contract(abi).at('0x9b7fcff7f0579bf15e0b4cbe8e91d9bccea9d874');
 $( "#givenAddress" ).change(function() {
 	let token = web3.eth.contract(tokenABI).at($( "#givenAddress" ).val());
 	token.symbol.call(function(error, result){
@@ -596,9 +575,9 @@ $( "#takenAddress" ).change(function() {
 
 $( "#btn" ).click(function() {
 	let token = web3.eth.contract(tokenABI).at($("#givenAddress").val());
-	token.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
+	token.allowance.call(web3.eth.accounts[0], '0x9b7fcff7f0579bf15e0b4cbe8e91d9bccea9d874', function (err, result) {
 		if (result.c[0] < $("#givenAmount").val()) {
-			token.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', $("#givenAmount").val(), function (err, result) {
+			token.approve('0x9b7fcff7f0579bf15e0b4cbe8e91d9bccea9d874', $("#givenAmount").val(), function (err, result) {
 				exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntil").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
 				window.location.href = "/all.html";
 			});

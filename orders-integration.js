@@ -23,61 +23,6 @@ let Web3 = require('web3');
 //let web3 = new Web3(web3.currentProvider);
 let abi = [
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "orderHash",
-				"type": "bytes32"
-			}
-		],
-		"name": "cancelOrder",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_givenTokenAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_givenTokenAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "_takenTokenAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_takenTokenAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_orderValidUntil",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_nonce",
-				"type": "uint256"
-			}
-		],
-		"name": "createOrder",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -173,31 +118,50 @@ let abi = [
 				"type": "bytes32"
 			}
 		],
-		"name": "trade",
+		"name": "cancelOrder",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_givenTokenAddress",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_givenTokenAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_takenTokenAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_takenTokenAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_orderValidUntil",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_nonce",
 				"type": "uint256"
 			}
 		],
-		"name": "orderHashArray",
-		"outputs": [
-			{
-				"internalType": "bytes32",
-				"name": "",
-				"type": "bytes32"
-			}
-		],
+		"name": "createOrder",
+		"outputs": [],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -249,6 +213,21 @@ let abi = [
 		],
 		"payable": false,
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "orderHash",
+				"type": "bytes32"
+			}
+		],
+		"name": "trade",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ];
@@ -570,16 +549,8 @@ let tokenABI = [
 ];
 
 
-/*var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
 
-var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
-var arr = [];
-myEvent.watch(function (err, result) {
-	let filled = exchange.OrderHashList(result.args.orderHash)[5];
-	console.log(filled);
-});*/
-
-var exchange = web3.eth.contract(abi).at('0x8e7c770cba5cbb342880e57fada571fdbefc0691');
+var exchange = web3.eth.contract(abi).at('0x9b7fcff7f0579bf15e0b4cbe8e91d9bccea9d874');
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
 myEvent.watch(function (err, res) {
@@ -613,9 +584,9 @@ function trade(hash) {
 		var add = result[3];
 		var amount = result[4];
 		let taken = web3.eth.contract(tokenABI).at(add);
-		taken.allowance.call(web3.eth.accounts[0], '0x8e7c770cba5cbb342880e57fada571fdbefc0691', function (err, result) {
+		taken.allowance.call(web3.eth.accounts[0], '0x9b7fcff7f0579bf15e0b4cbe8e91d9bccea9d874', function (err, result) {
 			if (result.c[0] < amount) {
-				taken.approve('0x8e7c770cba5cbb342880e57fada571fdbefc0691', amount, function (err, result) {
+				taken.approve('0x9b7fcff7f0579bf15e0b4cbe8e91d9bccea9d874', amount, function (err, result) {
 					exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
 				});
 			}
