@@ -714,10 +714,10 @@ myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	exchange.balances.call(res.args.token, web3.eth.accounts[0], function (err, result) {
+	/*exchange.balances.call(res.args.token, web3.eth.accounts[0], function (err, result) {
 		var string = $("div").html();
 		console.log(result);
-		/*if (res.args.token == '0x0000000000000000000000000000000000000000') 
+		if (res.args.token == '0x0000000000000000000000000000000000000000') 
 			string += '<div>' + ETH + ' ' + result + ' wei</div>';
 		else {
 			let token = web3.eth.contract(tokenABI).at(res.args.token);
