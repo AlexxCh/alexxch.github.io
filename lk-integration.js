@@ -832,6 +832,7 @@ myEvent.watch(function (err, res) {
 var arr = [];
 var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
 var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]}, function (err, res) {
+	var arr = [];
 	arr.push(res.args.tokenAddress);
 	return arr;
 });
