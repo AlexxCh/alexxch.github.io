@@ -708,13 +708,37 @@ let tokenABI = [
 ];
 
 var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
-var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
+var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 var arr = [];
 myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	exchange.orderHashList(res.args.orderHash, function(err, result) {
+	
+	var arr;
+	if (res.args.value == res.args.internalBalance)
+		arr.push(res.args.token);
+	var string = $("div").html();
+	string += '<div class="' + res.args.token + '"></div>';
+	$("div").html(string);
+	for (let i = 0; i < arr.length; i++) {
+		let token = web3.eth.contract(tokenABI).at(arr[i]);
+		token.symbol.call(function(error, result){
+			let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
+			str += result;
+			str += '</a>';
+			$('.' + arr[i]).html(str);
+		});
+		exchange.balances.call(arr[i], web3.eth.accounts[0], function(error, result){
+			let str = $('.' + arr[i]).html();
+			console.log(result);
+			str += '<span> ' + result;
+			str += '</span>';
+			$('.' + arr[i]).html(str);
+		});
+	}
+	
+	/*exchange.orderHashList(res.args.orderHash, function(err, result) {
 		if (Date.now() < result[5].c[0]*1000) {
 			var string = $('tbody').html();
 			string += '<tr class="table-warning"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + convert(result[5].c[0]) + '</td><td>' + res.args.orderHash + '</td>';
@@ -783,7 +807,7 @@ myEvent.watch(function (err, res) {
 				});
 			}
 		}
-	})
+	})*/
 });
 
 function trade(hash) {
