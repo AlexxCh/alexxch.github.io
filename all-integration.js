@@ -8,6 +8,61 @@
 
 let abi = [
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "orderHash",
+				"type": "bytes32"
+			}
+		],
+		"name": "cancelOrder",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_givenTokenAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_givenTokenAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_takenTokenAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_takenTokenAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_orderValidUntil",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_nonce",
+				"type": "uint256"
+			}
+		],
+		"name": "createOrder",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -37,6 +92,35 @@ let abi = [
 		],
 		"name": "Deposit",
 		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "depositEth",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "depositToken",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -132,6 +216,46 @@ let abi = [
 		"type": "event"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "orderHash",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "trade",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -215,90 +339,6 @@ let abi = [
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "orderHash",
-				"type": "bytes32"
-			}
-		],
-		"name": "cancelOrder",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_givenTokenAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_givenTokenAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "_takenTokenAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_takenTokenAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_orderValidUntil",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_nonce",
-				"type": "uint256"
-			}
-		],
-		"name": "createOrder",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "depositEth",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "token",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			}
-		],
-		"name": "depositToken",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
@@ -347,46 +387,6 @@ let abi = [
 		],
 		"payable": false,
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "orderHash",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "trade",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "tokenAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "withdraw",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ];
@@ -707,7 +707,7 @@ let tokenABI = [
 	}
 ];
 
-var exchange = web3.eth.contract(abi).at('0xc5f120dcc4d1880a569ce6142f8b5e8b897331b2');
+var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
 myEvent.watch(function (err, res) {
@@ -791,11 +791,11 @@ function trade(hash) {
 		var add = result[3];
 		var amount = result[4];
 		let taken = web3.eth.contract(tokenABI).at(add);
-		taken.allowance.call(web3.eth.accounts[0], '0xc5f120dcc4d1880a569ce6142f8b5e8b897331b2', function (err, result) {
+		taken.allowance.call(web3.eth.accounts[0], '0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a', function (err, result) {
 			console.log(result.c[0]);
 			if (result.c[0] < amount) {
 				console.log('not ok');
-				taken.approve('0xc5f120dcc4d1880a569ce6142f8b5e8b897331b2', amount, function (err, result) {
+				taken.approve('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a', amount, function (err, result) {
 					exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
 				});
 			}
