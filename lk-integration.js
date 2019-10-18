@@ -717,9 +717,22 @@ myEvent.watch(function (err, res) {
 	exchange.balances.call(res.args.token, web3.eth.accounts[0], function (err, result) {
 		var string = $("div").html();
 		console.log(result);
-		string += '<div>' + res.args.token + ' ' + result + '</div>';
+		/*if (res.args.token == '0x0000000000000000000000000000000000000000') 
+			string += '<div>' + ETH + ' ' + result + ' wei</div>';
+		else {
+			let token = web3.eth.contract(tokenABI).at(res.args.token);
+			token.symbol.call(function(error, result){
+					let str = '<a href="https://rinkeby.etherscan.io/address/' + res.args.token + '" target="_blank">';
+					str += result;
+					str += '</a>';
+					$('.' + arr[i]).html(str);
+				});
+			string += '<div>' + res.args.token + ' ' + result + '</div>';
+		}
 		$("div").html(string);
-	});
+	});*/
+	arr.push(res.args.token);
+	console.log(arr);
 	
 	/*exchange.orderHashList(res.args.orderHash, function(err, result) {
 		if (Date.now() < result[5].c[0]*1000) {
