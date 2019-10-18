@@ -714,7 +714,7 @@ myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-
+	var arr = []; 
 	if (res.args.value == res.args.internalBalance)
 		arr.push(res.args.token);
 	var string = $("div").html();
