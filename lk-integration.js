@@ -740,6 +740,7 @@ myEvent.watch(function (err, res) {
 			var string = $("div").html();
 			if (addresses[i] == '0x0000000000000000000000000000000000000000') {
 				string += '<div>' + ETH + ' ' + result + ' wei</div>';
+			}
 			else {
 				let token = web3.eth.contract(tokenABI).at(res.args.token);
 				token.symbol.call(function(error, result){
