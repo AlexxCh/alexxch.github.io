@@ -12,6 +12,37 @@ let abi = [
 		"inputs": [
 			{
 				"indexed": false,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "internalBalance",
+				"type": "uint256"
+			}
+		],
+		"name": "Deposit",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
 				"internalType": "bytes32",
 				"name": "orderHash",
 				"type": "bytes32"
@@ -32,7 +63,7 @@ let abi = [
 			{
 				"indexed": false,
 				"internalType": "address",
-				"name": "makerTokenAddress",
+				"name": "givenTokenAddress",
 				"type": "address"
 			},
 			{
@@ -89,10 +120,99 @@ let abi = [
 				"internalType": "address",
 				"name": "by",
 				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "remainingSum",
+				"type": "uint256"
 			}
 		],
 		"name": "OrderFilled",
 		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "internalBalance",
+				"type": "uint256"
+			}
+		],
+		"name": "Withdraw",
+		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "balanceOnOrder",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "balances",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"constant": false,
@@ -144,6 +264,35 @@ let abi = [
 			}
 		],
 		"name": "createOrder",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "depositEth",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "depositToken",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -207,9 +356,34 @@ let abi = [
 				"internalType": "bytes32",
 				"name": "orderHash",
 				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
 			}
 		],
 		"name": "trade",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdraw",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -533,7 +707,7 @@ let tokenABI = [
 	}
 ];
 
-var exchange = web3.eth.contract(abi).at('0x9b7fcff7f0579bf15e0b4cbe8e91d9bccea9d874');
+var exchange = web3.eth.contract(abi).at('0xc5f120dcc4d1880a569ce6142f8b5e8b897331b2');
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
 myEvent.watch(function (err, res) {
@@ -617,11 +791,11 @@ function trade(hash) {
 		var add = result[3];
 		var amount = result[4];
 		let taken = web3.eth.contract(tokenABI).at(add);
-		taken.allowance.call(web3.eth.accounts[0], '0x9b7fcff7f0579bf15e0b4cbe8e91d9bccea9d874', function (err, result) {
+		taken.allowance.call(web3.eth.accounts[0], '0xc5f120dcc4d1880a569ce6142f8b5e8b897331b2', function (err, result) {
 			console.log(result.c[0]);
 			if (result.c[0] < amount) {
 				console.log('not ok');
-				taken.approve('0x9b7fcff7f0579bf15e0b4cbe8e91d9bccea9d874', amount, function (err, result) {
+				taken.approve('0xc5f120dcc4d1880a569ce6142f8b5e8b897331b2', amount, function (err, result) {
 					exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
 				});
 			}
