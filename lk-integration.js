@@ -722,6 +722,7 @@ myEvent.watch(function (err, res) {
 	$("div").html(string);
 	for (let i = 0; i < arr.length; i++) {
 		console.log(arr);
+		if (arr[i] != '0x0000000000000000000000000000000000000000') {
 		let token = web3.eth.contract(tokenABI).at(arr[i]);
 		token.symbol.call(function(error, result){
 			let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
@@ -729,6 +730,8 @@ myEvent.watch(function (err, res) {
 			str += '</a>';
 			$('.' + arr[i]).html(str);
 		});
+		} $('.' + arr[i]).html("ETH");
+		else 
 		exchange.balances.call(arr[i], web3.eth.accounts[0], function(error, result){
 			let str = $('.' + arr[i]).html();
 			console.log(result);
