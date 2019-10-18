@@ -710,6 +710,7 @@ let tokenABI = [
 var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
 var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 var arr = [];
+var addresses = [];
 myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
@@ -733,9 +734,9 @@ myEvent.watch(function (err, res) {
 	});*/
 	arr.push(res.args.token);
 	console.log(arr);
-	var addresses = unique(arr);
+	addresses = unique(arr);
 	console.log(addresses);
-	for (let i=0; i< addresses.length; i++) {
+	/*for (let i=0; i< addresses.length; i++) {
 		exchange.balances.call(addresses[i], web3.eth.accounts[0], function (err, result) {
 			var string = $("div").html();
 			if (addresses[i] == '0x0000000000000000000000000000000000000000') {
@@ -753,7 +754,7 @@ myEvent.watch(function (err, res) {
 			}
 			$("div").html(string);
 		});
-	}
+	}*/
 	
 	/*exchange.orderHashList(res.args.orderHash, function(err, result) {
 		if (Date.now() < result[5].c[0]*1000) {
@@ -827,6 +828,8 @@ myEvent.watch(function (err, res) {
 	})*/
 });
 
+
+console.log(addresses);
 function unique(arr) {
   let result = [];
 
