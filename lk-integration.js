@@ -716,6 +716,7 @@ myEvent.watch(function (err, res) {
 	}
 	exchange.balances.call(res.args.token, web3.eth.accounts[0], function (err, result) {
 		var string = $("div").html();
+		console.log(result);
 		string += '<div>' + res.args.token + ' ' + result.c[0] + '</div>';
 		$("div").html(string);
 	});
