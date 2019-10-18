@@ -714,33 +714,11 @@ myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	var arr = []; 
-	if (res.args.value == res.args.internalBalance)
-		arr.push(res.args.token);
-	var string = $("div").html();
-	string += '<div class="' + res.args.token + '"></div>';
-	$("div").html(string);
-	console.log(arr);
-	for (let i = 0; i < arr.length; i++) {
-		console.log(arr);
-		if (arr[i] != '0x0000000000000000000000000000000000000000') {
-		let token = web3.eth.contract(tokenABI).at(arr[i]);
-		token.symbol.call(function(error, result){
-			let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
-			str += result;
-			str += '</a>';
-			$('.' + arr[i]).html(str);
-		});
-		} 
-		else $('.' + arr[i]).html('eth');	 
-		exchange.balances.call(arr[i], web3.eth.accounts[0], function(error, result){
-			let str = $('.' + arr[i]).html();
-			console.log(result);
-			str += '<span> ' + result;
-			str += '</span>';
-			$('.' + arr[i]).html(str);
-		});
-	}
+	exchange.balances.call(res.args.token, web3.eth.accounts[0], function (err, result) {
+		var string = $("div").html();
+		string += '<div>' + res.args.token + ' ' + result.c[0] + '</div>';
+		$("div").html(string);
+	});
 	
 	/*exchange.orderHashList(res.args.orderHash, function(err, result) {
 		if (Date.now() < result[5].c[0]*1000) {
