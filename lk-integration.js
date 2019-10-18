@@ -733,6 +733,26 @@ myEvent.watch(function (err, res) {
 	});*/
 	arr.push(res.args.token);
 	console.log(arr);
+	var addresses = unique(arr);
+	console.log(addresses);
+	for (let i=0; i< addresses.length; i++) {
+		exchange.balances.call(addresses[i], web3.eth.accounts[0], function (err, result) {
+			var string = $("div").html();
+			if (addresses[i] == '0x0000000000000000000000000000000000000000') {
+				string += '<div>' + ETH + ' ' + result + ' wei</div>';
+			else {
+				let token = web3.eth.contract(tokenABI).at(res.args.token);
+				token.symbol.call(function(error, result){
+					let str = '<a href="https://rinkeby.etherscan.io/address/' + res.args.token + '" target="_blank">';
+					str += result;
+					str += '</a>';
+					$('.' + arr[i]).html(str);
+				});
+				string += '<div>' + res.args.token + ' ' + result + '</div>';
+			}
+			$("div").html(string);
+		});
+	}
 	
 	/*exchange.orderHashList(res.args.orderHash, function(err, result) {
 		if (Date.now() < result[5].c[0]*1000) {
@@ -805,6 +825,18 @@ myEvent.watch(function (err, res) {
 		}
 	})*/
 });
+
+function unique(arr) {
+  let result = [];
+
+  for (let str of arr) {
+    if (!result.includes(str)) {
+      result.push(str);
+    }
+  }
+
+  return result;
+}
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
