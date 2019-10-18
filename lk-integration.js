@@ -707,7 +707,7 @@ let tokenABI = [
 	}
 ];
 
-var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
+/*var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
 var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 var arr = [];
 var addresses = [];
@@ -715,7 +715,7 @@ myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	/*exchange.balances.call(res.args.token, web3.eth.accounts[0], function (err, result) {
+	exchange.balances.call(res.args.token, web3.eth.accounts[0], function (err, result) {
 		var string = $("div").html();
 		console.log(result);
 		if (res.args.token == '0x0000000000000000000000000000000000000000') 
@@ -731,12 +731,12 @@ myEvent.watch(function (err, res) {
 			string += '<div>' + res.args.token + ' ' + result + '</div>';
 		}
 		$("div").html(string);
-	});*/
+	});
 	arr.push(res.args.token);
 	console.log(arr);
 	addresses = unique(arr);
 	console.log(addresses);
-	/*for (let i=0; i< addresses.length; i++) {
+	for (let i=0; i< addresses.length; i++) {
 		exchange.balances.call(addresses[i], web3.eth.accounts[0], function (err, result) {
 			var string = $("div").html();
 			if (addresses[i] == '0x0000000000000000000000000000000000000000') {
@@ -754,9 +754,9 @@ myEvent.watch(function (err, res) {
 			}
 			$("div").html(string);
 		});
-	}*/
+	}
 	
-	/*exchange.orderHashList(res.args.orderHash, function(err, result) {
+	exchange.orderHashList(res.args.orderHash, function(err, result) {
 		if (Date.now() < result[5].c[0]*1000) {
 			var string = $('tbody').html();
 			string += '<tr class="table-warning"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + convert(result[5].c[0]) + '</td><td>' + res.args.orderHash + '</td>';
@@ -825,11 +825,18 @@ myEvent.watch(function (err, res) {
 				});
 			}
 		}
-	})*/
+	})
 });
+*/
 
-
-console.log(addresses);
+var arr = [];
+var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
+var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]}, function (err, res) {
+	arr.push(res.args.tokenAddress);
+});
+console.log(arr);
+arr = unique(arr);
+console.log(arr);
 function unique(arr) {
   let result = [];
 
