@@ -730,8 +730,8 @@ myEvent.watch(function (err, res) {
 			str += '</a>';
 			$('.' + arr[i]).html(str);
 		});
-		} $('.' + arr[i]).html("ETH");
-		else 
+		} 
+		else $('.' + arr[i]).html("ETH");	 
 		exchange.balances.call(arr[i], web3.eth.accounts[0], function(error, result){
 			let str = $('.' + arr[i]).html();
 			console.log(result);
