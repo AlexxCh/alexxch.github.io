@@ -739,7 +739,7 @@ myEvent.watch(function (err, res) {
 		exchange.balances.call(addresses[i], web3.eth.accounts[0], function (err, result) {
 			var string = $("div").html();
 			if (addresses[i] == '0x0000000000000000000000000000000000000000') {
-				string += '<div>' + ETH + ' ' + result + ' wei</div>';
+				string += '<div>ETH ' + result + ' wei</div>';
 			}
 			else {
 				let token = web3.eth.contract(tokenABI).at(res.args.token);
