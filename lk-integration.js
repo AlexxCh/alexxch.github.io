@@ -731,7 +731,7 @@ myEvent.watch(function (err, res) {
 			$('.' + arr[i]).html(str);
 		});
 		} 
-		else $('.' + arr[i]).html("ETH");	 
+		else $('.' + arr[i]).html('eth');	 
 		exchange.balances.call(arr[i], web3.eth.accounts[0], function(error, result){
 			let str = $('.' + arr[i]).html();
 			console.log(result);
