@@ -708,7 +708,7 @@ let tokenABI = [
 ];
 
 var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
-var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest'});
+var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 var arr = [];
 myEvent.watch(function (err, res) {
 	if (err) {
@@ -720,6 +720,7 @@ myEvent.watch(function (err, res) {
 	var string = $("div").html();
 	string += '<div class="' + res.args.token + '"></div>';
 	$("div").html(string);
+	console.log(arr);
 	for (let i = 0; i < arr.length; i++) {
 		console.log(arr);
 		if (arr[i] != '0x0000000000000000000000000000000000000000') {
