@@ -711,7 +711,9 @@ var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d
 //var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 var addresses = [];
 var x = [];
-x.push(exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]}));
+
+let promise = new Promise(resolve, reject) => {
+	x.push(exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]}));
 for (let i = 0; i < x.length; i++) {
 x[i].watch(function (err, res) {
 	if (err) {
@@ -722,8 +724,13 @@ x[i].watch(function (err, res) {
     }
 })
 }
+	setTimeout(() => resolve("result"), 1000);
+}
 
-setTimeout (function() {}, 10000);
+promise.then(console.log(addresses, addresses.length));
+
+
+
 console.log(addresses, addresses.length);
 for (let i = 1; i < addresses.length; i++) {
 	let string = $('div').html();
