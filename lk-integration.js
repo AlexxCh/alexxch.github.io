@@ -719,34 +719,32 @@ x[i].watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	//var x = [];
-	//console.log('x: ' + res.args.token);
 	if (!addresses.includes(res.args.token)) {
       addresses.push(res.args.token);
     }
-	//addresses.push(res.args.token);
-	/*x = unique(x);
-	for (let i = 0; i < x.length; i++) {
-		exchange.balances(x[i], web3.eth.accounts[0], function (err, result) {
-			console.log('Balance of ' + x[i] + ' : ' + result);
-		});
-	}*/
 })
 }
-console.log(addresses);
 
-
-function unique(arr) {
-  let result = [];
-
-  for (let str of arr) {
-    if (!result.includes(str)) {
-      result.push(str);
-    }
-  }
-
-  return result;
+for (let i = 0; i < addresses.length; i++) {
+	let string = $("div").html();
+	string += '<span class=">' + addresses[i] + '">';
+	string += exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
+		return result;
+	});
+	string += '</span>';
+	$("div").html(string);
+	let token = web3.eth.contract(tokenABI).at(addresses[i]);
+	let symbol = token.symbol.call();
+	token.symbol.call(function(error, result){
+					let str = $('.' + addresses[i]).html();
+					str += '<a href="https://rinkeby.etherscan.io/address/' + addresses[i] + '" target="_blank">';
+					str += result;
+					str += '</a>';
+					$('.' + addresses[i]).html(str);
+				});
+	
 }
+
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
