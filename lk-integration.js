@@ -733,22 +733,12 @@ x[i].watch(function (err, res) {
 
 
 
-function getUniqTags(tags) {
-    var results = [];
-
-    tags.forEach(function (value) {
-        value = value.trim();
-
-        if (results.indexOf(value) === -1) {
-            results.push(value);
-        }
-    });
-
-    return results; 
-}
-
-console.log(getUniqTags(addresses));
-
+//var names = ["Mike","Matt","Nancy","Adam","Jenny","Nancy","Carl"];
+var uniqueNames = [];
+$.each(addresses, function(i, el){
+    if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+});
+console.log(uniqueNames);
 
 function unique(arr) {
   let result = [];
