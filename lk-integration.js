@@ -717,22 +717,20 @@ myEvent.watch(function (err, res) {
 		return error(err);
 	}
 	//var x = [];
-	x.push(res.args.token);
+	console.log('x: ' + res.args.token);
 	/*x = unique(x);
 	for (let i = 0; i < x.length; i++) {
 		exchange.balances(x[i], web3.eth.accounts[0], function (err, result) {
 			console.log('Balance of ' + x[i] + ' : ' + result);
 		});
 	}*/
-}).then (function() {
-	x = unique(x);
-	for (let i = 0; i < x.length; i++) {
-		exchange.balances(x[i], web3.eth.accounts[0], function (err, result) {
-			console.log('Balance of ' + x[i] + ' : ' + result);
-		});
+})
+console.log(myEvent.watch(function (err, res) {
+	if (err) {
+		return error(err);
 	}
-});
-
+	return(res.args.token);
+}))
 
 function unique(arr) {
   let result = [];
