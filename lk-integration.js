@@ -721,7 +721,7 @@ x[i].watch(function (err, res) {
 	}
 	//var x = [];
 	//console.log('x: ' + res.args.token);
-	if (!addresses.includes(str)) {
+	if (!addresses.includes(res.args.token)) {
       addresses.push(res.args.token);
     }
 	//addresses.push(res.args.token);
