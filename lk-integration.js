@@ -731,7 +731,9 @@ x[i].watch(function (err, res) {
 })
 }
 
-console.log(uniq_fast(addresses));
+
+
+console.log(Array.from(new Set(addresses)));
 
 function uniq_fast(a) {
     var seen = {};
