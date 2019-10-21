@@ -730,7 +730,7 @@ for (i = 0; ; i++) {
 	if (addresses[i] == null) break; 
 }
 addresses.length = i;
-console.log(arr, arr.length);
+console.log(addresses, addresses.length);
 
 function addr(addresses) {
 	console.log(addresses, addresses.length);
