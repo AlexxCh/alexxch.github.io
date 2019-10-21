@@ -723,7 +723,7 @@ x[i].watch(function (err, res) {
 })
 }
 console.log(addresses);
-for (let i = 0; i < addresses.length; i++) {
+for (let i = 1; i < addresses.length; i++) {
 	let string = $("div").html();
 	string += '<span class=">' + addresses[i] + '">';
 	string += exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
