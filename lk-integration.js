@@ -725,15 +725,18 @@ x[i].watch(function (err, res) {
 })
 addr(addresses);
 }
-var i;
-for (i = 0; ; i++) {
+
+
+
+console.log(addresses, addresses.length);
+
+function addr(addresses) {
+	var i;
+	for (i = 0; ; i++) {
 	console.log(addresses[i]);
 	if (addresses[i] == null) break; 
 }
 addresses.length = i;
-console.log(addresses, addresses.length);
-
-function addr(addresses) {
 	console.log(addresses, addresses.length);
 for (let i = 0; i < addresses.length; i++) {
 	let string = $('div').html();
