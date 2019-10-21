@@ -732,14 +732,21 @@ x[i].watch(function (err, res) {
 }
 
 
-
+var x = [55, 44, 55, 30, 30];
+var y = [];
+x.forEach(function(el, i) {
+  if (y.indexOf(el) === -1) {
+    y.push(el);
+  }
+})
+console.log(y);
 //var names = ["Mike","Matt","Nancy","Adam","Jenny","Nancy","Carl"];
-var uniqueNames = [];
-$.each(addresses, function(i, el){
-    if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-});
-console.log(addresses);
-
+addresses.forEach(function(el, i) {
+  if (arr.indexOf(el) === -1) {
+    arr.push(el);
+  }
+})
+console.log(arr);
 function unique(arr) {
   let result = [];
 
