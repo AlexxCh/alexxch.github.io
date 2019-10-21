@@ -727,6 +727,7 @@ addr(addresses);
 }
 var i;
 for (i = 0; ; i++) {
+	console.log(addresses[i]);
 	if (addresses[i] == null) break; 
 }
 addresses.length = i;
