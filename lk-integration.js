@@ -715,7 +715,7 @@ var x = myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	return res;
+	return res.args.value;
 });
 
 console.log(x);
