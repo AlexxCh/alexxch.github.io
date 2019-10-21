@@ -724,13 +724,13 @@ x[i].watch(function (err, res) {
 }
 console.log(addresses);
 for (let i = 1; i < addresses.length; i++) {
-	let string = $("div").html();
+	let string = $('div').html();
 	string += '<span class=">' + addresses[i] + '">';
 	string += exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
 		return result;
 	});
 	string += '</span>';
-	$("div").html(string);
+	$('div').html(string);
 	console.log(strung);
 	let token = web3.eth.contract(tokenABI).at(addresses[i]);
 	let symbol = token.symbol.call();
