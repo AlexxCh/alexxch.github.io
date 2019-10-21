@@ -727,7 +727,7 @@ x[i].watch(function (err, res) {
 	setTimeout(() => resolve("result"), 1000);
 }
 
-promise.then(console.log(addresses, addresses.length));
+promise.then(result => console.log(addresses, addresses.length));
 
 
 
