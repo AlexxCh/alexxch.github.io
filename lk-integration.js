@@ -711,14 +711,14 @@ var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d
 var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 var arr = [];
 var addresses = [];
-var x = myEvent.watch(function (err, res) {
+var x = [];
+x.push(myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	x.push(res.args.value);
-	return x;
-});
-
+	return(res.args.value)
+})
+);
 console.log(x);
 
 
