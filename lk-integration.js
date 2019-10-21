@@ -725,9 +725,11 @@ x[i].watch(function (err, res) {
 })
 addr(addresses);
 }
-for (let i = 0; ; i++) {
+var i;
+for (i = 0; ; i++) {
 	if (addresses[i] == null) break; 
 }
+addresses.length = i;
 console.log(arr, arr.length);
 
 function addr(addresses) {
