@@ -743,7 +743,7 @@ for (let i = 1; i < addresses.length; i++) {
 				});
 	
 }
-
+setTimeout(console.log(addresses.length), 2000);
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
