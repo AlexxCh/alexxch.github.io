@@ -712,8 +712,8 @@ var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d
 var addresses = [];
 var x = [];
 
-let promise = new Promise(resolve, reject) => {
-	x.push(exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]}));
+
+x.push(exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]}));
 for (let i = 0; i < x.length; i++) {
 x[i].watch(function (err, res) {
 	if (err) {
@@ -723,16 +723,13 @@ x[i].watch(function (err, res) {
       addresses.push(res.args.token);
     }
 })
+addr(addresses);
 }
-	setTimeout(() => resolve("result"), 1000);
-}
-
-promise.then(result => console.log(addresses, addresses.length));
-
 
 
 console.log(addresses, addresses.length);
-for (let i = 1; i < addresses.length; i++) {
+function addr(addresses) {
+for (let i = 0; i < addresses.length; i++) {
 	let string = $('div').html();
 	string += '<span class=">' + addresses[i] + '">';
 	string += exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
@@ -752,7 +749,7 @@ for (let i = 1; i < addresses.length; i++) {
 				});
 	
 }
-setTimeout(console.log(addresses.length), 2000);
+}
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
