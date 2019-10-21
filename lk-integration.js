@@ -722,7 +722,7 @@ x[i].watch(function (err, res) {
     }
 })
 }
-
+console.og(addresses);
 for (let i = 0; i < addresses.length; i++) {
 	let string = $("div").html();
 	string += '<span class=">' + addresses[i] + '">';
@@ -731,6 +731,7 @@ for (let i = 0; i < addresses.length; i++) {
 	});
 	string += '</span>';
 	$("div").html(string);
+	console.log(strung);
 	let token = web3.eth.contract(tokenABI).at(addresses[i]);
 	let symbol = token.symbol.call();
 	token.symbol.call(function(error, result){
