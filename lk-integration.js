@@ -719,7 +719,8 @@ myEvent.watch(function (err, res) {
 	x.push(res.args.token);
 	x = unique(x);
 	for (let i = 0; i < x.length; i++) {
-		exchange.balances(x[i], web3.eth.accounts[0], function (err, result) {
+		exchange.balances(x[i], web3.eth.accounts[0], function (x, err, result) {
+			x = unique(x);
 			console.log('Balance of ' + x[i] + ' : ' + result);
 		});
 	}
