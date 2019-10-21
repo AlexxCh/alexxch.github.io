@@ -721,7 +721,10 @@ x[i].watch(function (err, res) {
 	}
 	//var x = [];
 	//console.log('x: ' + res.args.token);
-	addresses.push(res.args.token);
+	if (!addresses.includes(str)) {
+      addresses.push(res.args.token);
+    }
+	//addresses.push(res.args.token);
 	/*x = unique(x);
 	for (let i = 0; i < x.length; i++) {
 		exchange.balances(x[i], web3.eth.accounts[0], function (err, result) {
@@ -730,28 +733,7 @@ x[i].watch(function (err, res) {
 	}*/
 })
 }
-
-
-
-console.log(Array.from(new Set(addresses)));
-
-function uniq_fast(a) {
-    var seen = {};
-    var out = [];
-    var len = a.length;
-    var j = 0;
-    for(var i = 0; i < len; i++) {
-         var item = a[i];
-         if(seen[item] !== 1) {
-               seen[item] = 1;
-               out[j++] = item;
-         }
-    }
-    return out;
-}
-
-addresses = uniq_fast(addresses);
-
+console.log(addresses);
 
 
 function unique(arr) {
