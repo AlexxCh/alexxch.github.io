@@ -709,19 +709,21 @@ let tokenABI = [
 
 var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
 var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
-console.log(myEvent);
 var arr = [];
 var addresses = [];
-var x = [];
-x.push(myEvent.watch(function (err, res) {
+myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	return(res.args.value)
-})
-);
-console.log(x);
-
+	var x = [];
+	x.push(res.args.token);
+	x = unique(x);
+	for (let i = 0; i < x.length; i++) {
+		exchange.balances(x[i], web3.eth.accounts[0], function (err, result) {
+			console.log('Balance of ' + x[i] + ' : ' + result);
+		});
+	}
+});
 
 
 function unique(arr) {
