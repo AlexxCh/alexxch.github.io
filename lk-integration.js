@@ -713,7 +713,9 @@ var arr = [];
 var addresses = [];
 var x = [];
 x.push(exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]}));
+console.log(x);
 x = unique(x);
+console.log(x);
 for (let i = 0; i < x.length; i++) {
 x[i].watch(function (err, res) {
 	if (err) {
