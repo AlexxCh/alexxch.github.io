@@ -727,8 +727,9 @@ addr(addresses);
 }
 
 
-console.log(addresses, addresses.length);
+
 function addr(addresses) {
+	console.log(addresses, addresses.length);
 for (let i = 0; i < addresses.length; i++) {
 	let string = $('div').html();
 	string += '<span class=">' + addresses[i] + '">';
