@@ -722,6 +722,8 @@ x[i].watch(function (err, res) {
     }
 })
 }
+
+setTimeout (function() {}, 2000);
 console.log(addresses, addresses.length);
 for (let i = 1; i < addresses.length; i++) {
 	let string = $('div').html();
