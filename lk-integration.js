@@ -731,6 +731,7 @@ x[i].watch(function (err, res) {
 })
 }
 
+console.log(uniq_fast(addresses));
 
 function uniq_fast(a) {
     var seen = {};
@@ -749,7 +750,7 @@ function uniq_fast(a) {
 
 addresses = uniq_fast(addresses);
 
-console.log(addresses);
+
 
 function unique(arr) {
   let result = [];
