@@ -722,7 +722,7 @@ x[i].watch(function (err, res) {
     }
 })
 }
-console.og(addresses);
+console.log(addresses);
 for (let i = 0; i < addresses.length; i++) {
 	let string = $("div").html();
 	string += '<span class=">' + addresses[i] + '">';
