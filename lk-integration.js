@@ -725,8 +725,8 @@ x[i].watch(function (err, res) {
 })
 addr(addresses);
 }
-
-
+var arr = addresses;
+console.log(arr, arr.length);
 
 function addr(addresses) {
 	console.log(addresses, addresses.length);
