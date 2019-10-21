@@ -738,7 +738,7 @@ var uniqueNames = [];
 $.each(addresses, function(i, el){
     if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
 });
-console.log(uniqueNames);
+console.log(addresses);
 
 function unique(arr) {
   let result = [];
