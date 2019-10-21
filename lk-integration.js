@@ -730,8 +730,8 @@ x[i].watch(function (err, res) {
 	}*/
 })
 }
-addresses = unique(addresses);
-console.log(addresses);
+arr = unique(addresses);
+console.log(arr);
 function unique(arr) {
   let result = [];
 
