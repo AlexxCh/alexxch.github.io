@@ -725,7 +725,9 @@ x[i].watch(function (err, res) {
 })
 addr(addresses);
 }
-var arr = addresses;
+for (let i = 0; ; i++) {
+	if (addresses[i] == null) break; 
+}
 console.log(arr, arr.length);
 
 function addr(addresses) {
