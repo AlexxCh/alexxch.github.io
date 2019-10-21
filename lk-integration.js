@@ -730,21 +730,26 @@ x[i].watch(function (err, res) {
 	}*/
 })
 }
-getUnique = function (arr) {
-    var i = 0,
-    current,
-    length = arr.length,
-    unique = [];
-    for (; i < length; i++) {
-      current = arr[i];
-      if (!~unique.indexOf(current)) {
-        unique.push(current);
-      }
-    }
-    return unique;
-  };
-  
-console.log(getUnique);
+
+
+
+function getUniqTags(tags) {
+    var results = [];
+
+    tags.forEach(function (value) {
+        value = value.trim();
+
+        if (results.indexOf(value) === -1) {
+            results.push(value);
+        }
+    });
+
+    return results; 
+}
+
+console.log(getUniqTags(addresses));
+
+
 function unique(arr) {
   let result = [];
 
