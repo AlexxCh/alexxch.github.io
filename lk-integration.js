@@ -724,13 +724,12 @@ myEvent.watch(function (err, res) {
 	  
     }
 })
-resolve = addresses;
+resolve(addresses);
 });
 
 let pr = new Promise(function(resolve, reject) {
-	promise.then(function() {x = result});
-	console.log(x);
-	resolve = x;
+	promise.then(function() { x = result});
+	resolve(x);
 });
 pr.then(console.log(result, result.length));
 
