@@ -712,7 +712,7 @@ var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d
 var addresses = [];
 var x = [];
 var l = 0;
-
+let promise = new Promise(function(resolve, reject) {
 x.push(exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]}));
 for (let i = 0; i < x.length; i++) {
 x[i].watch(function (err, res) {
@@ -725,10 +725,12 @@ x[i].watch(function (err, res) {
     }
 })
 
-
 }
-
+resolve("done")
+}
+promise.then(
 console.log(addresses, addresses.length, l);
+)
 
 function addr(addresses) {
 	var i;
