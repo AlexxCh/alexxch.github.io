@@ -726,8 +726,8 @@ myEvent.watch(function (err, res) {
     }
 })
 
-console.log(l);
-setTimeout(() => resolve(l), 1000);
+//setTimeout(() => resolve(l), 1000);
+resolve(l);
 });
 promise.then(function (result) {
 	myEvent.stopWatch();
