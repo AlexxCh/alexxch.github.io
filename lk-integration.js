@@ -724,7 +724,7 @@ myEvent.watch(function (err, res) {
 	  
     }
 })
-resolve(addresses);
+resolve = addresses;
 });
 
 let pr = new Promise(function(resolve, reject) {
