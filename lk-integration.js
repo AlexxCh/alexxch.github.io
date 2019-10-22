@@ -728,7 +728,7 @@ resolve = addresses;
 });
 
 let pr = new Promise(function(resolve, reject) {
-	x = promise.then(function() {return result});
+	promise.then(function() {x = result});
 	console.log(x);
 	resolve = x;
 });
