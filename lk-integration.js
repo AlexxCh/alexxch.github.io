@@ -729,8 +729,8 @@ x[i].watch(function (err, res) {
 
 
 do {
-		console.log(arr, arr.length);
-} while (arr.length == 0);
+		console.log(addresses, addresses.length);
+} while (addresses.length == 0);
 
 function addr(addresses) {
 	var i;
