@@ -741,8 +741,7 @@ function addr(addresses) {
 	console.log(addresses[i]);
 	if (addresses[i] == null) break; 
 }
-addresses.length = i;
-	console.log(addresses, addresses.length);
+
 for (let i = 0; i < addresses.length; i++) {
 	let string = $('div').html();
 	string += '<span class=">' + addresses[i] + '">';
@@ -752,6 +751,7 @@ for (let i = 0; i < addresses.length; i++) {
 	string += '</span>';
 	$('div').html(string);
 	console.log(string);
+	if (addresses[i] != '0x0000000000000000000000000000000000000000') {
 	let token = web3.eth.contract(tokenABI).at(addresses[i]);
 	let symbol = token.symbol.call();
 	token.symbol.call(function(error, result){
@@ -762,6 +762,10 @@ for (let i = 0; i < addresses.length; i++) {
 					$('.' + addresses[i]).html(str);
 				});
 	
+}
+	else {
+					$('.' + addresses[i]).html('ETH');
+	}
 }
 }
 
