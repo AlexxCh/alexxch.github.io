@@ -724,7 +724,7 @@ myEvent.watch(function (err, res) {
 	  
     }
 })
-console.log(l);
+console.log(addresses);
 });
 promise.then(
 result =>
