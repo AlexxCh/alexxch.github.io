@@ -729,8 +729,8 @@ x[i].watch(function (err, res) {
 resolve("done")
 });
 promise.then(
-console.log(addresses, addresses.length, l);
-)
+console.log(addresses, addresses.length, l));
+
 
 function addr(addresses) {
 	var i;
