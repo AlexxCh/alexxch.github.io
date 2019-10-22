@@ -714,7 +714,7 @@ console.log(myEvent);
 
 var x = [];
 var l = 0;
-/*let promise = new Promise(function(resolve, reject) {
+let promise = new Promise(function(resolve, reject) {
 
 myEvent.watch(function (err, res) {
 	if (err) {
@@ -728,9 +728,12 @@ myEvent.watch(function (err, res) {
 })
 
 console.log(l);
-resolve(l);
+setTimeout(() => resolve(l), 1000);
 });
-*/
+promise.then(function (result) {
+	myEvent.stopWatch();
+	console.log(result);
+});
 /*let pr = new Promise(function(resolve, reject) {
 	promise.then(
 		function (result) {
