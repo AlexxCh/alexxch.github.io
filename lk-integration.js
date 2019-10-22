@@ -724,10 +724,10 @@ x[i].watch(function (err, res) {
     }
 })
 
-setInterval(test(addresses), 100);
+
 }
 
-
+setInterval(test(addresses), 100);
 
 
 function test(arr) {
