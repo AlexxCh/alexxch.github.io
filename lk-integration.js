@@ -724,7 +724,7 @@ x[i].watch(function (err, res) {
     }
 })
 
-setTimeout(test(addresses), 10000);
+setInterval(test(addresses), 10000);
 }
 
 
