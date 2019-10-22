@@ -708,10 +708,10 @@ let tokenABI = [
 ];
 
 var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
-var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]})
-.on('token', function(add){
-                          console.log('token',add);
-                      });
+var myEvent = exchange.Created({},{ fromBlock: 0, toBlock: 'latest' }, function(error, event){ console.log(event); })
+                        .on('token', function(event){
+                              console.log(event);
+                        });
 var addresses = [];
 var x = [];
 var l = 0;
