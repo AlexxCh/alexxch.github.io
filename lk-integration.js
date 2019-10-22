@@ -731,7 +731,7 @@ let pr = new Promise(function(resolve, reject) {
 	promise.then(
 		function (result) {
 			x = result;
-			console.log(x);
+			//console.log(x);
 		}
 	);
 	console.log(x);
