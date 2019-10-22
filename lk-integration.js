@@ -728,7 +728,13 @@ resolve(addresses);
 });
 
 let pr = new Promise(function(resolve, reject) {
-	promise.then( x = result);
+	promise.then(
+		function (result) {
+			x = result;
+			console.log(x);
+		}
+	);
+	console.log(x);
 	resolve(x);
 });
 pr.then(console.log(result, result.length));
