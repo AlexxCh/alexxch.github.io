@@ -725,10 +725,14 @@ x[i].watch(function (err, res) {
 })
 
 }
-addr(addresses);
+test(addresses);
 
 
-console.log(addresses, addresses.length);
+
+function test(arr) {
+	for (let i; i < 5; i++)
+		console.log(arr[i]);
+}
 
 function addr(addresses) {
 	var i;
