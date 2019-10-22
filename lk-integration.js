@@ -731,11 +731,11 @@ let pr = new Promise(function(resolve, reject) {
 	promise.then(
 		function (result) {
 			x = result;
-			//console.log(x);
+			resolve(x);
 		}
 	);
 	console.log(x);
-	resolve(x);
+	
 });
 pr.then(result => console.log(result, result.length));
 
