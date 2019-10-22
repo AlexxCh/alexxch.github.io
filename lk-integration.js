@@ -728,7 +728,7 @@ resolve(addresses);
 });
 promise.then(
 result =>
-console.log(result));
+console.log(result, result.length));
 
 
 function addr(addresses) {
