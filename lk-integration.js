@@ -727,17 +727,7 @@ myEvent.watch(function (err, res) {
 resolve(addresses);
 });
 
-let pr = new Promise(function(resolve, reject) {
-	promise.then(
-		function (result) {
-			x = result;
-			//console.log(x);
-		}
-	);
-	console.log(x);
-	resolve(x);
-});
-pr.then(console.log(result, result.length));
+promise.then(console.log(result, result.length));
 
 function addr(addresses) {
 	var i;
