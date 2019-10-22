@@ -714,7 +714,7 @@ var x = [];
 var l = 0;
 let promise = new Promise(function(resolve, reject) {
 
-myEvent.watch(function (err, res) {
+myEvent.get(function (err, res) {
 	if (err) {
 		return error(err);
 	}
