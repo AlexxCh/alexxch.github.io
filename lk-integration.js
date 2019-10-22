@@ -723,9 +723,9 @@ x[i].watch(function (err, res) {
       addresses.push(res.args.token);
     }
 })
-
-}
 test(addresses);
+}
+
 
 
 
