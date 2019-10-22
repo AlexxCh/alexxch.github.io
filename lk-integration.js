@@ -729,6 +729,7 @@ x[i].watch(function (err, res) {
 }
 
 console.log(addresses, addresses.length);
+console.log(0);
 
 function addr(addresses) {
 	var i;
