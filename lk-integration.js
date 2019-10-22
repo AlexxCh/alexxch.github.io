@@ -731,7 +731,7 @@ setTimeout(() => resolve(addresses), 1000);
 });
 promise.then(function (result) {
 	myEvent.stopWatching();
-	console.log(result, result.length);
+	addr(result);
 });
 
 
