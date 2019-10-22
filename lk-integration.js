@@ -753,7 +753,6 @@ for (let i = 0; i < addresses.length; i++) {
 	console.log(string);
 	if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
 	let token = web3.eth.contract(tokenABI).at(addresses[i]);
-	let symbol = token.symbol.call();
 	token.symbol.call(function(error, result){
 					let str = $('.' + addresses[i]).html();
 					str += '<a href="https://rinkeby.etherscan.io/address/' + addresses[i] + '" target="_blank">';
