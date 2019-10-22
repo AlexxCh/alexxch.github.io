@@ -726,25 +726,14 @@ myEvent.watch(function (err, res) {
     }
 })
 
-setTimeout(() => resolve(l), 1000);
+setTimeout(() => resolve(addresses), 1000);
 //resolve(l);
 });
 promise.then(function (result) {
 	myEvent.stopWatching();
-	console.log(result);
+	console.log(result, result.length);
 });
-/*let pr = new Promise(function(resolve, reject) {
-	promise.then(
-		function (result) {
-			x = result;
-			//resolve(x);
-		}
-	);
-	console.log(x);
-	
-});*/
-//pr.then(result => console.log(result, result.length));
-promise.then(result => console.log(result));
+
 
 function addr(addresses) {
 	var i;
