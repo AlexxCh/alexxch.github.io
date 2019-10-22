@@ -707,12 +707,11 @@ let tokenABI = [
 	}
 ];
 
-var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
-var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]}, function(error, event){ console.log(event); })
-                        .on('token', function(event){
-                              console.log(event);
-                        });
 var addresses = [];
+var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
+var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]}, function(error, event){ addresses.push(event.args.token); })
+console.log(addresses);
+
 var x = [];
 var l = 0;
 /*let promise = new Promise(function(resolve, reject) {
