@@ -730,7 +730,7 @@ myEvent.watch(function (err, res) {
 resolve(l);
 });
 promise.then(function (result) {
-	myEvent.stopWatch();
+	myEvent.stopWatching();
 	console.log(result);
 });
 /*let pr = new Promise(function(resolve, reject) {
