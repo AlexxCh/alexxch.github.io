@@ -730,8 +730,7 @@ test(addresses);
 
 
 function test(arr) {
-	for (let i; i < 5; i++)
-		console.log(arr[i]);
+		console.log(arr);
 }
 
 function addr(addresses) {
