@@ -721,11 +721,10 @@ myEvent.watch(function (err, res) {
 	if (!addresses.includes(res.args.token)) {
       addresses.push(res.args.token);
 	  l++;
-	  console.log(l);
+	  
     }
-	resolve(l);
 })
-
+console.log(l);
 });
 promise.then(
 result =>
