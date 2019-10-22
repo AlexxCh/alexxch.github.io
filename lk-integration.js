@@ -727,12 +727,10 @@ x[i].watch(function (err, res) {
 
 }
 
-setInterval(test(addresses), 100);
 
-
-function test(arr) {
+do {
 		console.log(arr, arr.length);
-}
+} while (arr.length == 0);
 
 function addr(addresses) {
 	var i;
