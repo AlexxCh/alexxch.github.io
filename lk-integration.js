@@ -730,7 +730,7 @@ test(addresses);
 
 
 function test(arr) {
-		console.log(arr);
+		console.log(arr, arr.length);
 }
 
 function addr(addresses) {
