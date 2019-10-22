@@ -721,11 +721,14 @@ x[i].watch(function (err, res) {
 	}
 	if (!addresses.includes(res.args.token)) {
       addresses.push(res.args.token);
+	  addresses.length++;
     }
 })
 
 
 }
+
+console.log(addresses, addresses.length);
 
 function addr(addresses) {
 	var i;
