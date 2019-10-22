@@ -731,7 +731,7 @@ let pr = new Promise(function(resolve, reject) {
 	promise.then(
 	x = result);
 	resolve(x)
-}
+});
 pr.then(console.log(result, result.length));
 
 function addr(addresses) {
