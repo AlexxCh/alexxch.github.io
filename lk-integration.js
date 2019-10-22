@@ -729,6 +729,7 @@ resolve = addresses;
 
 let pr = new Promise(function(resolve, reject) {
 	x = promise.then(function() {return result});
+	console.log(x);
 	resolve = x;
 });
 pr.then(console.log(result, result.length));
