@@ -740,7 +740,7 @@ function addr(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
 		let string = $('.container').html();
 		string +='<div>';
-		exchange.balances(addresses[i], web3.eth.accounts[0], string += function (err, result) {
+		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
 			return result.c[0];
 		});
 		console.log(string);
