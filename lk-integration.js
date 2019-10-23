@@ -739,19 +739,23 @@ function addr(addresses) {
 		$('tbody').html(string);
 		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
 			$('.' + addresses[i] + '-value').html(result.c[0]);
+			var val = result.c[0];
+			exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
+				$('.' + addresses[i] + '-on-orders').html(result.c[0]);
+				console.log(val);
+				$('.' + addresses[i] + '-free').html(val - result.c[0]);
+			});
 		});
 		
-		exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
-			$('.' + addresses[i] + '-on-orders').html(result.c[0]);
-		});
-		let val = +($('.' + addresses[i] + '-value').html());
+		
+		/*let val = +($('.' + addresses[i] + '-value').html());
 		console.log(val);
 		let ord = +($('.' + addresses[i] + '-on-orders').html());
 		console.log(ord);
 		//let s = parseInt($('.' + addresses[i] + '-value').html(), 10) - parseInt($('.' + addresses[i] + '-on-orders').html(), 10);
 		console.log(val - ord);
 		let s = val - ord;
-		$('.' + addresses[i] + '-free').html(s);
+		$('.' + addresses[i] + '-free').html(s);*/
 			
 		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
