@@ -737,11 +737,17 @@ promise.then(function (result) {
 
 function addr(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
-		$('.container').html($('.container').html() + '<div>');
+		let string = $('.container').html();
+		string +='<div>';
+		$('.container').html(string);
 		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
-			$('.container').html($('.container').html() + result.c[0]);
+			let str = $('.container').html();
+			str += result.c[0];
+			$('.container').html(str);
 		});
-		$('.container').html($('.container').html() + ' <span class="' + addresses[i] + '"></span></div>');
+		string = $('.container').html();
+		string += ' <span class="' + addresses[i] + '"></span></div>';
+		$('.container').html(string);
 		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
 			token.symbol.call(function(error, result){
