@@ -744,9 +744,9 @@ function addr(addresses) {
 		exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
 			$('.' + addresses[i] + '-on-orders').html(result.c[0]);
 		});
-		let val = Number($('.' + addresses[i] + '-value').html());
+		let val = +($('.' + addresses[i] + '-value').html());
 		console.log(val);
-		let ord = Number($('.' + addresses[i] + '-on-orders').html());
+		let ord = +($('.' + addresses[i] + '-on-orders').html());
 		console.log(ord);
 		//let s = parseInt($('.' + addresses[i] + '-value').html(), 10) - parseInt($('.' + addresses[i] + '-on-orders').html(), 10);
 		console.log(val - ord);
