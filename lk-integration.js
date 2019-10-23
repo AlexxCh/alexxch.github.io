@@ -737,7 +737,7 @@ promise.then(function (result) {
 
 function addr(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
-		let string = $('.container').html();
+		var string = $('.container').html();
 		string +='<div>';
 		var pr = new Promise(function(resolve, reject) {
 			exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
