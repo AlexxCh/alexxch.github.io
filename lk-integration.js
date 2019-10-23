@@ -745,7 +745,7 @@ function addr(addresses) {
 			$('.' + addresses[i] + '-on-orders').html(result.c[0]);
 		});
 		
-		let s = $('.' + addresses[i] + '-value').html() - $('.' + addresses[i] + '-on-orders').html();
+		let s = parseInt($('.' + addresses[i] + '-value').html()) - parseInt($('.' + addresses[i] + '-on-orders').html());
 		$('.' + addresses[i] + '-free').html(s);
 			
 		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
