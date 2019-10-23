@@ -743,15 +743,18 @@ function addr(addresses) {
 }
 
 for (let i = 0; i < addresses.length; i++) {
-	let string = $('div').html();
-	string += '<span class=">' + addresses[i] + '">';
-	string += exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
+	//let string = $('div').html();
+	//string += '<span class=">' + addresses[i] + '">';
+	$('div').html($('div').html() + '<span class=">' + addresses[i] + '">');
+	exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
 		console.log(result.c[0]);
-		return result.c[0];
+		//return result.c[0];
+		$('div').html($('div').html() + result.c[0]);
 	});
-	string += '</span>';
-	$('div').html(string);
-	console.log(string);
+	//string += '</span>';
+	$('div').html($('div').html() + '</span>');
+	//$('div').html(string);
+	//console.log(string);
 	if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
 	let token = web3.eth.contract(tokenABI).at(addresses[i]);
 	token.symbol.call(function(error, result){
