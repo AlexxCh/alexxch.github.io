@@ -740,6 +740,14 @@ function addr(addresses) {
 		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
 			$('.' + addresses[i] + '-value').html(result.c[0]);
 		});
+		
+		exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
+			$('.' + addresses[i] + '-on-orders').html(result.c[0]);
+		});
+		
+		let s = $('.' + addresses[i] + '-value').html() - $('.' + addresses[i] + '-on-orders').html();
+		$('.' + addresses[i] + '-free').html(s);
+			
 		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
 			token.symbol.call(function(error, result){
