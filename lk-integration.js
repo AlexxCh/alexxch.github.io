@@ -738,8 +738,12 @@ promise.then(function (result) {
 function addr(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
 		var string = $('.container').html();
-		string +='<div>';
-		var pr = new Promise(function(resolve, reject) {
+		string +='<div><span class="' + addresses[i] + '-value"></span> <span class="' + addresses[i] + '-symbol"></span></div>';
+		$('.container').html(string);
+		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
+			$('.' + addresses[i] + '-value').html(result);
+		});
+		/*var pr = new Promise(function(resolve, reject) {
 			exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
 				setTimeout(() => resolve(result.c[0]), 1000);
 			})
@@ -750,20 +754,20 @@ function addr(addresses) {
 		console.log(string);
 		string += ' <span class="' + addresses[i] + '"></span></div>';
 		console.log(string);
-		$('.container').html(string);
-		/*if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
+		$('.container').html(string);*/
+		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
 			token.symbol.call(function(error, result){
 				let str = $('.' + addresses[i]).html();
 				str += '<a href="https://rinkeby.etherscan.io/address/' + addresses[i] + '" target="_blank">';
 				str += result;
 				str += '</a>';
-				$('.' + addresses[i]).html(str);
+				$('.' + addresses[i] + '-symbol').html(str);
 			});
 		}
 		else {
-			$('.' + addresses[i]).html('ETH');
-		}*/
+			$('.' + addresses[i] + '-symbol').html('ETH');
+		}
 	}
 }
 
