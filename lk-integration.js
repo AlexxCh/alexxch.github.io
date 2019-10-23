@@ -736,12 +736,16 @@ promise.then(function (result) {
 
 
 function addr(addresses) {
-	var val = [];
 	for (let i = 0; i < addresses.length; i++) {
 		let string = $('.container').html();
 		string +='<div>';
-		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
-			return result.c[0];
+		var pr = new Promise(function(resolve, reject) {
+			exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
+				resolve(result.c[0]);
+			})
+		});
+		pr.then(function (result) {
+			string += result;
 		});
 		console.log(string);
 		string += ' <span class="' + addresses[i] + '"></span></div>';
