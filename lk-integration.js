@@ -744,9 +744,13 @@ function addr(addresses) {
 		exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
 			$('.' + addresses[i] + '-on-orders').html(result.c[0]);
 		});
-		
-		let s = parseInt($('.' + addresses[i] + '-value').html(), 10) - parseInt($('.' + addresses[i] + '-on-orders').html(), 10);
-		console.log(parseInt($('.' + addresses[i] + '-value').html(), 10));
+		let val = parseInt($('.' + addresses[i] + '-value').html(), 10);
+		console.log(val);
+		let ord = parseInt($('.' + addresses[i] + '-on-orders').html(), 10);
+		console.log(ord);
+		//let s = parseInt($('.' + addresses[i] + '-value').html(), 10) - parseInt($('.' + addresses[i] + '-on-orders').html(), 10);
+		console.log(val - ord);
+		let s = val - ord;
 		$('.' + addresses[i] + '-free').html(s);
 			
 		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
