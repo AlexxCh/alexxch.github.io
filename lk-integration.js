@@ -741,7 +741,7 @@ function addr(addresses) {
 		string +='<div>';
 		var pr = new Promise(function(resolve, reject) {
 			exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
-				resolve(result.c[0]);
+				setTimeout(() => resolve(result.c[0]), 1000);
 			})
 		});
 		pr.then(function (result) {
