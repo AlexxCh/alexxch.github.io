@@ -734,9 +734,9 @@ promise.then(function (result) {
 
 function addr(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
-		var string = $('.container').html();
-		string +='<div><span class="' + addresses[i] + '-value"></span> <span class="' + addresses[i] + '-symbol"></span></div>';
-		$('.container').html(string);
+		var string = $('tbody').html();
+		string +='<tr><td class="' + addresses[i] + '-value"></td> <td class="' + addresses[i] + '-symbol"></td><td class="' + addresses[i] + '-on-orders"></td><td class="' + addresses[i] + '-free"></td></tr>';
+		$('tbody').html(string);
 		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
 			$('.' + addresses[i] + '-value').html(result.c[0]);
 		});
