@@ -714,21 +714,18 @@ var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: we
 var x = [];
 var l = 0;
 let promise = new Promise(function(resolve, reject) {
-
-myEvent.watch(function (err, res) {
-	if (err) {
-		return error(err);
-	}
-	if (!addresses.includes(res.args.token)) {
-      addresses.push(res.args.token);
-	  l++;
-	  
-    }
-})
-
-setTimeout(() => resolve(addresses), 1000);
-//resolve(l);
+	myEvent.watch(function (err, res) {
+		if (err) {
+			return error(err);
+		}
+		if (!addresses.includes(res.args.token)) {
+		  addresses.push(res.args.token);
+		  l++;  
+		}
+	})
+	setTimeout(() => resolve(addresses), 1000);
 });
+
 promise.then(function (result) {
 	myEvent.stopWatching();
 	addr(result);
@@ -743,18 +740,6 @@ function addr(addresses) {
 		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
 			$('.' + addresses[i] + '-value').html(result.c[0]);
 		});
-		/*var pr = new Promise(function(resolve, reject) {
-			exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
-				setTimeout(() => resolve(result.c[0]), 1000);
-			})
-		});
-		pr.then(function (result) {
-			string += result;
-		});
-		console.log(string);
-		string += ' <span class="' + addresses[i] + '"></span></div>';
-		console.log(string);
-		$('.container').html(string);*/
 		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
 			token.symbol.call(function(error, result){
@@ -766,7 +751,7 @@ function addr(addresses) {
 			});
 		}
 		else {
-			$('.' + addresses[i] + '-symbol').html('ETH');
+			$('.' + addresses[i] + '-symbol').html('Wei');
 		}
 	}
 }
