@@ -741,7 +741,7 @@ function addr(addresses) {
 		string +='<div><span class="' + addresses[i] + '-value"></span> <span class="' + addresses[i] + '-symbol"></span></div>';
 		$('.container').html(string);
 		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
-			$('.' + addresses[i] + '-value').html(result);
+			$('.' + addresses[i] + '-value').html(result.c[0]);
 		});
 		/*var pr = new Promise(function(resolve, reject) {
 			exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
@@ -758,7 +758,7 @@ function addr(addresses) {
 		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
 			token.symbol.call(function(error, result){
-				let str = $('.' + addresses[i]).html();
+				let str = $('.' + addresses[i] + '-symbol').html();
 				str += '<a href="https://rinkeby.etherscan.io/address/' + addresses[i] + '" target="_blank">';
 				str += result;
 				str += '</a>';
