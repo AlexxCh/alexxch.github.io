@@ -736,41 +736,27 @@ promise.then(function (result) {
 
 
 function addr(addresses) {
-	var i;
-	for (i = 0; ; i++) {
-	console.log(addresses[i]);
-	if (addresses[i] == null) break; 
-}
-
-for (let i = 0; i < addresses.length; i++) {
-	//let string = $('div').html();
-	//string += '<span class=">' + addresses[i] + '">';
-	$('div').html($('div').html() + '<span class=">' + addresses[i] + '">');
-	exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
-		console.log(result.c[0]);
-		//return result.c[0];
-		$('div').html($('div').html() + result.c[0]);
-	});
-	//string += '</span>';
-	$('div').html($('div').html() + '</span>');
-	//$('div').html(string);
-	//console.log(string);
-	if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
-	let token = web3.eth.contract(tokenABI).at(addresses[i]);
-	token.symbol.call(function(error, result){
-		console.log(result);
-					let str = $('.' + addresses[i]).html();
-					str += '<a href="https://rinkeby.etherscan.io/address/' + addresses[i] + '" target="_blank">';
-					str += result;
-					str += '</a>';
-					$('.' + addresses[i]).html(str);
-				});
-	
-}
-	else {
-					$('.' + addresses[i]).html('ETH');
+	for (let i = 0; i < addresses.length; i++) {
+		$('.container').html($('.container').html() + '<div>');
+		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
+			$('.container').html($('.container').html() + result.c[0]);
+		});
+		$('.container').html($('.container').html() + ' <span class="' + addresses[i] + '"></span></div>');
+		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
+			let token = web3.eth.contract(tokenABI).at(addresses[i]);
+			token.symbol.call(function(error, result){
+				console.log(result);
+				let str = $('.' + addresses[i]).html();
+				str += '<a href="https://rinkeby.etherscan.io/address/' + addresses[i] + '" target="_blank">';
+				str += result;
+				str += '</a>';
+				$('.' + addresses[i]).html(str);
+			});
+		}
+		else {
+			$('.' + addresses[i]).html('ETH');
+		}
 	}
-}
 }
 
 function trade(hash) {
