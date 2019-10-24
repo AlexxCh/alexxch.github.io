@@ -740,8 +740,6 @@ myEvent.watch(function (err, res) {
 			string += '<tr class="table-danger"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Отменен</td><td>' + res.args.orderHash + '</td>';
 			string += '<td></td></tr>';
 			$('tbody').html(string);
-			arr.push(result[1]);
-			arr.push(result[3]);
 		}
 		else  {
 			exchange.orderFilled(res.args.orderHash, function (err, r) {
@@ -759,8 +757,6 @@ myEvent.watch(function (err, res) {
 					string += '<tr class="table-warning"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + res.args.orderHash + '</td>';
 					string += '<td><input id="' + res.args.orderHash + '" placeholder="Кол-во"></td><td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
 					$('tbody').html(string);
-					arr.push(result[1]);
-					arr.push(result[3]);
 				}
 			});
 			
