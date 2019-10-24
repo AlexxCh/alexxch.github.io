@@ -764,7 +764,7 @@ promise.then(function (result) {
 					}
 					if (!addresses.includes(r[1]))
 						addresses.push(r[1])
-				}
+				})
 			})
 			setTimeout(() => resolve(addresses), 1000);
 		});
