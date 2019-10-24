@@ -714,7 +714,8 @@ let tokenABI = [
 
 var addresses = []; var s = 0;
 var exchange = web3.eth.contract(abi).at('0x92bf00f1a8602e34279532a495efecf578528e94');
-var depositEvent = exchange.Deposit({sender:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
+//var depositEvent = exchange.Deposit({sender:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
+var depositEvent = exchange.Deposit({},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 
 let promise = new Promise(function(resolve, reject) {
 	depositEvent.watch(function (err, res) {
@@ -728,7 +729,12 @@ let promise = new Promise(function(resolve, reject) {
 	setTimeout(() => resolve(addresses), 1000);
 });
 
-promise.then(function (result) {
+promise.then(function(result) {
+	depositEvent.stopWatching();
+	addr(result);
+});
+
+/*promise.then(function (result) {
 	var orderEvent = exchange.OrderCreated({maker:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 	depositEvent.stopWatching();
 	let pr = new Promise(function(resolve, reject) {
@@ -773,7 +779,7 @@ promise.then(function (result) {
 		});
 		
 	})
-});
+});*/
 
 
 function addr(addresses) {
@@ -782,12 +788,14 @@ function addr(addresses) {
 		string +='<tr><td class="' + addresses[i] + '-value"></td> <td class="' + addresses[i] + '-symbol"></td><td class="' + addresses[i] + '-on-orders"></td><td class="' + addresses[i] + '-free"></td></tr>';
 		$('tbody').html(string);
 		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
-			$('.' + addresses[i] + '-value').html(result.c[0]);
-			var val = result.c[0];
-			exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
-				$('.' + addresses[i] + '-on-orders').html(result.c[0]);
-				$('.' + addresses[i] + '-free').html(val - result.c[0]);
-			});
+			if (result.c[0] != 0) {
+				$('.' + addresses[i] + '-value').html(result.c[0]);
+				var val = result.c[0];
+				exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
+					$('.' + addresses[i] + '-on-orders').html(result.c[0]);
+					$('.' + addresses[i] + '-free').html(val - result.c[0]);
+				});
+			}
 		});
 			
 		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
