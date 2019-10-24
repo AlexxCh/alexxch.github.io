@@ -721,7 +721,7 @@ let promise = new Promise(function(resolve, reject) {
 		  l++;  
 		}
 	})
-	setTimeout(() => resolve(addresses), 1000);
+	setTimeout(() => resolve(addresses), 2000);
 });
 
 promise.then(function (result) {
