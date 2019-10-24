@@ -784,7 +784,7 @@ myEvent.watch(function (err, res) {
 			}*/
 		}
 		for (let i = 0; i < arr.length; i++) {
-			if (arr[i] != '0x0000000000000000000000000000000000000000') {
+			if (arr[i] == '0x0000000000000000000000000000000000000000') {
 				$('.' + arr[i]).html('<a>Wei</a>');
 			}
 			else {
