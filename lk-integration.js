@@ -751,7 +751,27 @@ promise.then(function (result) {
 	
 	pr.then(function (result) {
 		orderEvent.stopWatching();
-		addr(result);
+		var tradeEv = exchange.OrderFilled({by:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
+		orderEvent.stopWatching();
+		let prom = new Promise(function(resolve, reject) {
+			tradeEv.watch(function (err, res) {
+				if (err) {
+					return error(err);
+				}
+				exchange.orderHashList(res.args.orderHash, function (err, r) {
+					if (err) {
+						return error(err);
+					}
+					if (!addresses.includes(r[1]))
+						addresses.push(r[1])
+				}
+			})
+			setTimeout(() => resolve(addresses), 1000);
+		});
+		prom.then(function(result) {
+			addr(result);
+		});
+		
 	})
 });
 
