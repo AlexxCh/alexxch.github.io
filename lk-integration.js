@@ -1086,7 +1086,7 @@ let promise = new Promise(function(resolve, reject) {
 		  addresses.push(res.args.token); 
 		}
 	})
-	setTimeout(() => resolve(addresses), 1000);
+	setTimeout(() => resolve(addresses), 2000);
 });
 
 promise.then(function(result) {
