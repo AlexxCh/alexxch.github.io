@@ -749,7 +749,7 @@ myEvent.watch(function (err, res) {
 				});
 			}
 		}
-		else if (result[5].c[0] == 1) {
+		else if (result[4].c[0] == 0) {
 			var string = $('tbody').html();
 			string += '<tr class="table-success"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Исполнено</td><td>' + res.args.orderHash + '</td>';
 			string += '<td></td></tr>';
