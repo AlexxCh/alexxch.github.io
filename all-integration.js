@@ -715,7 +715,15 @@ myEvent.watch(function (err, res) {
 		return error(err);
 	}
 	exchange.orderHashList(res.args.orderHash, function(err, result) {
-		if (Date.now() < result[5].c[0]*1000) {
+		if (result[4].c[0] == 0) {
+			var string = $('tbody').html();
+			string += '<tr class="table-success"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Исполнено</td><td>' + res.args.orderHash + '</td>';
+			string += '<td></td></tr>';
+			$('tbody').html(string);
+			arr.push(result[1]);
+			arr.push(result[3]);
+		}
+		else if (Date.now() < result[5].c[0]*1000) {
 			var string = $('tbody').html();
 			string += '<tr class="table-warning"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + convert(result[5].c[0]) + '</td><td>' + res.args.orderHash + '</td>';
 			string += '<td><input id="' + res.args.orderHash + '" placeholder="Кол-во"></td><td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
@@ -726,14 +734,6 @@ myEvent.watch(function (err, res) {
 		else if (result[5].c[0] == 0) {
 			var string = $('tbody').html();
 			string += '<tr class="table-info"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Отменен</td><td>' + res.args.orderHash + '</td>';
-			string += '<td></td></tr>';
-			$('tbody').html(string);
-			arr.push(result[1]);
-			arr.push(result[3]);
-		}
-		else if (result[4].c[0] == 0) {
-			var string = $('tbody').html();
-			string += '<tr class="table-success"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Исполнено</td><td>' + res.args.orderHash + '</td>';
 			string += '<td></td></tr>';
 			$('tbody').html(string);
 			arr.push(result[1]);
