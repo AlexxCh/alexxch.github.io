@@ -714,10 +714,10 @@ let tokenABI = [
 
 var addresses = []; var s = 0;
 var exchange = web3.eth.contract(abi).at('0x92bf00f1a8602e34279532a495efecf578528e94');
-var myEvent = exchange.Deposit({sender:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
+var depositEvent = exchange.Deposit({sender:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 
 let promise = new Promise(function(resolve, reject) {
-	myEvent.watch(function (err, res) {
+	depositEvent.watch(function (err, res) {
 		if (err) {
 			return error(err);
 		}
@@ -729,8 +729,30 @@ let promise = new Promise(function(resolve, reject) {
 });
 
 promise.then(function (result) {
-	myEvent.stopWatching();
-	addr(result);
+	var orderEvent = exchange.OrderCreated({maker:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
+	depositEvent.stopWatching();
+	let pr = new Promise(function(resolve, reject) {
+		orderEvent.watch(function (err, res) {
+			if (err) {
+				return error(err);
+			}
+			if (!addresses.includes(res.args.takenTokenAddress)) {
+				var tradeEvent = exchange.OrderFilled({orderHash:  res.args.orderHash},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
+				tradeEvent.watch(function (err, r) {
+					if (err) {
+						return error(err);
+					}
+					addresses.push(res.args.takenTokenAddress);
+				})
+			}
+		})
+		setTimeout(() => resolve(addresses), 1000);
+	});
+	
+	pr.then(function (result) {
+		orderEvent.stopWatching();
+		addr(result);
+	})
 });
 
 
