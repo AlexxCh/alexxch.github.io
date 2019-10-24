@@ -725,7 +725,7 @@ let promise = new Promise(function(resolve, reject) {
 		  addresses.push(res.args.token); 
 		}
 	})
-	setTimeout(() => resolve(addresses), 500);
+	setTimeout(() => resolve(addresses), 1000);
 });
 
 promise.then(function (result) {
@@ -746,7 +746,7 @@ promise.then(function (result) {
 				})
 			}
 		})
-		setTimeout(() => resolve(addresses), 500);
+		setTimeout(() => resolve(addresses), 1000);
 	});
 	
 	pr.then(function (result) {
@@ -766,7 +766,7 @@ promise.then(function (result) {
 						addresses.push(r[1])
 				})
 			})
-			setTimeout(() => resolve(addresses), 500);
+			setTimeout(() => resolve(addresses), 1000);
 		});
 		prom.then(function(result) {
 			addr(result);
