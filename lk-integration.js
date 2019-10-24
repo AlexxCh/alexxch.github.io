@@ -1097,15 +1097,15 @@ promise.then(function(result) {
 function addr(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
 		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
-			if (result.c[0] != 0) {
+			if (Number(result) != 0) {
 				var string = $('tbody').html();
 				string +='<tr><td class="' + addresses[i] + '-value"></td> <td class="' + addresses[i] + '-symbol"></td><td class="' + addresses[i] + '-on-orders"></td><td class="' + addresses[i] + '-free"></td></tr>';
 				$('tbody').html(string);
-				$('.' + addresses[i] + '-value').html(result.c[0]);
-				var val = result.c[0];
+				$('.' + addresses[i] + '-value').html(Number(result));
+				var val = Number(result);
 				exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
-					$('.' + addresses[i] + '-on-orders').html(result.c[0]);
-					$('.' + addresses[i] + '-free').html(val - result.c[0]);
+					$('.' + addresses[i] + '-on-orders').html(Number(result));
+					$('.' + addresses[i] + '-free').html(val - Number(result));
 				});
 			}
 		});
