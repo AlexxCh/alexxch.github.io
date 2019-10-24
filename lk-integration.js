@@ -709,7 +709,7 @@ let tokenABI = [
 
 var addresses = []; var s = 0;
 var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
-var myEvent = exchange.Deposit({sender: web3.eth.accounts[0]},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
+var myEvent = exchange.Deposit({},{ {filter: {sender: web3.eth.accounts[0]}}, fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 
 let promise = new Promise(function(resolve, reject) {
 	myEvent.watch(function (err, res) {
