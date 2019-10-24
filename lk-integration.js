@@ -713,7 +713,7 @@ let tokenABI = [
 ];
 
 var addresses = []; var s = 0;
-var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
+var exchange = web3.eth.contract(abi).at('0x92bf00f1a8602e34279532a495efecf578528e94');
 var myEvent = exchange.Deposit({},{sender:  ''+web3.eth.accounts[0], fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 
 let promise = new Promise(function(resolve, reject) {
