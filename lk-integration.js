@@ -1110,6 +1110,14 @@ function addr(addresses) {
 			}
 		});
 			
+		
+	}
+	
+	symbs(addresses);
+}
+
+function symbs(addresses) {
+	for (let i = 0; i < addresses.length; i++) {
 		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
 			token.symbol.call(function(error, result){
