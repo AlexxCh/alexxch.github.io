@@ -717,11 +717,10 @@ let promise = new Promise(function(resolve, reject) {
 			return error(err);
 		}
 		if (!addresses.includes(res.args.token)) {
-		  addresses.push(res.args.token);
-		  l++;  
+		  addresses.push(res.args.token); 
 		}
 	})
-	setTimeout(() => resolve(addresses), 2000);
+	setTimeout(() => resolve(addresses), 1000);
 });
 
 promise.then(function (result) {
