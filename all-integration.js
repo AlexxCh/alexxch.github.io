@@ -728,6 +728,8 @@ myEvent.watch(function (err, res) {
 			arr.push(result[1]);
 			arr.push(result[3]);
 		}*/
+		arr.push(result[1]);
+		arr.push(result[3]);
 		if (result[2].c[0] == 0) {
 			var string = $('tbody').html();
 			string += '<tr class="table-danger"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Отменен</td><td>' + res.args.orderHash + '</td>';
