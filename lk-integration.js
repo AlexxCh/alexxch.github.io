@@ -728,10 +728,10 @@ let promise = new Promise(function(resolve, reject) {
 	setTimeout(() => resolve(addresses), 500);
 });
 
-promise.then(function (result) {
+
 	var orderEvent = exchange.OrderCreated({maker:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
-	depositEvent.stopWatching();
-	let pr = new Promise(function(resolve, reject) {
+
+let pr = new Promise(function(resolve, reject) {
 		orderEvent.watch(function (err, res) {
 			if (err) {
 				return error(err);
@@ -749,9 +749,7 @@ promise.then(function (result) {
 		setTimeout(() => resolve(addresses), 500);
 	});
 	
-	pr.then(function (result) {
-		orderEvent.stopWatching();
-		var tradeEv = exchange.OrderFilled({by:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
+	var tradeEv = exchange.OrderFilled({by:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 		orderEvent.stopWatching();
 		let prom = new Promise(function(resolve, reject) {
 			tradeEv.watch(function (err, res) {
@@ -768,11 +766,20 @@ promise.then(function (result) {
 			})
 			setTimeout(() => resolve(addresses), 500);
 		});
-		prom.then(function(result) {
-			addr(result);
-		});
+
+promise.then(function (result) {
+		depositEvent.stopWatching();
+		addr(result);
+});
+	
+	pr.then(function (result) {
+		orderEvent.stopWatching();
+		addr(result);
+	});
 		
-	})
+		prom.then(function(result) {
+			tradeEv.stopWatching();
+			addr(result);
 });
 
 
