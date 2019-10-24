@@ -711,8 +711,6 @@ var addresses = []; var s = 0;
 var exchange = web3.eth.contract(abi).at('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a');
 var myEvent = exchange.Deposit({},{ fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 
-var x = [];
-var l = 0;
 let promise = new Promise(function(resolve, reject) {
 	myEvent.watch(function (err, res) {
 		if (err) {
@@ -742,7 +740,6 @@ function addr(addresses) {
 			var val = result.c[0];
 			exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
 				$('.' + addresses[i] + '-on-orders').html(result.c[0]);
-				console.log(val);
 				$('.' + addresses[i] + '-free').html(val - result.c[0]);
 			});
 		});
