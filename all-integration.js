@@ -718,7 +718,7 @@ myEvent.watch(function (err, res) {
 		if (Date.now() < result[5].c[0]*1000) {
 			var string = $('tbody').html();
 			string += '<tr class="table-warning"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + convert(result[5].c[0]) + '</td><td>' + res.args.orderHash + '</td>';
-			string += '<td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
+			string += '<td><input id="' + res.args.orderHash + '></td><td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
 			$('tbody').html(string);
 			arr.push(result[1]);
 			arr.push(result[3]);
@@ -803,8 +803,9 @@ myEvent.watch(function (err, res) {
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
 		var add = result[3];
-		var amount = result[4];
-		let taken = web3.eth.contract(tokenABI).at(add);
+		var amount = $('#' + hash).val();
+		console.log(amount);
+		/*let taken = web3.eth.contract(tokenABI).at(add);
 		taken.allowance.call(web3.eth.accounts[0], '0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a', function (err, result) {
 			console.log(result.c[0]);
 			if (result.c[0] < amount) {
@@ -817,7 +818,8 @@ function trade(hash) {
 				console.log('ok');
 				exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
 			}
-		}); 
+		}); */
+		exchange.trade(hash, amount, {from: web3.eth.accounts[0]}, function(err, result) {});
 	});
 }
 
