@@ -722,15 +722,6 @@ myEvent.watch(function (err, res) {
 			$('tbody').html(string);
 			arr.push(result[1]);
 			arr.push(result[3]);
-			/*for (let i = 0; i < arr.length; i++) {
-				let token = web3.eth.contract(tokenABI).at(arr[i]);
-				token.symbol.call(function(error, result){
-					let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
-					str += result;
-					str += '</a>';
-					$('.' + arr[i]).html(str);
-				});
-			}*/
 		}
 		else if (result[5].c[0] == 0) {
 			var string = $('tbody').html();
@@ -739,15 +730,6 @@ myEvent.watch(function (err, res) {
 			$('tbody').html(string);
 			arr.push(result[1]);
 			arr.push(result[3]);
-			/*for (let i = 0; i < arr.length; i++) {
-				let token = web3.eth.contract(tokenABI).at(arr[i]);
-				token.symbol.call(function(error, result){
-					let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
-					str += result;
-					str += '</a>';
-					$('.' + arr[i]).html(str);
-				});
-			}*/
 		}
 		else if (result[4].c[0] == 0) {
 			var string = $('tbody').html();
@@ -756,15 +738,6 @@ myEvent.watch(function (err, res) {
 			$('tbody').html(string);
 			arr.push(result[1]);
 			arr.push(result[3]);
-			/*for (let i = 0; i < arr.length; i++) {
-				let token = web3.eth.contract(tokenABI).at(arr[i]);
-				token.symbol.call(function(error, result){
-					let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
-					str += result;
-					str += '</a>';
-					$('.' + arr[i]).html(str);
-				});
-			}*/
 		}
 		else {
 			var string = $('tbody').html();
@@ -773,15 +746,6 @@ myEvent.watch(function (err, res) {
 			$('tbody').html(string);
 			arr.push(result[1]);
 			arr.push(result[3]);
-			/*for (let i = 0; i < arr.length; i++) {
-				let token = web3.eth.contract(tokenABI).at(arr[i]);
-				token.symbol.call(function(error, result){
-					let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
-					str += result;
-					str += '</a>';
-					$('.' + arr[i]).html(str);
-				});
-			}*/
 		}
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i] == '0x0000000000000000000000000000000000000000') {
