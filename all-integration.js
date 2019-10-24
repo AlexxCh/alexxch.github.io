@@ -737,7 +737,7 @@ myEvent.watch(function (err, res) {
 		
 		if (result[2].c[0] == 0) {
 			var string = $('tbody').html();
-			string += '<tr class="table-danger"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Отменен</td><td>' + res.args.orderHash + '</td>';
+			string += '<tr class="table-danger"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + res.args.orderHash + '</td><td>Отменен</td>';
 			string += '<td></td></tr>';
 			$('tbody').html(string);
 		}
@@ -745,7 +745,7 @@ myEvent.watch(function (err, res) {
 			exchange.orderFilled(res.args.orderHash, function (err, r) {
 				if (r.c[0] == result[2].c[0]) {
 					var string = $('tbody').html();
-					string += '<tr class="table-success"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Исполнено</td><td>' + res.args.orderHash + '</td>';
+					string += '<tr class="table-success"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + res.args.orderHash + '</td><td>Исполнено</td>';
 					string += '<td></td></tr>';
 					$('tbody').html(string);
 					arr.push(result[1]);
@@ -754,13 +754,13 @@ myEvent.watch(function (err, res) {
 				else if (r.c[0] > 0){
 					var string = $('tbody').html();
 					string += '<tr class="table-warning"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + res.args.orderHash + '</td>';
-					string += '<td><input id="' + res.args.orderHash + '" placeholder="Кол-во"></td><td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
+					string += '<td>' + r.c[0] + '/' + result[2].c[0] + '</td><td><input id="' + res.args.orderHash + '" placeholder="Кол-во"></td><td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
 					$('tbody').html(string);
 				}
 				else {
 					var string = $('tbody').html();
 					string += '<tr class="table-info"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + res.args.orderHash + '</td>';
-					string += '<td><input id="' + res.args.orderHash + '" placeholder="Кол-во"></td><td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
+					string += '<td>0/' + result[2].c[0] + '</td><td><input id="' + res.args.orderHash + '" placeholder="Кол-во"></td><td><button onclick="trade(\'' + res.args.orderHash + '\')">Торговать!</button></td></tr>';
 					$('tbody').html(string);
 				}
 			});
