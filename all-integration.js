@@ -1137,7 +1137,7 @@ myEvent.watch(function (err, res) {
 					$('.' + arr[i]).html(str);
 				});
 				$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
-			}
+			
 		}
 	})
 	
