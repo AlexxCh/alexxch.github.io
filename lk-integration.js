@@ -1131,7 +1131,7 @@ function symbs(addresses) {
 	}
 	resolve();
 	})
-	pr.thne(function() {
+	pr.then(function() {
 		
 	$('.0x0000000000000000000000000000000000000000-symbol').html('Wei');
 	});
