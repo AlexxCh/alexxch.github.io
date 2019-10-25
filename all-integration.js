@@ -1126,11 +1126,8 @@ myEvent.watch(function (err, res) {
 			});
 			
 		}
-		
 	})
-});
-
-for (let i = 0; i < arr.length; i++) {
+	for (let i = 0; i < arr.length; i++) {
 			if (arr[i] == '0x0000000000000000000000000000000000000000') {
 				$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
 			}
@@ -1144,6 +1141,7 @@ for (let i = 0; i < arr.length; i++) {
 				});
 			}
 		}
+});
 
 function trade(hash) {
 	exchange.orderHashList.call(hash, function (err, result) {
