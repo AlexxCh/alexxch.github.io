@@ -1079,7 +1079,6 @@ myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	let promise = new Promise (function (resolve,reject) {
 	exchange.orderHashList(res.args.orderHash, function(err, result) {
 		/*if (result[4].c[0] == 0) {
 			var string = $('tbody').html();
@@ -1128,9 +1127,6 @@ myEvent.watch(function (err, res) {
 			
 		}
 	})
-	resolve(arr);
-	})
-	promise.then(function(arr) {
 	for (let i = 0; i < arr.length; i++) {
 		console.log(arr[i]);
 			if (arr[i] == '0x0000000000000000000000000000000000000000') {
@@ -1146,7 +1142,6 @@ myEvent.watch(function (err, res) {
 				});
 			}
 		}
-	}); 
 });
 
 function trade(hash) {
