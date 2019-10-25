@@ -1080,14 +1080,6 @@ myEvent.watch(function (err, res) {
 		return error(err);
 	}
 	exchange.orderHashList(res.args.orderHash, function(err, result) {
-		/*if (result[4].c[0] == 0) {
-			var string = $('tbody').html();
-			string += '<tr class="table-success"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>Исполнено</td><td>' + res.args.orderHash + '</td>';
-			string += '<td></td></tr>';
-			$('tbody').html(string);
-			arr.push(result[1]);
-			arr.push(result[3]);
-		}*/
 		if (!arr.includes(result[1])) {
 		  arr.push(result[1]); 
 		}
@@ -1152,56 +1144,6 @@ function trade(hash) {
 		var add = result[3];
 		var amount = $('#' + hash).val();
 		console.log(amount);
-		/*let taken = web3.eth.contract(tokenABI).at(add);
-		taken.allowance.call(web3.eth.accounts[0], '0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a', function (err, result) {
-			console.log(result.c[0]);
-			if (result.c[0] < amount) {
-				console.log('not ok');
-				taken.approve('0x3c6faaa928e626bde27d9d5f3346c8c5be8d7f8a', amount, function (err, result) {
-					exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
-				});
-			}
-			else {
-				console.log('ok');
-				exchange.trade(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
-			}
-		}); */
 		exchange.trade(hash, amount, {from: web3.eth.accounts[0]}, function(err, result) {});
 	});
-}
-
-function convert(unixtimestamp){
-
- // Unixtimestamp
- //var unixtimestamp = document.getElementById('timestamp').value;
-
- // Months array
- var months_arr = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
-
- // Convert timestamp to milliseconds
- var date = new Date(unixtimestamp*1000);
-
- // Year
- var year = date.getFullYear();
-
- // Month
- var month = months_arr[date.getMonth()];
-
- // Day
- var day = date.getDate();
-
- // Hours
- var hours = date.getHours();
-
- // Minutes
- var minutes = "0" + date.getMinutes();
-
- // Seconds
- var seconds = "0" + date.getSeconds();
-
- // Display date time in dd-Mm-yyyy h:m:s format
- var convdataTime = day+'-'+month+'-'+year+' '+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
- 
- return convdataTime;
- 
 }
