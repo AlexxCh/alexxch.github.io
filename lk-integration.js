@@ -1113,7 +1113,7 @@ promise.then(function(result) {
 							string += '<td>Отменен</td></tr>';
 					}
 					else if (r.c[0] == result[2].c[0]) {
-						string += '<tr class="table-danger"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + res.args.orderHash + '</td>';
+						string += '<tr class="table-success"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + res.args.orderHash + '</td>';
 							string += '<td>Исполнен</td></tr>';
 					}
 					else {
