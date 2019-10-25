@@ -1122,5 +1122,5 @@ function symbs(addresses) {
 				$('.' + addresses[i] + '-symbol').html(str);
 			});
 	}
-	$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
+	$(".0x0000000000000000000000000000000000000000-symbol").html('<a>Wei</a>');
 }
