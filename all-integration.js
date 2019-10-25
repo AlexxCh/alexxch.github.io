@@ -1093,6 +1093,12 @@ myEvent.watch(function (err, res) {
 			string += '<td></td></tr>';
 			$('tbody').html(string);
 		}
+		else if (web3.eth.accounts[0] == result[0]) {
+			var string = $('tbody').html();
+			string += '<tr class="table-info"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + res.args.orderHash + '</td>';
+			string += '<td><button onclick="cancel(\'' + res.args.orderHash + '\')">Отменить!</button></td></tr>';
+			$('tbody').html(string);
+		}
 		else  {
 			exchange.orderFilled(res.args.orderHash, function (err, r) {
 				if (r.c[0] == result[2].c[0]) {
@@ -1146,4 +1152,8 @@ function trade(hash) {
 		console.log(amount);
 		exchange.trade(hash, amount, {from: web3.eth.accounts[0]}, function(err, result) {});
 	});
+}
+
+function cancel(hash) {
+	exchange.cancelOrder(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
 }
