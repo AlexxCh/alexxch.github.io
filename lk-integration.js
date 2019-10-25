@@ -1118,6 +1118,7 @@ function addr(addresses) {
 }
 
 function symbs(addresses) {
+	let pr = new Promise (function (resolve, reject) {
 	for (let i = 0; i < addresses.length; i++) {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
 			token.symbol.call(function(error, result){
@@ -1128,5 +1129,10 @@ function symbs(addresses) {
 				$('.' + addresses[i] + '-symbol').html(str);
 			});
 	}
+	resolve();
+	})
+	pr.thne(function() {
+		
 	$('.0x0000000000000000000000000000000000000000-symbol').html('Wei');
+	});
 }
