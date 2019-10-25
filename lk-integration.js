@@ -1139,6 +1139,6 @@ function returnToken(addr) {
 
 function inject() {
 	if ($('#new-addr').val() == '0x0000000000000000000000000000000000000000') 
-		exchange.depositEth({value: $('#amount').val()});
-	else exchange.depositToken($('#new-addr').val(), $('#amount').val());
+		exchange.depositEth({value: $('#amount').val()}, function(err, result) {});
+	else exchange.depositToken($('#new-addr').val(), $('#amount').val(), function(err, result) {});
 }
