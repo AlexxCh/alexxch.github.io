@@ -1119,14 +1119,14 @@ myEvent.watch(function (err, res) {
 			
 		}
 		for (let i = 0; i < arr.length; i++) {
-		console.log(arr[i]);
+		//console.log(arr[i]);
 				let token = web3.eth.contract(tokenABI).at(arr[i]);
 				token.symbol.call(function(error, result){
 					if (result == null) {
 						$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
 					}
 					else {
-					console.log(result);
+					//console.log(result);
 					let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
 					str += result;
 					str += '</a>';
