@@ -1133,6 +1133,7 @@ myEvent.watch(function (err, res) {
 	resolve(arr) 
 	});
 	pr.then(function(result) {
+		console.log(result, result.length);
 		resolve(result);
 	}
 });
