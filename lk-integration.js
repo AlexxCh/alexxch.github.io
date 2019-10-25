@@ -1095,7 +1095,6 @@ promise.then(function(result) {
 	addr(result);
 });
 
-let pr = new Promise(function(resolve, reject) {
 	var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});	
 	var arr = [];
 	myEvent.watch(function (err, res) {
@@ -1114,8 +1113,6 @@ let pr = new Promise(function(resolve, reject) {
 					$('.orders').html(string);
 				
 			});
-			
-		}
 		for (let i = 0; i < arr.length; i++) {
 		console.log(arr[i]);
 				let token = web3.eth.contract(tokenABI).at(arr[i]);
@@ -1134,8 +1131,7 @@ let pr = new Promise(function(resolve, reject) {
 		}
 		$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
 	})
-	})
-});
+	});
 
 function addr(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
