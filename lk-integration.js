@@ -1095,6 +1095,48 @@ promise.then(function(result) {
 	addr(result);
 });
 
+let pr = new Promise(function(resolve, reject) {
+	var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});	
+	var arr = [];
+	myEvent.watch(function (err, res) {
+		exchange.orderHashList(res.args.orderHash, function(err, result) {
+			if (result[0] != web3.eth.accounts[0]) return 0;
+		if (!arr.includes(result[1])) {
+		  arr.push(result[1]); 
+		}
+		if (!arr.includes(result[3])) {
+		  arr.push(result[3]); 
+		}
+			exchange.orderFilled(res.args.orderHash, function (err, r) {
+					var string = $('.orders').html();
+					string += '<tr class="table-warning"><td>' + result[0] + '</td><td class="' + result[1] + '"></td><td>' + result[2].c[0] + '</td><td class="' + result[3] + '"></td><td>' + result[4].c[0] + '</td><td>' + res.args.orderHash + '</td>';
+					string += '<td>' + r.c[0] + '/' + result[2].c[0] + '</td><td><button onclick="cancel(\'' + res.args.orderHash + '\')">Отменить!</button></td></tr>';
+					$('.orders').html(string);
+				
+			});
+			
+		}
+		for (let i = 0; i < arr.length; i++) {
+		console.log(arr[i]);
+				let token = web3.eth.contract(tokenABI).at(arr[i]);
+				token.symbol.call(function(error, result){
+					if (result == null) {
+						$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
+					}
+					else {
+					console.log(result);
+					let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
+					str += result;
+					str += '</a>';
+					$('.' + arr[i]).html(str);
+					}
+				});			
+		}
+		$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
+	})
+	})
+});
+
 function addr(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
 		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
