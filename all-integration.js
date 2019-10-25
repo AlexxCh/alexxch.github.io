@@ -1129,6 +1129,7 @@ myEvent.watch(function (err, res) {
 		}
 		
 	})
+	console.log(arr);
 	resolve(arr);
 });
 });
