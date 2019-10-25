@@ -1075,12 +1075,11 @@ let tokenABI = [
 var exchange = web3.eth.contract(abi).at('0x0ac3850334e1b81bc87d2f554e8c9c772fc1738e');
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
-let promise = new Promise (function (resolve, reject) {
+let promise = new Promise (function (resolve,reject) {
 myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	let pr = new Promise(function (resolve, reject){
 	exchange.orderHashList(res.args.orderHash, function(err, result) {
 		/*if (result[4].c[0] == 0) {
 			var string = $('tbody').html();
@@ -1128,20 +1127,7 @@ myEvent.watch(function (err, res) {
 			});
 			
 		}
-		
-	})
-	resolve(arr) 
-	});
-	pr.then(function(result) {
-		console.log(result, result.length);
-		resolve(result);
-	});
-});
-});
-
-promise.then(function(arr) {
-	myEvent.stopWatching();
-	for (let i = 0; i < arr.length; i++) {
+		for (let i = 0; i < arr.length; i++) {
 		console.log(arr[i]);
 				let token = web3.eth.contract(tokenABI).at(arr[i]);
 				token.symbol.call(function(error, result){
@@ -1158,6 +1144,28 @@ promise.then(function(arr) {
 				});			
 		}
 		$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
+	})
+	resolve("done");
+});
+
+let pr = new Promise (function(resolve,reject) {
+	promise.then(function(result) {
+		myEvent.stopWatching();
+	});
+	var arr;
+	myEvent.watch(function (err, res) {
+		if (err) {
+			return error(err);
+		}
+		if (!arr.includes(result[1])) {
+		  arr.push(result[1]); 
+		}
+		if (!arr.includes(result[3])) {
+		  arr.push(result[3]); 
+		}
+	});
+	console.log(arr);
+	resolve(arr);
 });
 
 function trade(hash) {
