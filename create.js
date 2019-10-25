@@ -1148,16 +1148,26 @@ $( "#takenAddress" ).change(function() {
 
 $( "#btn" ).click(function() {
 	let token = web3.eth.contract(tokenABI).at($("#givenAddress").val());
-	token.allowance.call(web3.eth.accounts[0], '0x4cf60bcc443429dbb55f3e8924628c07662d9fe6', function (err, result) {
-		if (result.c[0] < $("#givenAmount").val()) {
-			token.approve('0x4cf60bcc443429dbb55f3e8924628c07662d9fe6', $("#givenAmount").val(), function (err, result) {
+	exchange.balances($("#givenAddress").val(), web3.eth.accounts[0], function(err, res) {
+		exchange.balanceOnOrder($("#givenAmount").val(), web3.eth.accounts[0], function(err, r) {
+			if ($("#givenAmount").val() > res.c[0] - r.c[0]) {
+				token.allowance.call(web3.eth.accounts[0], '0x4cf60bcc443429dbb55f3e8924628c07662d9fe6', function (err, result) {
+					if (result.c[0] < $("#givenAmount").val() - res.c[0] + r.c[0]) {
+						token.approve('0x4cf60bcc443429dbb55f3e8924628c07662d9fe6', $("#givenAmount").val(), function (err, result) {
+							exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntil").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
+							window.location.href = "/all.html";
+						});
+					}
+					else {
+						exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntil").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
+						window.location.href = "/all.html";
+					}
+				})
+			}
+			else {
 				exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntil").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
 				window.location.href = "/all.html";
-			});
-		}
-		else {
-			exchange.createOrder($("#givenAddress").val(), $("#givenAmount").val(), $("#takenAddress").val(), $("#takenAmount").val(), $("#validUntil").val(), $("#nonce").val(), {from: web3.eth.accounts[0]}, function(err, result) {});
-			window.location.href = "/all.html";
-		}
-	})
+			}
+		});
+	});
 });
