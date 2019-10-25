@@ -1073,7 +1073,7 @@ let tokenABI = [
 ];
 
 var addresses = []; var s = 0;
-var exchange = web3.eth.contract(abi).at('0x0ac3850334e1b81bc87d2f554e8c9c772fc1738e');
+var exchange = web3.eth.contract(abi).at('0x4cf60bcc443429dbb55f3e8924628c07662d9fe6');
 //var depositEvent = exchange.Deposit({sender:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 var depositEvent = exchange.Deposit({},{fromBlock: 0, toBlock: 'latest'});
 
