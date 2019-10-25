@@ -1085,7 +1085,7 @@ var depositEvent = exchange.Deposit({},{fromBlock: 0, toBlock: 'latest'});
 		  addresses.push(res.args.token); 
 		}
 		addr(addresses);
-		symbs(addresses);
+		//symbs(addresses);
 	})
 
 
@@ -1113,7 +1113,6 @@ function addr(addresses) {
 
 function symbs(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
-		if (addresses[i] !== '0x0000000000000000000000000000000000000000') {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
 			token.symbol.call(function(error, result){
 				let str = $('.' + addresses[i] + '-symbol').html();
@@ -1122,9 +1121,6 @@ function symbs(addresses) {
 				str += '</a>';
 				$('.' + addresses[i] + '-symbol').html(str);
 			});
-		}
-		else {
-			$('.' + addresses[i] + '-symbol').html('Wei');
-		}
 	}
+	$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
 }
