@@ -1134,6 +1134,7 @@ myEvent.watch(function (err, res) {
 			else {
 				let token = web3.eth.contract(tokenABI).at(arr[i]);
 				token.symbol.call(function(error, result){
+					console.log(result);
 					let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
 					str += result;
 					str += '</a>';
