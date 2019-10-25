@@ -1100,7 +1100,7 @@ function addr(addresses) {
 		exchange.balances(addresses[i], web3.eth.accounts[0], function (err, result) {
 			if (Number(result) != 0) {
 				var string = $('tbody').html();
-				string +='<tr><td class="' + addresses[i] + '-value"></td> <td class="' + addresses[i] + '-symbol"></td><td class="' + addresses[i] + '-on-orders"></td><td class="' + addresses[i] + '-free"></td></tr>';
+				string +='<tr><td class="' + addresses[i] + '-value"></td> <td class="' + addresses[i] + '-symbol"></td><td class="' + addresses[i] + '-on-orders"></td><td class="' + addresses[i] + '-free"></td><td><input id="' + addresses[i] + '" placeholder="Кол-во"></td><td><button onclick="returnToken(\'' + addresses[i] + '\')">Вывести!</button></td></tr>';
 				$('tbody').html(string);
 				$('.' + addresses[i] + '-value').html(Number(result));
 				var val = Number(result);
@@ -1131,4 +1131,8 @@ function symbs(addresses) {
 				}
 			});
 	}
+}
+
+function returnToken(addr) {
+	exchange.Withdraw(addr, $("#"+addr).val(), {from: web3.eth.accounts[0]}, function(err, result) {});
 }
