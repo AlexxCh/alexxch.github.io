@@ -1080,6 +1080,7 @@ myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
+	let pr = new Promise(resolve, reject){
 	exchange.orderHashList(res.args.orderHash, function(err, result) {
 		/*if (result[4].c[0] == 0) {
 			var string = $('tbody').html();
@@ -1129,8 +1130,11 @@ myEvent.watch(function (err, res) {
 		}
 		
 	})
-	console.log(arr);
-	resolve(arr);
+	resolve(arr) 
+	});
+	pr.then(function(result) {
+		resolve(result);
+	}
 });
 });
 
