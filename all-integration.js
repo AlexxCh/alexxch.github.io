@@ -1128,10 +1128,6 @@ myEvent.watch(function (err, res) {
 		}
 		for (let i = 0; i < arr.length; i++) {
 		console.log(arr[i]);
-			if (arr[i] == '0x0000000000000000000000000000000000000000') {
-				$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
-			}
-			else {
 				let token = web3.eth.contract(tokenABI).at(arr[i]);
 				token.symbol.call(function(error, result){
 					console.log(result);
@@ -1140,6 +1136,7 @@ myEvent.watch(function (err, res) {
 					str += '</a>';
 					$('.' + arr[i]).html(str);
 				});
+				$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
 			}
 		}
 	})
