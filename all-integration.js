@@ -1080,7 +1080,7 @@ myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
 	}
-	let pr = new Promise(resolve, reject){
+	let pr = new Promise(function (resolve, reject){
 	exchange.orderHashList(res.args.orderHash, function(err, result) {
 		/*if (result[4].c[0] == 0) {
 			var string = $('tbody').html();
