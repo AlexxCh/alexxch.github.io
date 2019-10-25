@@ -1134,5 +1134,5 @@ function symbs(addresses) {
 }
 
 function returnToken(addr) {
-	exchange.Withdraw(addr, $("#"+addr).val(), {from: web3.eth.accounts[0]}, function(err, result) {});
+	exchange.withdraw(addr, $("#"+addr).val(), {from: web3.eth.accounts[0]}, function(err, result) {});
 }
