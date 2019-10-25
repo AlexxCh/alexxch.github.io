@@ -1129,9 +1129,9 @@ function symbs(addresses) {
 				$('.' + addresses[i] + '-symbol').html(str);
 			});
 	}
-	resolve();
+	resolve("done");
 	})
-	pr.then(function() {
+	pr.then(function(result) {
 		
 	$('.0x0000000000000000000000000000000000000000-symbol').html('Wei');
 	});
