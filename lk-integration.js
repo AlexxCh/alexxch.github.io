@@ -1087,7 +1087,7 @@ let promise = new Promise(function(resolve, reject) {
 		}
 	})
 	console.log(addresses);
-	setTimeout(() => resolve(addresses), 2000);
+	setTimeout(() => resolve(addresses), 1000);
 });
 
 promise.then(function(result) {
