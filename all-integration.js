@@ -1126,8 +1126,7 @@ myEvent.watch(function (err, res) {
 			});
 			
 		}
-	})
-	for (let i = 0; i < arr.length; i++) {
+		for (let i = 0; i < arr.length; i++) {
 		console.log(arr[i]);
 			if (arr[i] == '0x0000000000000000000000000000000000000000') {
 				$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
@@ -1142,6 +1141,8 @@ myEvent.watch(function (err, res) {
 				});
 			}
 		}
+	})
+	
 });
 
 function trade(hash) {
