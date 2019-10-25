@@ -1133,6 +1133,6 @@ function symbs(addresses) {
 	})
 	pr.then(function(result) {
 		
-	$('.0x0000000000000000000000000000000000000000-symbol').html('Wei');
+	$(".0x0000000000000000000000000000000000000000-symbol").html('Wei');
 	});
 }
