@@ -1129,9 +1129,8 @@ myEvent.watch(function (err, res) {
 		}
 		
 	})
-	
+	resolve(arr);
 });
-resolve(arr);
 });
 
 promise.then(function(arr) {
