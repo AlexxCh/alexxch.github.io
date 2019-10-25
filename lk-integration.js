@@ -1184,3 +1184,7 @@ function inject() {
 		exchange.depositEth({value: $('#amount').val()}, function(err, result) {});
 	else exchange.depositToken($('#new-addr').val(), $('#amount').val(), function(err, result) {});
 }
+
+function cancel(hash) {
+	exchange.cancelOrder(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
+}
