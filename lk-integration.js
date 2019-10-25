@@ -1121,15 +1121,14 @@ function symbs(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
 			token.symbol.call(function(error, result){
+				if (result == null) $(".0x0000000000000000000000000000000000000000-symbol").html('Wei');
+				else {
 				let str = $('.' + addresses[i] + '-symbol').html();
 				str += '<a href="https://rinkeby.etherscan.io/address/' + addresses[i] + '" target="_blank">';
 				str += result;
 				str += '</a>';
 				$('.' + addresses[i] + '-symbol').html(str);
+				}
 			});
 	}
 }
-
-do {
-	$(".0x0000000000000000000000000000000000000000-symbol").html('Wei');
-} while(true);
