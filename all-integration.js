@@ -1135,7 +1135,7 @@ myEvent.watch(function (err, res) {
 	pr.then(function(result) {
 		console.log(result, result.length);
 		resolve(result);
-	}
+	});
 });
 });
 
