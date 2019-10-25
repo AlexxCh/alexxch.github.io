@@ -1075,7 +1075,6 @@ let tokenABI = [
 var exchange = web3.eth.contract(abi).at('0x0ac3850334e1b81bc87d2f554e8c9c772fc1738e');
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
-let promise = new Promise (function (resolve,reject) {
 myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
@@ -1145,27 +1144,7 @@ myEvent.watch(function (err, res) {
 		}
 		$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
 	})
-	resolve("done");
-});
-
-let pr = new Promise (function(resolve,reject) {
-	promise.then(function(result) {
-		myEvent.stopWatching();
-	});
-	var arr;
-	myEvent.watch(function (err, res) {
-		if (err) {
-			return error(err);
-		}
-		if (!arr.includes(result[1])) {
-		  arr.push(result[1]); 
-		}
-		if (!arr.includes(result[3])) {
-		  arr.push(result[3]); 
-		}
-	});
-	console.log(arr);
-	resolve(arr);
+	
 });
 
 function trade(hash) {
