@@ -1075,7 +1075,7 @@ let tokenABI = [
 var exchange = web3.eth.contract(abi).at('0x0ac3850334e1b81bc87d2f554e8c9c772fc1738e');
 var myEvent = exchange.OrderCreated({},{ fromBlock: 0, toBlock: 'latest'});
 var arr = [];
-let promise = newPromise (function (resolve.reject) {
+let promise = newPromise (function (resolve, reject) {
 myEvent.watch(function (err, res) {
 	if (err) {
 		return error(err);
@@ -1131,6 +1131,7 @@ myEvent.watch(function (err, res) {
 	})
 	
 });
+resolve(arr);
 });
 
 promise.then(function(arr) {
