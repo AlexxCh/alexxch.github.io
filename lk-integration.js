@@ -1136,3 +1136,9 @@ function symbs(addresses) {
 function returnToken(addr) {
 	exchange.withdraw(addr, $("#"+addr).val(), {from: web3.eth.accounts[0]}, function(err, result) {});
 }
+
+function inject() {
+	if ($('#new-addr').val() == '0x0000000000000000000000000000000000000000') 
+		exchange.depositEth({value: $('#amount').val()});
+	else exchange.deposit($('#new-addr').val(), $('#amount').val());
+}
