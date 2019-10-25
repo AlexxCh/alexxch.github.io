@@ -1077,6 +1077,7 @@ var exchange = web3.eth.contract(abi).at('0x0ac3850334e1b81bc87d2f554e8c9c772fc1
 //var depositEvent = exchange.Deposit({sender:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 var depositEvent = exchange.Deposit({},{fromBlock: 0, toBlock: 'latest'});
 
+let promise = new Promise(function(resolve, reject) {
 	depositEvent.watch(function (err, res) {
 		if (err) {
 			return error(err);
@@ -1084,10 +1085,14 @@ var depositEvent = exchange.Deposit({},{fromBlock: 0, toBlock: 'latest'});
 		if (!addresses.includes(res.args.token)) {
 		  addresses.push(res.args.token); 
 		}
-		addr(addresses);
-		//symbs(addresses);
 	})
+	setTimeout(() => resolve(addresses), 2000);
+});
 
+promise.then(function(result) {
+	depositEvent.stopWatching();
+	addr(result);
+});
 
 function addr(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
@@ -1122,5 +1127,5 @@ function symbs(addresses) {
 				$('.' + addresses[i] + '-symbol').html(str);
 			});
 	}
-	$(".0x0000000000000000000000000000000000000000-symbol").html('<a>Wei</a>');
+	$('.0x0000000000000000000000000000000000000000-symbol').html('Wei');
 }
