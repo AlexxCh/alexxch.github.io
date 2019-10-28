@@ -1,5 +1,10 @@
 /*
-	Создать ордер
+	Создание ордера:
+		Ввод адресов двух токенов и кол-ва их обмена, а также случайного числа nonce (для возможности создать несколько одинаковых ордеров) - можно автоматизировать и подставлять например текущее время)
+		При создании ордера проверяется баланс юзера на СК. 
+		Если юзер меняет ETH и его баланса не хватает на создание ордера: запрашивается функция depositEth()
+		Если не хватает токенов для создания ордера, проверяется approve() для СК на перемещение данных токенов. Если его достаточно, то вызывается функция depositToken(), иначе сначала approve(), потом depositToken()
+		Т.к. функции вызываются друг за другом и блокчейном не успевают записаться изменения, то в окошке метамаска вылетает алерт, но функции исполняются последовательно и по итогу все прозодят.
 
 */
 window.addEventListener('load', async () => {
@@ -1127,23 +1132,33 @@ let tokenABI = [
 
 var exchange = web3.eth.contract(abi).at('0x4cf60bcc443429dbb55f3e8924628c07662d9fe6');
 $( "#givenAddress" ).change(function() {
-	let token = web3.eth.contract(tokenABI).at($( "#givenAddress" ).val());
-	token.symbol.call(function(error, result){
-		let str = '<a href="https://rinkeby.etherscan.io/address/' + $( "#givenAddress" ).val() + '" target="_blank">';
-		str += result;
-		str += '</a>';
-		$("#givenSymbol").html(str);
-	});
+	if ($("#givenAddress").val() != '0x0000000000000000000000000000000000000000') {
+		let token = web3.eth.contract(tokenABI).at($( "#givenAddress" ).val());
+		token.symbol.call(function(error, result){
+			let str = '<a href="https://rinkeby.etherscan.io/address/' + $( "#givenAddress" ).val() + '" target="_blank">';
+			str += result;
+			str += '</a>';
+			$("#givenSymbol").html(str);
+		});
+	}
+	else {
+		$("#givenSymbol").html('ETH');
+	}
 });
 
 $( "#takenAddress" ).change(function() {
-	let token = web3.eth.contract(tokenABI).at($( "#takenAddress" ).val());
-	token.symbol.call(function(error, result){
-		let str = '<a href="https://rinkeby.etherscan.io/address/' + $( "#takenAddress" ).val() + '" target="_blank">';
-		str += result;
-		str += '</a>';
-		$("#takenSymbol").html(str);
-	});
+	if ($("#givenAddress").val() != '0x0000000000000000000000000000000000000000') {
+		let token = web3.eth.contract(tokenABI).at($( "#takenAddress" ).val());
+		token.symbol.call(function(error, result){
+			let str = '<a href="https://rinkeby.etherscan.io/address/' + $( "#takenAddress" ).val() + '" target="_blank">';
+			str += result;
+			str += '</a>';
+			$("#takenSymbol").html(str);
+		});
+	}
+	else {
+		$("#givenSymbol").html('ETH');
+	}
 });
 
 $( "#btn" ).click(function() {
