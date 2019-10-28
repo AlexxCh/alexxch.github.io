@@ -1223,7 +1223,19 @@ function returnToken(addr) {
 function inject() {
 	if ($('#new-addr').val() == '0x0000000000000000000000000000000000000000') 
 		exchange.depositEth({value: $('#amount').val()}, function(err, result) {});
-	else exchange.depositToken($('#new-addr').val(), $('#amount').val(), function(err, result) {});
+	else {
+		let token = web3.eth.contract(tokenABI).at($('#new-addr').val());
+		token.allowance.call(web3.eth.accounts[0], '0x4cf60bcc443429dbb55f3e8924628c07662d9fe6', function(error, result){
+			if (result < $('#amount').val()) {
+				token.approve.call('0x4cf60bcc443429dbb55f3e8924628c07662d9fe6', $('#amount').val(), function(error, result){
+					exchange.depositToken($('#new-addr').val(), $('#amount').val(), function(err, result) {});
+				})
+			}
+			else {
+				exchange.depositToken($('#new-addr').val(), $('#amount').val(), function(err, result) {});
+			}
+		})
+	}
 }
 
 function cancel(hash) {
