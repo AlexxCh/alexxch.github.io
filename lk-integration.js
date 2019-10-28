@@ -1227,6 +1227,7 @@ function inject() {
 		let token = web3.eth.contract(tokenABI).at($('#new-addr').val());
 		token.allowance.call(web3.eth.accounts[0], '0x4cf60bcc443429dbb55f3e8924628c07662d9fe6', function(error, result){
 			console.log(Number(result));
+			console.log(Number(result) < Number($('#amount').val()));
 			if (Number(result) < Number($('#amount').val())) {
 				token.approve.call('0x4cf60bcc443429dbb55f3e8924628c07662d9fe6', $('#amount').val(), function(error, result){
 					exchange.depositToken($('#new-addr').val(), $('#amount').val(), function(err, result) {});
