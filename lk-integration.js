@@ -1209,7 +1209,8 @@ function addr(addresses) {
 				var string = $('tbody').html();
 				string +='<tr><td class="' + addresses[i] + '-value"></td> <td class="' + addresses[i] + '-symbol"></td><td class="' + addresses[i] + '-on-orders"></td><td class="' + addresses[i] + '-free"></td><td><input id="' + addresses[i] + '" placeholder="Кол-во"></td><td><button onclick="returnToken(\'' + addresses[i] + '\')">Вывести!</button></td></tr>';
 				$('tbody').html(string);
-				$('.' + addresses[i] + '-value').html(convert(Number(result), addresses[i]));
+				convert(Number(result), addresses[i])
+				
 				var val = Number(result);
 				exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
 					$('.' + addresses[i] + '-on-orders').html(Number(result));
@@ -1271,7 +1272,7 @@ function convert(num, addr) {
 		let str = num.toString;
 		if (str.length > 18) {
 			str.splice(str.length - 18, 0, '.');
-			return (Number(str));
+			$('.' + addr + '-value').html(Number(str));
 		}
 		else {
 			let s;
@@ -1279,7 +1280,7 @@ function convert(num, addr) {
 				s+= '0';
 			}
 			str = '0.' + s + str;
-			return (Number(str));
+			$('.' + addr + '-value').html(Number(str));
 		}
 	}
 	else {
@@ -1288,7 +1289,7 @@ function convert(num, addr) {
 			let str = num.toString;
 			if (str.length > Number(result)) {
 				str.splice(str.length - Number(result), 0, '.');
-				return (Number(str));
+				$('.' + addr + '-value').html(Number(str));
 			}
 			else {
 				let s;
@@ -1296,7 +1297,7 @@ function convert(num, addr) {
 					s+= '0';
 				}
 				str = '0.' + s + str;
-				return (Number(str));
+				$('.' + addr + '-value').html(Number(str));
 			}
 		})
 	}
