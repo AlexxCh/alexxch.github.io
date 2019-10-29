@@ -1145,7 +1145,6 @@ let promise = new Promise(function(resolve, reject) {
 		  addresses.push(res.args.token); 
 		}
 	})
-	console.log(addresses);
 	setTimeout(() => resolve(addresses), 1000);
 });
 
@@ -1183,14 +1182,12 @@ promise.then(function(result) {
 				
 			});
 		for (let i = 0; i < arr.length; i++) {
-		console.log(arr[i]);
 				let token = web3.eth.contract(tokenABI).at(arr[i]);
 				token.symbol.call(function(error, result){
 					if (result == null) {
 						$(".0x0000000000000000000000000000000000000000").html('<a>Wei</a>');
 					}
 					else {
-					console.log(result);
 					let str = '<a href="https://rinkeby.etherscan.io/address/' + arr[i] + '" target="_blank">';
 					str += result;
 					str += '</a>';
@@ -1268,7 +1265,7 @@ function cancel(hash) {
 }
 
 function convert(num, addr) {
-	console.log(num.addr);
+	console.log(num,addr);
 	if (addr = '0x0000000000000000000000000000000000000000') {
 		let str = num.toString();
 		console.log(str);
