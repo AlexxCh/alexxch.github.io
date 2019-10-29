@@ -1271,8 +1271,8 @@ function convert(num, addr) {
 		console.log(str);
 		if (str.length > 18) {
 			str.splice(str.length - 18, 0, '.');
-			console.log(Number(str));
-			$('.' + addr + '-value').html(Number(str));
+			console.log(str);
+			$('.' + addr + '-value').html(str);
 		}
 		else {
 			let s;
@@ -1280,8 +1280,8 @@ function convert(num, addr) {
 				s+= '0';
 			}
 			str = '0.' + s + str;
-			console.log(Number(str));
-			$('.' + addr + '-value').html(Number(str));
+			console.log(str);
+			$('.' + addr + '-value').html(str);
 		}
 	}
 	else {
