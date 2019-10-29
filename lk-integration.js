@@ -1209,7 +1209,7 @@ function addr(addresses) {
 				var string = $('tbody').html();
 				string +='<tr><td class="' + addresses[i] + '-value"></td> <td class="' + addresses[i] + '-symbol"></td><td class="' + addresses[i] + '-on-orders"></td><td class="' + addresses[i] + '-free"></td><td><input id="' + addresses[i] + '" placeholder="Кол-во"></td><td><button onclick="returnToken(\'' + addresses[i] + '\')">Вывести!</button></td></tr>';
 				$('tbody').html(string);
-				$('.' + addresses[i] + '-value').html(Number(result));
+				$('.' + addresses[i] + '-value').html(convert(Number(result), addresses[i]));
 				var val = Number(result);
 				exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
 					$('.' + addresses[i] + '-on-orders').html(Number(result));
@@ -1264,4 +1264,40 @@ function inject() {
 
 function cancel(hash) {
 	exchange.cancelOrder(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
+}
+
+function convert(num, addr) {
+	if (addr = '0x0000000000000000000000000000000000000000') {
+		let str = num.toString;
+		if (str.length > 18) {
+			str.splice(str.length - 18, 0, '.');
+			return (Number(str));
+		}
+		else {
+			let s;
+			for (let i = str.length; i < 18); i++) {
+				s+= '0';
+			}
+			str.unshift('0.', s);
+			return (Number(str));
+		}
+	}
+	else {
+		let token = web3.eth.contract(tokenABI).at(addr);
+		token.decimals.call(function(err, result) {
+			let str = num.toString;
+			if (str.length > Number(result)) {
+				str.splice(str.length - Number(result), 0, '.');
+				return (Number(str));
+			}
+			else {
+				let s;
+				for (let i = str.length; i < Number(result)); i++) {
+					s+= '0';
+				}
+				str.unshift('0.', s);
+				return (Number(str));
+			}
+		})
+	}
 }
