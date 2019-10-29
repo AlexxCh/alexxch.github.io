@@ -1271,10 +1271,8 @@ function cancel(hash) {
 }
 
 function convert(num, addr, where) {
-	console.log(num,addr);
 	if (addr == '0x0000000000000000000000000000000000000000') {
 		let str = num.toString();
-		console.log(str);
 		if (str.length > 18) {
 			str = str.substr(0, str.length - 18) + '.' + str.substr(str.length - 18);
 			$(where).html(str);
@@ -1284,7 +1282,6 @@ function convert(num, addr, where) {
 			for (let i = str.length; i < 18; i++) {
 				s+= '0';
 			}
-			console.log(s);
 			str = '0.' + s + str;
 			$(where).html(str);
 		}
@@ -1293,7 +1290,6 @@ function convert(num, addr, where) {
 		let token = web3.eth.contract(tokenABI).at(addr);
 		token.decimals.call(function(err, result) {
 			let str = num.toString();
-			console.log(str);
 			if (str.length > Number(result)) {
 				str = str.substr(0, str.length - Number(result)) + '.' + str.substr(str.length - Number(result));
 				$(where).html(str);
