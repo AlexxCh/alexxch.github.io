@@ -1278,7 +1278,7 @@ function convert(num, addr) {
 			for (let i = str.length; i < 18; i++) {
 				s+= '0';
 			}
-			str.splice(0, 0, '0.', s);
+			str = '0.' + s + str;
 			return (Number(str));
 		}
 	}
@@ -1295,7 +1295,7 @@ function convert(num, addr) {
 				for (let i = str.length; i < Number(result); i++) {
 					s+= '0';
 				}
-				str.splice(0, 0, '0.', s);
+				str = '0.' + s + str;
 				return (Number(str));
 			}
 		})
