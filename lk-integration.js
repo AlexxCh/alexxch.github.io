@@ -1275,7 +1275,7 @@ function convert(num, addr) {
 		}
 		else {
 			let s;
-			for (let i = str.length; i < 18); i++) {
+			for (let i = str.length; i < 18; i++) {
 				s+= '0';
 			}
 			str.unshift('0.', s);
@@ -1292,7 +1292,7 @@ function convert(num, addr) {
 			}
 			else {
 				let s;
-				for (let i = str.length; i < Number(result)); i++) {
+				for (let i = str.length; i < Number(result); i++) {
 					s+= '0';
 				}
 				str.unshift('0.', s);
