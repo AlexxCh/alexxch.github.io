@@ -1266,7 +1266,7 @@ function cancel(hash) {
 
 function convert(num, addr) {
 	console.log(num,addr);
-	if (addr = '0x0000000000000000000000000000000000000000') {
+	if (addr == '0x0000000000000000000000000000000000000000') {
 		let str = num.toString();
 		console.log(str);
 		if (str.length > 18) {
