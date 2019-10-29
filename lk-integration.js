@@ -1270,7 +1270,7 @@ function convert(num, addr) {
 		let str = num.toString();
 		console.log(str);
 		if (str.length > 18) {
-			str.substr(0, str.length - 18) + '.' + str.substr(str.length - 18);
+			str = str.substr(0, str.length - 18) + '.' + str.substr(str.length - 18);
 			console.log(str);
 			$('.' + addr + '-value').html(str);
 		}
@@ -1291,7 +1291,7 @@ function convert(num, addr) {
 			let str = num.toString();
 			console.log(str);
 			if (str.length > Number(result)) {
-				str.substr(0, str.length - Number(result)) + '.' + str.substr(str.length - Number(result));
+				str = str.substr(0, str.length - Number(result)) + '.' + str.substr(str.length - Number(result));
 				console.log(Number(str));
 				$('.' + addr + '-value').html(Number(str));
 			}
