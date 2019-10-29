@@ -1210,8 +1210,12 @@ function addr(addresses) {
 				
 				var val = Number(result);
 				exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
-					convert(Number(result), addresses[i], '.' + addresses[i] + '-on-orders');
-					convert(val - Number(result), addresses[i], '.' + addresses[i] + '-free');
+					if (Number(result) != 0)
+						convert(Number(result), addresses[i], '.' + addresses[i] + '-on-orders');
+					else $('.' + addresses[i] + '-on-orders').html(0);
+					if (val != Number(result))
+						convert(val - Number(result), addresses[i], '.' + addresses[i] + '-free');
+					else $('.' + addresses[i] + '-free').html(0);
 					//$('.' + addresses[i] + '-on-orders').html(Number(result));
 					//$('.' + addresses[i] + '-free').html(val - Number(result));
 				});
