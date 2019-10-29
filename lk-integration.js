@@ -1133,7 +1133,6 @@ let tokenABI = [
 
 var addresses = []; var s = 0;
 var exchange = web3.eth.contract(abi).at('0x4cf60bcc443429dbb55f3e8924628c07662d9fe6');
-//var depositEvent = exchange.Deposit({sender:  web3.eth.accounts[0]},{fromBlock: 0, toBlock: 'latest', address: web3.eth.accounts[0]});
 var depositEvent = exchange.Deposit({},{fromBlock: 0, toBlock: 'latest'});
 
 let promise = new Promise(function(resolve, reject) {
@@ -1216,8 +1215,6 @@ function addr(addresses) {
 					if (val != Number(result))
 						convert(val - Number(result), addresses[i], '.' + addresses[i] + '-free');
 					else $('.' + addresses[i] + '-free').html(0);
-					//$('.' + addresses[i] + '-on-orders').html(Number(result));
-					//$('.' + addresses[i] + '-free').html(val - Number(result));
 				});
 			}
 		});
@@ -1243,10 +1240,6 @@ function symbs(addresses) {
 			});
 	}
 }
-
-/*function returnToken(addr) {
-	exchange.withdraw(addr, $("#"+addr).val(), {from: web3.eth.accounts[0]}, function(err, result) {});
-}*/
 
 function returnToken(addr) {
 	if (addr == '0x0000000000000000000000000000000000000000') {
