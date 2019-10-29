@@ -1268,8 +1268,10 @@ function cancel(hash) {
 }
 
 function convert(num, addr) {
+	console.log(num.addr);
 	if (addr = '0x0000000000000000000000000000000000000000') {
 		let str = num.toString();
+		console.log(str):
 		if (str.length > 18) {
 			str.splice(str.length - 18, 0, '.');
 			console.log(Number(str));
@@ -1289,6 +1291,7 @@ function convert(num, addr) {
 		let token = web3.eth.contract(tokenABI).at(addr);
 		token.decimals.call(function(err, result) {
 			let str = num.toString();
+			console.log(str):
 			if (str.length > Number(result)) {
 				str.splice(str.length - Number(result), 0, '.');
 				console.log(Number(str));
