@@ -1206,12 +1206,14 @@ function addr(addresses) {
 				var string = $('tbody').html();
 				string +='<tr><td class="' + addresses[i] + '-value"></td> <td class="' + addresses[i] + '-symbol"></td><td class="' + addresses[i] + '-on-orders"></td><td class="' + addresses[i] + '-free"></td><td><input id="' + addresses[i] + '" placeholder="Кол-во"></td><td><button onclick="returnToken(\'' + addresses[i] + '\')">Вывести!</button></td></tr>';
 				$('tbody').html(string);
-				convert(Number(result), addresses[i])
+				convert(Number(result), addresses[i], '.' + addresses[i] + '-value');
 				
 				var val = Number(result);
 				exchange.balanceOnOrder(addresses[i], web3.eth.accounts[0], function (err, result) {
-					$('.' + addresses[i] + '-on-orders').html(Number(result));
-					$('.' + addresses[i] + '-free').html(val - Number(result));
+					convert(Number(result), addresses[i], '.' + addresses[i] + '-on-orders');
+					convert(val - Number(result), addresses[i], '.' + addresses[i] + '-free');
+					//$('.' + addresses[i] + '-on-orders').html(Number(result));
+					//$('.' + addresses[i] + '-free').html(val - Number(result));
 				});
 			}
 		});
@@ -1264,14 +1266,14 @@ function cancel(hash) {
 	exchange.cancelOrder(hash, {from: web3.eth.accounts[0]}, function(err, result) {});
 }
 
-function convert(num, addr) {
+function convert(num, addr, where) {
 	console.log(num,addr);
 	if (addr == '0x0000000000000000000000000000000000000000') {
 		let str = num.toString();
 		console.log(str);
 		if (str.length > 18) {
 			str = str.substr(0, str.length - 18) + '.' + str.substr(str.length - 18);
-			$('.' + addr + '-value').html(str);
+			$(where).html(str);
 		}
 		else {
 			let s = '';
@@ -1280,7 +1282,7 @@ function convert(num, addr) {
 			}
 			console.log(s);
 			str = '0.' + s + str;
-			$('.' + addr + '-value').html(str);
+			$(where).html(str);
 		}
 	}
 	else {
@@ -1290,7 +1292,7 @@ function convert(num, addr) {
 			console.log(str);
 			if (str.length > Number(result)) {
 				str = str.substr(0, str.length - Number(result)) + '.' + str.substr(str.length - Number(result));
-				$('.' + addr + '-value').html(str);
+				$(where).html(str);
 			}
 			else {
 				let s = '';
@@ -1298,7 +1300,7 @@ function convert(num, addr) {
 					s+= '0';
 				}
 				str = '0.' + s + str;
-				$('.' + addr + '-value').html(str);
+				$(where).html(str);
 			}
 		})
 	}
