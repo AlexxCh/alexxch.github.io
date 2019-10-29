@@ -1272,6 +1272,7 @@ function convert(num, addr) {
 		let str = num.toString;
 		if (str.length > 18) {
 			str.splice(str.length - 18, 0, '.');
+			console.log(Number(str));
 			$('.' + addr + '-value').html(Number(str));
 		}
 		else {
@@ -1280,6 +1281,7 @@ function convert(num, addr) {
 				s+= '0';
 			}
 			str = '0.' + s + str;
+			console.log(Number(str));
 			$('.' + addr + '-value').html(Number(str));
 		}
 	}
@@ -1289,6 +1291,7 @@ function convert(num, addr) {
 			let str = num.toString;
 			if (str.length > Number(result)) {
 				str.splice(str.length - Number(result), 0, '.');
+				console.log(Number(str));
 				$('.' + addr + '-value').html(Number(str));
 			}
 			else {
@@ -1297,6 +1300,7 @@ function convert(num, addr) {
 					s+= '0';
 				}
 				str = '0.' + s + str;
+				console.log(Number(str));
 				$('.' + addr + '-value').html(Number(str));
 			}
 		})
