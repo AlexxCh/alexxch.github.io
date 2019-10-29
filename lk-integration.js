@@ -1226,7 +1226,7 @@ function symbs(addresses) {
 	for (let i = 0; i < addresses.length; i++) {
 			let token = web3.eth.contract(tokenABI).at(addresses[i]);
 			token.symbol.call(function(error, result){
-				if (result == null) $(".0x0000000000000000000000000000000000000000-symbol").html('Wei');
+				if (result == null) $(".0x0000000000000000000000000000000000000000-symbol").html('ETH');
 				else {
 				let str = $('.' + addresses[i] + '-symbol').html();
 				str += '<a href="https://rinkeby.etherscan.io/address/' + addresses[i] + '" target="_blank">';
