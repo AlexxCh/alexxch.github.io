@@ -1244,8 +1244,22 @@ function symbs(addresses) {
 	}
 }
 
-function returnToken(addr) {
+/*function returnToken(addr) {
 	exchange.withdraw(addr, $("#"+addr).val(), {from: web3.eth.accounts[0]}, function(err, result) {});
+}*/
+
+function returnToken(addr) {
+	if (addr == '0x0000000000000000000000000000000000000000') {
+		val = $("#"+addr).val() * Math.pow(10, 18);
+		exchange.withdraw(addr, val, {from: web3.eth.accounts[0]}, function(err, result) {});
+	}
+	else {
+		let token =  web3.eth.contract(tokenABI).at(addr);
+		token.decimals.call(function(err, result) {
+			val = $("#"+addr).val() * Math.pow(10, result);
+			exchange.withdraw(addr, val, {from: web3.eth.accounts[0]}, function(err, result) {});
+		});
+	}
 }
 
 function inject() {
