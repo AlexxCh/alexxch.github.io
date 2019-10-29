@@ -1279,6 +1279,7 @@ function convert(num, addr) {
 			for (let i = str.length; i < 18; i++) {
 				s+= '0';
 			}
+			console.log(s);
 			str = '0.' + s + str;
 			console.log(str);
 			$('.' + addr + '-value').html(str);
