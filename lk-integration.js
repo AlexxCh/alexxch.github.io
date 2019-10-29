@@ -1275,7 +1275,7 @@ function convert(num, addr) {
 			$('.' + addr + '-value').html(str);
 		}
 		else {
-			let s;
+			let s = '';
 			for (let i = str.length; i < 18; i++) {
 				s+= '0';
 			}
@@ -1296,7 +1296,7 @@ function convert(num, addr) {
 				$('.' + addr + '-value').html(Number(str));
 			}
 			else {
-				let s;
+				let s = '';
 				for (let i = str.length; i < Number(result); i++) {
 					s+= '0';
 				}
